@@ -1,0 +1,25 @@
+
+###> symfony/framework-bundle ###
+/ecopret/.env.local
+/ecopret/.env.local.php
+/ecopret/.env.*.local
+/ecopret/config/secrets/prod/prod.decrypt.private.php
+/ecopret/public/bundles/
+/ecopret/var/
+/ecopret/vendor/
+###< symfony/framework-bundle ###
+
+###> phpunit/phpunit ###
+/ecopret/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
+
+###> symfony/phpunit-bridge ###
+.phpunit.result.cache
+/ecopret/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+###> symfony/asset-mapper ###
+/ecopret/public/assets/
+/ecopret/assets/vendor/
+###< symfony/asset-mapper ###
