@@ -1,0 +1,40 @@
+/* public/css/styles.css */
+
+/* Barre de Navigation */
+.navbar {
+    background-color: #2c2d2e;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+}
+
+.navbar-brand a {
+    text-decoration: none;
+    color: #054c04;
+    font-size: 3em;
+    font-weight: bold;
+}
+
+.navbar-menu {
+    display: flex;
+}
+
+.navbar-nav {
+    list-style: none;
+    display: flex;
+}
+
+.nav-item {
+    margin-right: 15px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.nav-link:hover {
+    color: #054c04;
+}
