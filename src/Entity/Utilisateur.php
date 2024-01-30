@@ -69,6 +69,12 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'id_user', targetEntity: Reservation::class)]
     private Collection $reservations;
 
+    #[ORM\OneToOne(mappedBy: 'id_user', cascade: ['persist', 'remove'])]
+    private ?Preteur $preteur = null;
+
+    #[ORM\OneToOne(mappedBy: 'id_user', cascade: ['persist', 'remove'])]
+    private ?Emprunteur $emprunteur = null;
+
     public function __construct()
     {
         $this->messages = new ArrayCollection();
@@ -352,6 +358,45 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
                 $reservation->setIdUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPreteur(): ?Preteur
+    {
+        return $this->preteur;
+    }
+
+    public function setPreteur(Preteur $preteur): static
+    {
+        // set the owning side of the relation if necessary
+        if ($preteur->getIdUser() !== $this) {
+            $preteur->setIdUser($this);
+        }
+
+        $this->preteur = $preteur;
+
+        return $this;
+    }
+
+    public function getEmprunteur(): ?Emprunteur
+    {
+        return $this->emprunteur;
+    }
+
+    public function setEmprunteur(?Emprunteur $emprunteur): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($emprunteur === null && $this->emprunteur !== null) {
+            $this->emprunteur->setIdUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($emprunteur !== null && $emprunteur->getIdUser() !== $this) {
+            $emprunteur->setIdUser($this);
+        }
+
+        $this->emprunteur = $emprunteur;
 
         return $this;
     }
