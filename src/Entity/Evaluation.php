@@ -33,13 +33,6 @@ class Evaluation
         return $this->id;
     }
 
-    public function setId(string $id): static
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
     public function getTitre(): ?string
     {
         return $this->titre;

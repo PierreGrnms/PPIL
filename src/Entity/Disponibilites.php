@@ -16,8 +16,6 @@ class Disponibilites
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $id_dispo = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $debut = null;
@@ -32,18 +30,6 @@ class Disponibilites
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdDispo(): ?string
-    {
-        return $this->id_dispo;
-    }
-
-    public function setIdDispo(string $id_dispo): static
-    {
-        $this->id_dispo = $id_dispo;
-
-        return $this;
     }
 
     public function getDebut(): ?\DateTimeInterface

@@ -16,9 +16,6 @@ class Photo
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $id_photo = null;
-
-    #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
     #[ORM\ManyToOne(inversedBy: 'photos')]
@@ -30,17 +27,6 @@ class Photo
         return $this->id;
     }
 
-    public function getIdPhoto(): ?string
-    {
-        return $this->id_photo;
-    }
-
-    public function setIdPhoto(string $id_photo): static
-    {
-        $this->id_photo = $id_photo;
-
-        return $this;
-    }
 
     public function getNom(): ?string
     {

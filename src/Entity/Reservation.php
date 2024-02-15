@@ -16,9 +16,6 @@ class Reservation
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $id_reservation = null;
-
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $reserv_debut = null;
 
@@ -38,17 +35,6 @@ class Reservation
         return $this->id;
     }
 
-    public function getIdReservation(): ?string
-    {
-        return $this->id_reservation;
-    }
-
-    public function setIdReservation(string $id_reservation): static
-    {
-        $this->id_reservation = $id_reservation;
-
-        return $this;
-    }
 
     public function getReservDebut(): ?\DateTimeInterface
     {
@@ -81,7 +67,7 @@ class Reservation
 
     public function setIdUser(?Utilisateur $id_user): static
     {
-        $this->id = $id_user;
+        $this->id_user = $id_user;
 
         return $this;
     }

@@ -16,8 +16,6 @@ class Message
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $id_mess = null;
 
     #[ORM\ManyToOne(inversedBy: 'messages')]
     #[ORM\JoinColumn(nullable: false)]
@@ -37,17 +35,6 @@ class Message
         return $this->id;
     }
 
-    public function getIdMess(): ?string
-    {
-        return $this->id_mess;
-    }
-
-    public function setIdMess(string $id_mess): static
-    {
-        $this->id_mess = $id_mess;
-
-        return $this;
-    }
 
     public function getIdUtilisateur(): ?Utilisateur
     {

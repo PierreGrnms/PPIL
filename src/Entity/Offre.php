@@ -17,8 +17,6 @@ class Offre
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $id_offre = null;
 
     #[ORM\Column(length: 255)]
     private ?string $titre_offre = null;
@@ -29,19 +27,19 @@ class Offre
     #[ORM\Column]
     private ?float $prix = null;
 
-    #[ORM\OneToMany(mappedBy: 'id_offre', targetEntity: Evaluation::class)]
+    #[ORM\OneToMany(mappedBy: 'id', targetEntity: Evaluation::class)]
     private Collection $evaluations;
 
-    #[ORM\OneToMany(mappedBy: 'id_offre', targetEntity: Photo::class)]
+    #[ORM\OneToMany(mappedBy: 'id', targetEntity: Photo::class)]
     private Collection $photos;
 
-    #[ORM\OneToMany(mappedBy: 'id_offre', targetEntity: Reclamation::class)]
+    #[ORM\OneToMany(mappedBy: 'id', targetEntity: Reclamation::class)]
     private Collection $reclamations;
 
-    #[ORM\OneToMany(mappedBy: 'id_offre', targetEntity: Reservation::class)]
+    #[ORM\OneToMany(mappedBy: 'id', targetEntity: Reservation::class)]
     private Collection $reservations;
 
-    #[ORM\OneToMany(mappedBy: 'id_offre', targetEntity: Disponibilites::class)]
+    #[ORM\OneToMany(mappedBy: 'id', targetEntity: Disponibilites::class)]
     private Collection $disponibilites;
 
     public function __construct()
@@ -56,18 +54,6 @@ class Offre
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdOffre(): ?string
-    {
-        return $this->id_offre;
-    }
-
-    public function setIdOffre(string $id_offre): static
-    {
-        $this->id_offre = $id_offre;
-
-        return $this;
     }
 
     public function getTitreOffre(): ?string
