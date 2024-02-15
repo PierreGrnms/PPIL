@@ -81,7 +81,7 @@ class Reservation
 
     public function setIdUser(?Utilisateur $id_user): static
     {
-        $this->id_user = $id_user;
+        $this->id = $id_user;
 
         return $this;
     }
