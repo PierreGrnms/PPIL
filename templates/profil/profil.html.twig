@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block body %}
+    <head>
+        <link rel="stylesheet" href="{{ asset('css/profil.css') }}">
+    </head>
+    {% include 'includes/nav_bar/navBar.html.twig' %}
+
+    <h1>Profil</h1>
+    <div class="container-form">
+        {{ form_errors(profilForm) }}
+        {#bug ici sa met des truc apres le bouton
+        voir formerrors()
+        voir getUser
+        voir si getSession c bien
+        réglé probleme hover deconnection
+        hébergement#}
+        {{ form_start(profilForm) }}
+            <label for="">{{ user.email }}</label>
+
+            {{ form_row(profilForm.password, {
+                label: 'Password'
+            }) }}
+            {{ form_row(profilForm.nom, {
+                'data': user.email is defined ? 'HEHE' : 'CACa'
+            }) }}
+            {{ form_row(profilForm.prenom) }}
+            {{ form_row(profilForm.numero_rue) }}
+            {{ form_row(profilForm.nom_de_la_rue) }}
+            {{ form_row(profilForm.numero_telephone) }}
+            {{ form_row(profilForm.code_postal) }}
+            {{ form_row(profilForm.porte_monnaie) }}
+
+            <button type="submit" class="btn">Changer mon Profil</button>
+        {{ form_end(profilForm) }}
+    </div>
+
+
+    {% include 'includes/footer/footer.html.twig' %}
+{% endblock %}
