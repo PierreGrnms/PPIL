@@ -16,7 +16,20 @@
                 <a class="nav-link" href="{{ path('home') }}">Abonnements</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('home') }}">Connexion</a>
+                {% if app.session.get('user') %}
+                    <div class="user-container">
+                        <a class="nav-link connected" href="{{ path('app_profil') }}">
+                            {{ app.session.get('user').getEmail() }}
+                        </a>
+                        <a class="nav-link disconnect" href="{{ path('disconnect') }}">
+                            Déconnecter
+                        </a>
+                    </div>
+
+                {% else %}
+                    <a class="nav-link" href="{{ path('app_register') }}">Connexion</a>
+                {% endif %}
+
             </li>
             {# Ajoute d'autres liens de navigation ici #}
         </ul>

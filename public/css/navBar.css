@@ -7,6 +7,7 @@
     display: flex;
     justify-content: space-between;
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    column-gap: 50%;
 }
 
 .navbar-brand a {
@@ -14,25 +15,51 @@
     color: #054c04;
     font-size: 3em;
     font-weight: bold;
+    flex:1;
 }
 
 .navbar-menu {
     display: flex;
+    flex:1;
 }
 
 .navbar-nav {
     list-style: none;
     display: flex;
+    flex:1;
+    justify-content: space-around;
 }
 
 .nav-item {
-    margin-right: 15px;
+    padding:10px 0;
 }
 
 .nav-link {
     text-decoration: none;
     color: #ffffff;
     font-weight: bold;
+}
+.user-container {
+    position: relative;
+    display:flex;
+    flex-direction: column;
+}
+.connected {
+    color: #c45454;
+}
+.disconnect {
+    position: absolute;
+    top:110%;
+    display:none;
+    width:0;
+    background: #e71616;
+    font-size:20px;
+    padding:10px;
+}
+
+.user-container:hover .disconnect {
+    display:block;
+    width:100%;
 }
 
 .nav-link:hover {
