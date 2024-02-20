@@ -11,15 +11,26 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
+            ->add('email', null, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter an email address',
+                    ]),
+                    new Email([
+                        'message' => 'The email "{{ value }}" is not a valid email address.',
+                    ]),
+                ],
+            ])
             ->add('agreeTerms', CheckboxType::class, [
-                                'mapped' => false,
+                'mapped' => false,
                 'constraints' => [
                     new IsTrue([
                         'message' => 'You should agree to our terms.',
@@ -27,8 +38,6 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('plainPassword', PasswordType::class, [
-                                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
@@ -38,19 +47,68 @@ class RegistrationFormType extends AbstractType
                     new Length([
                         'min' => 6,
                         'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        // max length allowed by Symfony for security reasons
                         'max' => 4096,
+                    ]),
+                    new Regex([
+                        'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/',
+                        'message' => 'Your password must contain at least one lowercase letter, one uppercase letter, and one digit.',
                     ]),
                 ],
             ])
-            ->add('nom')
-            ->add('prenom')
-            ->add('nom_de_la_rue')
-            ->add('numero_rue')
-            ->add('code_postal')
-            ->add('numero_telephone')
-            ->add('porte_monnaie')
-
+            ->add('nom', null, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter your last name',
+                    ]),
+                ],
+            ])
+            ->add('prenom', null, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter your first name',
+                    ]),
+                ],
+            ])
+            ->add('nom_de_la_rue', null, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter the street name',
+                    ]),
+                ],
+            ])
+            ->add('numero_rue', null, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter the street number',
+                    ]),
+                ],
+            ])
+            ->add('code_postal', null, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter the postal code',
+                    ]),
+                ],
+            ])
+            ->add('numero_telephone', null, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter your phone number',
+                    ]),
+                    new Regex([
+                        'pattern' => '/^\+(?:[0-9] ?){6,14}[0-9]$/',
+                        'message' => 'Please enter a valid phone number with country code.',
+                    ]),
+                ],
+            ])
+            ->add('porte_monnaie', null, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter your wallet information',
+                    ]),
+                    // Add any additional constraints for the wallet field
+                ],
+            ])
         ;
     }
 
