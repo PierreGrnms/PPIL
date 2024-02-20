@@ -22,7 +22,7 @@ build:
 disk: 512
 
 relationships:
-    database: 'db:mysql'
+    database: 'database:mysql'
 
 web:
     locations:
