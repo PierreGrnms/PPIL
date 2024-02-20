@@ -13,17 +13,9 @@ class HomePageController extends AbstractController
     public function index(Request $request): Response
     {
 
-        $session = $request->getSession();
         return $this->render('home_page/index.html.twig', [
             'controller_name' => 'HomePageController',
         ]);
     }
 
-    #[Route('/disconnect', name: 'disconnect')]
-    public function disconnect(Request $request)
-    {
-        $session = $request->getSession();
-        $session->remove('user');
-        return $this->redirectToRoute('home');
-    }
 }

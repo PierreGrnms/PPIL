@@ -34,9 +34,6 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
             // do anything else you need here, like send an email
 
-            $session = $request->getSession();
-            $session->set("user", $user);    // ou $form->get('email')
-
             return $this->redirectToRoute('home');
         }
 

@@ -21,6 +21,10 @@ form {
     justify-content: space-around;
     align-items: center;
 
+    border-radius: 15px;
+    padding: 1%;
+    border: solid 2px white;
+
     font-family: Arial, Helvetica, sans-serif;
     gap: 20px;
     width:50%;

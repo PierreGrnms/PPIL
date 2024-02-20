@@ -17,28 +17,13 @@ class ProfilController extends AbstractController
     public function index(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
 
-        $session = $request->getSession();
-        $userSession = $session->get('user');
-        $user = $entityManager->getRepository(Utilisateur::class)->findOneBy(['email'=>$userSession->getEmail()]);
-        //print_r(app->user);
-        if (!$user) {
-            throw $this->createNotFoundException(
-                'No User found for main : '. $userSession->getEmail()
-            );
-        }
+        $user = $this->getUser();
+
         $form = $this->createForm(ProfilFormType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $userAlreadyExist = $entityManager->getRepository(Utilisateur::class)->findOneBy(['email'=>$user->getEmail()]);
-            if ($userAlreadyExist) {
-                throw $this->createAccessDeniedException(
-                    'Utilisateur déjà existant : '. $userAlreadyExist->getEmail()
-                );
-            } else {
-                $entityManager->persist($user);
-                $entityManager->flush();
-                $session->set('user', $user);    // ou $form->get('email')
-            }
+            $entityManager->persist($user);
+            $entityManager->flush();
             return $this->redirectToRoute('home');
         }
 
