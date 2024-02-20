@@ -21,6 +21,9 @@ build:
 
 disk: 512
 
+relationships:
+    database: 'db:mysql'
+
 web:
     locations:
         "/":
