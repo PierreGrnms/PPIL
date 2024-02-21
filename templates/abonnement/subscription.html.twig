@@ -1,0 +1,23 @@
+{# templates/default/index.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}ÉcoPrêt - Accueil{% endblock %}
+
+{% block body %}
+    <head>
+        <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+    </head>
+    {% include 'includes/nav_bar/navBar.html.twig' %}
+
+    <div class="container mt-4">
+        <p>
+            Vous n'avez pas encore payer d'abonnement.\n
+            Si vous voulez 
+        </p>
+    </div>
+
+    {# Ajoute d'autres sections ou fonctionnalités ici #}
+
+    {% include 'includes/footer/footer.html.twig' %}
+{% endblock %}
