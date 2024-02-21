@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block body %}
+    <head>
+        <link rel="stylesheet" href="{{ asset('css/profil.css') }}">
+    </head>
+    {% include 'includes/nav_bar/navBar.html.twig' %}
+
+    <h1>Profil</h1>
+    <div class="container-form">
+        {{ form_errors(profilForm) }}
+
+        {{ form_start(profilForm) }}
+            <label for="">{{ user.email }}</label>
+
+            {{ form_row(profilForm.plainPassword, {label: 'Password'}) }}
+            {% if profilForm.plainPassword.vars.errors|length > 0 %}
+                <div class="error">{{ profilForm.plainPassword.vars.errors|first.message }}</div>
+            {% endif %}
+
+            {{ form_row(profilForm.nom) }}
+            {% if profilForm.nom.vars.errors|length > 0 %}
+                <div class="error">{{ profilForm.nom.vars.errors|first.message }}</div>
+            {% endif %}
+
+            {{ form_row(profilForm.prenom) }}
+            {% if profilForm.prenom.vars.errors|length > 0 %}
+                <div class="error">{{ profilForm.prenom.vars.errors|first.message }}</div>
+            {% endif %}
+
+            {{ form_row(profilForm.numero_rue) }}
+            {% if profilForm.numero_rue.vars.errors|length > 0 %}
+                <div class="error">{{ profilForm.numero_rue.vars.errors|first.message }}</div>
+            {% endif %}
+
+            {{ form_row(profilForm.nom_de_la_rue) }}
+            {% if profilForm.nom_de_la_rue.vars.errors|length > 0 %}
+                <div class="error">{{ profilForm.nom_de_la_rue.vars.errors|first.message }}</div>
+            {% endif %}
+
+            {{ form_row(profilForm.numero_telephone) }}
+            {% if profilForm.numero_telephone.vars.errors|length > 0 %}
+                <div class="error">{{ profilForm.numero_telephone.vars.errors|first.message }}</div>
+            {% endif %}
+
+            {{ form_row(profilForm.code_postal) }}
+            {% if profilForm.code_postal.vars.errors|length > 0 %}
+                <div class="error">{{ profilForm.code_postal.vars.errors|first.message }}</div>
+            {% endif %}
+
+            {{ form_row(profilForm.porte_monnaie) }}
+            {% if profilForm.porte_monnaie.vars.errors|length > 0 %}
+                <div class="error">{{ profilForm.porte_monnaie.vars.errors|first.message }}</div>
+            {% endif %}
+
+            <button type="submit" class="btn">Changer mon Profil</button>
+        {{ form_end(profilForm) }}
+    </div>
+
+
+    {% include 'includes/footer/footer.html.twig' %}
+{% endblock %}
