@@ -12,19 +12,16 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AbonnementSubscriptionController extends AbstractController
 {
-    #[Route('/abonnement', name: 'app_abonnement_subscription')]
+    #[Route('/abonnement', name: 'app_abonnement')]
     public function index(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
 
         $user = $this->getUser();
-        $abo = $this->findAbonnement($entityManager, $user);
 
         if($user == null){
-            return $this->render('home_page/index.html.twig', [
-                'user' => $user,
-            ]);
+            return $this->redirectToRoute('app_login');
         }
-        $abo = findAbonnement($entityManager, $user);
+        $abo = $this->findAbonnement($entityManager, $user);
         if($abo == null){
             return $this->render('abonnement/subscription.html.twig');
         }
