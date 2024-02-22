@@ -29,14 +29,14 @@ class AjouterUneOffreController extends AbstractController
             // $entityManager->persist($offre);
             // $entityManager->flush();
 
-            return $this->redirectToRoute('page_de_confirmation');
+            return $this->redirectToRoute('ajouteruneoffre');
         }
         if ($dispo->isSubmitted() && $dispo->isValid()) {
             // Traitez les données du formulaire ici, par exemple :
             // $entityManager = $this->getDoctrine()->getManager();
             // $entityManager->persist($offre);
             // $entityManager->flush();
-            return $this->redirectToRoute('app_ajouter_une_offre');
+            return $this->redirectToRoute('ajouteruneoffre');
         }
         return $this->render('ajouter_une_offre/index.html.twig', [
             'controller_name' => 'AjouterUneOffreController',

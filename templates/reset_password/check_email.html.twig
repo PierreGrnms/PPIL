@@ -3,9 +3,17 @@
 {% block title %}Password Reset Email Sent{% endblock %}
 
 {% block body %}
-    <p>
-        If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password.
-        This link will expire in {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
-    </p>
-    <p>If you don't receive an email please check your spam folder or <a href="{{ path('app_forgot_password_request') }}">try again</a>.</p>
+    <head>
+        <link rel="stylesheet" href="{{ asset('css/resetpass.css') }}">
+    </head>
+    {% include 'includes/nav_bar/navBar.html.twig' %}
+    <div class="container">
+        
+        <p>
+            If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password.
+            This link will expire in {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+        </p>
+        <p>If you don't receive an email please check your spam folder or <a href="{{ path('app_forgot_password_request') }}">try again</a>.</p>
+    </div>
+    {% include 'includes/footer/footer.html.twig' %}
 {% endblock %}
