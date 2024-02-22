@@ -1,0 +1,24 @@
+    {% extends 'base.html.twig' %}
+
+{% block title %}Reset your password{% endblock %}
+
+{% block body %}
+    
+    <head>
+        <link rel="stylesheet" href="{{ asset('css/resetpass.css') }}">
+    </head>
+    {% include 'includes/nav_bar/navBar.html.twig' %}
+<div class="container">
+        <h1>Hi!</h1>
+
+        <p>To reset your password, please visit the following link</p>
+
+        <a href="{{ url('app_reset_password', {token: resetToken.token}) }}">{{ url('app_reset_password', {token: resetToken.token}) }}</a>
+
+        <p>This link will expire in {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
+
+        <p>Cheers!</p>
+    </div>
+
+    {% include 'includes/footer/footer.html.twig' %}
+{% endblock %}

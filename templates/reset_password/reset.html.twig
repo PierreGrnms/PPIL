@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reset your password{% endblock %}
+
+{% block body %}
+    <head>
+        <link rel="stylesheet" href="{{ asset('css/resetpass.css') }}">
+    </head>
+    {% include 'includes/nav_bar/navBar.html.twig' %}
+    <div class="container">
+        <h1>Reset your password</h1>
+
+        {{ form_start(resetForm) }}
+            {{ form_row(resetForm.plainPassword) }}
+            <button class="btn btn-primary">Reset password</button>
+        {{ form_end(resetForm) }}
+    </div>
+    {% include 'includes/footer/footer.html.twig' %}
+{% endblock %}
+
