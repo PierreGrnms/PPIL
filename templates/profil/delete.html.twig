@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Supprimer le compte
+{% endblock %}
+
+{% block body %}
+
+    <head>
+        <link rel="stylesheet" href="{{ asset('css/profil.css') }}">
+    </head>
+    {% include 'includes/nav_bar/navBar.html.twig' %}
+
+    <h1>Voulez-vous vraiment supprimer votre compte ?</h1>
+
+    {{ form_start(form) }}
+    <div class="button-container">
+        {{ form_widget(form) }}
+        <a href="{{ path('app_profil')}}">
+            <button type="button" class="btn">Annuler</button>
+        </a>
+    </div>
+    {{ form_end(form) }}
+
+    {% include 'includes/footer/footer.html.twig' %}
+{% endblock %}

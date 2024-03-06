@@ -16,7 +16,6 @@ class ProfilController extends AbstractController
     #[Route('/profil', name: 'app_profil')]
     public function index(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
-
         $user = $this->getUser();
 
         $form = $this->createForm(ProfilFormType::class, $user);
@@ -24,7 +23,7 @@ class ProfilController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($user);
             $entityManager->flush();
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('app_profil');
         }
 
         return $this->render('profil/profil.html.twig', [

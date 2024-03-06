@@ -55,10 +55,16 @@
                 <div class="error">{{ profilForm.porte_monnaie.vars.errors|first.message }}</div>
             {% endif %}
 
-            <button type="submit" class="btn">Changer mon Profil</button>
+            <div class="button-container">
+                <button type="submit" class="btn">Changer mon Profil</button>
+                <button type="reset" class="btn">Réinitialiser mes modifications</button>
+                <a class="nav-link delete" href="{{ path('supprimer_compte', {'id': user.id}) }}">
+                    <button type="button" class="btn">Supprimer mon compte</button>
+                </a>
+            </div>
+
         {{ form_end(profilForm) }}
     </div>
-
 
     {% include 'includes/footer/footer.html.twig' %}
 {% endblock %}
