@@ -3,3 +3,8 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+supprimer_compte:
+    path: '/profil/{id}/supprimerCompte'
+    controller: 'App\Controller\DeleteAccountController::supprimerCompte'
+
