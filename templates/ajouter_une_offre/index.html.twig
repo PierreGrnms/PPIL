@@ -1,67 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AjouterUneOffreController!{% endblock %}
+{% block title %}Ajouter une offre{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+
 <link rel="stylesheet" href="{{ asset('css/ajouterOffre.css') }}">
 
     {% include 'includes/nav_bar/navBar.html.twig' %}
 
+<script src="{{ asset('js/formOffre.js') }}"></script>
 
-<h1>Ajouter une offre</h1>
-
-    {{ form_start(offreForm) }}
-    {{ form_row(offreForm.choiceField) }}
-        {{ form_row(offreForm.titre_offre) }}
-        {{ form_row(offreForm.texte_offre) }}
-        {{ form_label(offreForm.prix, 'Prix en florain') }}
-        {{ form_widget(offreForm.prix, ) }}
-        {{ form_errors(offreForm.prix) }}      
-        {{ form_row(offreForm.fichiers,{'attr': {'id': 'fichiersInput'}}) }}
-        <ul id="fileList"></ul>
-        <script>
-    document.getElementById('ajouter_une_offre_form_fichiers').addEventListener('change', function(event) {
-        var fileList = document.getElementById('fileList');
-        fileList.innerHTML = ''; // Efface la liste précédente des fichiers sélectionnés
-
-        // Parcourt les fichiers sélectionnés et les ajoute à la liste
-        for (var i = 0; i < this.files.length; i++) {
-            var listItem = document.createElement('li');
-            listItem.textContent = this.files[i].name;
-            fileList.appendChild(listItem);
-        }
-    });
-</script>
-                <button type="submit">Ajouter l'offre</button>
-
-    <div class="dispo">
-    <h2> Ajouter une disponibilité </h2>
-
-
-    {{ form_start(dispoForm) }}
-    <div>
-        {{ form_label(dispoForm.selectedDate, 'Sélectionner une date') }}
-        {{ form_widget(dispoForm.selectedDate, {'attr': {'class': 'selectDate'}}) }}
-        {{ form_errors(dispoForm.selectedDate) }}
-    </div>
-    <div>
-        {{ form_label(dispoForm.debutPlageHoraire) }}
-        {{ form_widget(dispoForm.debutPlageHoraire, {'attr': {'class': 'form-control'}}) }}
-        {{ form_errors(dispoForm.debutPlageHoraire) }}
-    </div>
-    <div>
-        {{ form_label(dispoForm.finPlageHoraire) }}
-        {{ form_widget(dispoForm.finPlageHoraire, {'attr': {'class': 'form-control'}}) }}
-        {{ form_errors(dispoForm.finPlageHoraire) }}
-    </div>
-        <button type="submit">Ajouter la disponibilité</button>
-
-    {{ form_end(dispoForm) }}
-    </div>
-        {{ form_end(offreForm) }}
 
 {% endblock %}
