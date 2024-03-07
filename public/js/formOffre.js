@@ -215,7 +215,7 @@
             buttonSub.id = 'sub';
             buttonSub.classList.add('btn');
             buttonSub.addEventListener('click', function(){
-                sendAjaxForm("/ajouteruneoffre") ;
+                sendAjaxForm("app_ajax_get") ;
             }) ;
             form.appendChild(buttonSub) ;
 //===============================
@@ -263,29 +263,30 @@ function sendAjaxForm(dest){
         console.log("type : "+ type) ;
         // Création de la requete Ajax
         // Créer un objet XMLHttpRequest
-        var xhr = new XMLHttpRequest();
-
-        // Définir l'URL du serveur
-        var url = dest;
-
-        // Convertir les données en format JSON
-        var data = JSON.stringify({
+        var data = {
             titre: titre,
             description: description,
             prix: prix,
             lstDispo: lstDispo,
             lstFichiers: lstFichiers
-        });
-        // Configurer la requête
-        xhr.open("POST", url, true);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        // Définir la fonction de rappel à exécuter lorsque la requête est terminée
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                // La requête a réussi, vous pouvez traiter la réponse ici si nécessaire
-                console.log(xhr.responseText);
+        };
+        
+        // URL de destination de la requête AJAX
+        var url = "/ajouteruneoffre";
+        
+        // Envoi de la requête AJAX
+        $.ajax({
+            type: "POST", // Méthode HTTP à utiliser
+            url: url, // URL de destination
+            contentType: "application/json", // Type de contenu de la requête
+            data: JSON.stringify(data), // Données à envoyer, converties en JSON
+            success: function(response) { // Fonction à exécuter en cas de succès
+                console.log("Réponse du serveur :", response);
+            },
+            error: function(xhr, status, error) { // Fonction à exécuter en cas d'erreur
+                console.error("Erreur lors de la requête :", error);
             }
-        }
+        });
     }
 }
 /**
