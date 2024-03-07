@@ -215,7 +215,7 @@
             buttonSub.id = 'sub';
             buttonSub.classList.add('btn');
             buttonSub.addEventListener('click', function(){
-                sendAjaxForm("") ;
+                sendAjaxForm("/ajouteruneoffre") ;
             }) ;
             form.appendChild(buttonSub) ;
 //===============================
@@ -273,8 +273,8 @@ function sendAjaxForm(dest){
             titre: titre,
             description: description,
             prix: prix,
-            listeDispo: listeDispo,
-            listeFichier: listeFichier
+            lstDispo: lstDispo,
+            lstFichiers: lstFichiers
         });
         // Configurer la requête
         xhr.open("POST", url, true);

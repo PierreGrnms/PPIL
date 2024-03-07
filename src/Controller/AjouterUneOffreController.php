@@ -9,39 +9,40 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\HttpFoundation\JsonResponse;
 class AjouterUneOffreController extends AbstractController
 {
     #[Route('/ajouteruneoffre', name: 'app_ajouter_une_offre')]
     public function index(Request $request): Response
     {
         $offre = new Offre();
-        $form = $this->createForm(AjouterUneOffreFormType::class, null);
+        echo('test') ;
 
-        $form->handleRequest($request);
-
-        $dispo = $this->createForm(AjoutDispoType::class, null);
-        $dispo->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            // Traitez les données du formulaire ici, par exemple :
-            // $entityManager = $this->getDoctrine()->getManager();
-            // $entityManager->persist($offre);
-            // $entityManager->flush();
-
-            return $this->redirectToRoute('ajouteruneoffre');
-        }
-        if ($dispo->isSubmitted() && $dispo->isValid()) {
-            // Traitez les données du formulaire ici, par exemple :
-            // $entityManager = $this->getDoctrine()->getManager();
-            // $entityManager->persist($offre);
-            // $entityManager->flush();
-            return $this->redirectToRoute('ajouteruneoffre');
-        }
         return $this->render('ajouter_une_offre/index.html.twig', [
             'controller_name' => 'AjouterUneOffreController',
-            'offreForm' => $form->createView(),
-            'dispoForm' => $dispo->createView(),
         ]);
+    }
+    /**
+     * @Route("/ajouteruneoffre", name="app_ajouter_une_offre")
+     */
+    public function votreAction(Request $request)  
+    {
+        
+        // Récupérer les données envoyées via la requête AJAX
+        $data = json_decode($request->getContent(), true);
+
+        // Traiter les données
+        $titre = $data['titre'];
+        $description = $data['description'];
+        $prix = $data['prix'];
+        $listeDispo = $data['listeDispo'];
+        $listeFichier = $data['listeFichier'];
+        echo $data ;
+        // Faites ce que vous devez faire avec les données, par exemple :
+        // Enregistrer les données dans la base de données
+        // ...
+
+        // Répondre à la requête AJAX
+        return new JsonResponse(['message' => 'Données reçues avec succès !']);
     }
 }
