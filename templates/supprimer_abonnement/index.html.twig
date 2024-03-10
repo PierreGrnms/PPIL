@@ -11,9 +11,15 @@
     {% include 'includes/nav_bar/navBar.html.twig' %}
 
     <div class="container mt-4">
-        <p>
-            Vous avez un abonnement qui expirera le {{date}}
-        </p>
+        {% if {{isSuppr}} %}
+            <div>
+                Votre abonnement a bien été supprimé
+            </div>
+        {% else %}
+            <div>
+                Une erreur à été rencontrée, votre abonnement n'a pas pu etre supprimé
+            <div>
+        {% endif %}
     </div>
 
     {# Ajoute d'autres sections ou fonctionnalités ici #}

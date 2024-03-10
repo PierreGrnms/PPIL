@@ -10,32 +10,25 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AbonnementSubscriptionController extends AbstractController
+class SupprimerAbonnementController extends AbstractController
 {
-    #[Route('/abonnement', name: 'app_abonnement')]
+    #[Route('/suppr_abonnement', name: 'app_suppr_abonnement')]
     public function index(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
 
         $user = $this->getUser();
-
-        if($user == null){
-            return $this->redirectToRoute('app_login');
-        }
-        $abo = $this->findAbonnement($entityManager, $user);
-        if($abo == null){
-            return $this->render('abonnement/subscription.html.twig');
-        }
-        return $this->render('abonnement/abonnement.html.twig', [
-            'date' => $abo,
+        $isSuppr = $this->supprAbonnement($entityManager, $user);
+        return $this->render('supprimer_abonnement/index.html.twig', [
+            'isSuppr' => $isSuppr,
         ]);
     }
 
-    public function findAbonnement($entityManager, $user): ?Date
+    public function supprAbonnement($entityManager, $user): boolval
     {
         $queryBuilder = $entityManager->createQueryBuilder();
 
         $query = $entityManager->createQuery(
-            'SELECT i.date_expiration
+            'DELETE 
             FROM App\Entity\InscriptionAnnuelle i
             INNER JOIN App\Entity\Utilisateur u
             WHERE u.email = :user'
