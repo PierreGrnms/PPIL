@@ -1,9 +1,4 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
-}
-
-form {
+#formOffre {
     max-width: 400px;
     margin: 0 auto;
     padding: 20px;
@@ -12,52 +7,101 @@ form {
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-top: 50px;
-}
 
-h1 {
-    font-size: 1.5em;
-    text-align: center;
-    color: #333;
 }
+#containerDispoForm{
+    max-width: 350px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+    margin-bottom: 30px;
 
-label {
-    display: block;
-    margin: 10px 0 5px;
-    color: #555;
 }
-
-input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    box-sizing: border-box;
-}
-
 button {
     background-color: #007bff;
     color: #fff;
     cursor: pointer;
     padding: 10px;
     border: none;
+    display: block;
     border-radius: 3px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
 }
+#delImg{
+    color: red;
+    font-weight: bold;
+}
+#delImg:hover{
 
+font-size: 110%;
+}
 button:hover {
     background-color: #0056b3;
 }
-
-
-.checkbox-label input {
-    margin-right: 500px;
+#titre{
+    display: block;
+    margin: auto;
+    color: red;
 }
 
-.dispo {
-    border: 1px solid #ddd;
+.containerDispo {
+    padding: 4px;
+    width:fit-content;
+    height: fit-content;
+    background-color: #007bff ;
+    font-size: small;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 50px;
+    display: inline-block;
+    margin: 5px;
+}
+#importImg{
+    max-width: 200px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-top: 50px;
-    padding: 20px;
+    display: block;
+    margin: auto;
+}
 
+#fileInput{
+    margin-left: 100px;
+    margin-right: auto;
+    background-color: red;
+    align-content: center;
+    display: block;
+}
+.inputDispo{
+    margin-bottom: 20px;
+}
+#tabImg{
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+}
+.inputForm{
+    width: 100%;
+}
+#imageContainer{
+    display:grid ;
+    justify-content: center; /* Centre horizontalement */
+    align-items: center; /* Centre verticalement */
+    max-width: 400px;
+}
+textarea {
+    resize: none;
+}
+#form div {
+    padding: 20px;
+    background-color: red;
+}
+body{
+    background-color: #EEEEEE;
 }
