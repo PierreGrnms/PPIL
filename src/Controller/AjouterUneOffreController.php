@@ -47,7 +47,7 @@ class AjouterUneOffreController extends AbstractController
                 $mess = $mess . $value2 ;
             }
         }
-         
+        
         // Faire quelque chose avec les données reçues, par exemple enregistrer dans la base de données
         $offre = new Offre();
         $offre->setTitreOffre($titre);
@@ -65,7 +65,21 @@ class AjouterUneOffreController extends AbstractController
             $entityManager->persist($offre);
             $entityManager->persist($dispo);
             $entityManager->flush();
+            $number_img = 0 ;
+            $public_directory = $this->getParameter('kernel.project_dir') . '/public' . '/' . $titre . '/';
+            // Chemin du fichier dans le répertoire public
+            mkdir($public_directory) ;
+            foreach ($lstFichiers as $key => $image_string) {
+                $image_string = str_replace('data:image/jpeg;base64,', '', $image_string);
+                $image_string = str_replace('data:image/jpg;base64,', '', $image_string);
+                $image_string = str_replace('data:image/png;base64,', '', $image_string);
 
+                $imageData = base64_decode($image_string);
+
+                $chemin_fichier = $public_directory . (string)$number_img . '.png';
+                file_put_contents($chemin_fichier, $imageData);
+                $number_img++ ;
+            }
 
         }
         
