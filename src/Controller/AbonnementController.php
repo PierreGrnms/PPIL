@@ -18,7 +18,7 @@ class AbonnementController extends AbstractController
 
         $user = $this->getUser();
 
-        if(false){
+        if($user){
             return $this->redirectToRoute('app_login');
         }
         $abo = $this->findAbonnement($entityManager, $user);
@@ -34,7 +34,7 @@ class AbonnementController extends AbstractController
         $query = $entityManager->createQuery(
             'SELECT i.date_expiration
             FROM App\Entity\InscriptionAnnuelle i
-            JOIN App\Entity\Utilisateur u ON 
+            INNER JOIN App\Entity\Utilisateur u
             WHERE u.email = :user'
         )->setParameter('user', $user);
 

@@ -17,23 +17,30 @@ class SupprimerAbonnementController extends AbstractController
     {
 
         $user = $this->getUser();
-        $isSuppr = $this->supprAbonnement($entityManager, $user);
-        return $this->render('supprimer_abonnement/index.html.twig', [
-            'isSuppr' => $isSuppr,
+        if($user){
+            return $this->redirectToRoute('app_login');
+        }
+        $this->supprAbonnement($entityManager, $user);
+        return $this->render('abonnement/index.html.twig', [
+            'date' => null,
         ]);
     }
 
-    public function supprAbonnement($entityManager, $user): boolval
+    public function supprAbonnement($entityManager, $user)
     {
         $queryBuilder = $entityManager->createQueryBuilder();
 
         $query = $entityManager->createQuery(
-            'DELETE 
+            'SELECT i.id
             FROM App\Entity\InscriptionAnnuelle i
             INNER JOIN App\Entity\Utilisateur u
             WHERE u.email = :user'
         )->setParameter('user', $user);
 
-        return $query->getOneOrNullResult();
+        $res = $query->execute();
+        foreach($res as $result){
+            $entityManager->remove($result);
+        }
+        $entityManager->flush();
     }
 }

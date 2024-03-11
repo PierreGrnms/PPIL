@@ -18,13 +18,16 @@ class AjoutAbonnementController extends AbstractController
 
         $user = $this->getUser();
 
-        if(false){
+        if($user){
             return $this->redirectToRoute('app_login');
         }
-        $date = '2010-09-16';
-        $date = $this->findDateProchaineExpiration($date);
-        return $this->render('ajout_abonnement/index.html.twig', [
-            'date' => $date,
+        $date = null;
+        if($date == null){
+            $date = date('d-m-Y');
+        }
+        $new_date = $this->findDateProchaineExpiration($date);
+        return $this->render('abonnement/index.html.twig', [
+            'date' => $new_date
         ]);
     }
 
@@ -35,7 +38,7 @@ class AjoutAbonnementController extends AbstractController
         $query = $entityManager->createQuery(
             'SELECT i.date_expiration
             FROM App\Entity\InscriptionAnnuelle i
-            JOIN App\Entity\Utilisateur u ON 
+            JOIN App\Entity\Utilisateur u 
             WHERE u.email = :user'
         )->setParameter('user', $user);
 

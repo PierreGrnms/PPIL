@@ -13,14 +13,14 @@
     <div class="container mt-4">
         {% if date %}
             <div>
-                Vous avez un abonnement qui expirera le {{date}}
-                Vous pouvez prolonger votre abonnement en cliquant <a href="{{ path('get_abonnement') }}"> ici </a> </br>
-                Si vous souhaitez annuler votre abonnement <a href="{{ path('app_suppr_abonnement') }}" onclick="return confirm('Êtes vous sûr de vouloir supprimer votre abonnement ?')">cliquez ici</a>
+                Vous avez un abonnement qui expirera le {{date}}<br/>
+                <a class="button" href="{{ path('app_ajout_abonnement') }}"> Prolonger mon abonnement </a> 
+                <a class="button" href="{{ path('app_suppr_abonnement') }}" onclick="return confirm('Êtes vous sûr de vouloir supprimer votre abonnement ?')">Annuler mon abonnement</a>
             </div>
         {% else %}
             <div> 
                 Vous n'avez pas encore d'abonnement </br>
-                Vous pouvez vous abonner en cliquant <a href="{{ path('home') }}"> ici </a>
+                <a class="button" href="{{ path('app_ajout_abonnement') }}"> M'abonner </a>
         {% endif %}
         
     </div>
