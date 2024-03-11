@@ -1,0 +1,31 @@
+{# templates/default/index.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}ÉcoPrêt - Accueil{% endblock %}
+
+{% block body %}
+    <head>
+        <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+    </head>
+    {% include 'includes/nav_bar/navBar.html.twig' %}
+
+    <div class="container mt-4">
+        {% if date %}
+            <div>
+                Vous avez un abonnement qui expirera le {{date}}<br/>
+                <a class="button" href="{{ path('app_ajout_abonnement') }}"> Prolonger mon abonnement </a> 
+                <a class="button" href="{{ path('app_suppr_abonnement') }}" onclick="return confirm('Êtes vous sûr de vouloir supprimer votre abonnement ?')">Annuler mon abonnement</a>
+            </div>
+        {% else %}
+            <div> 
+                Vous n'avez pas encore d'abonnement </br>
+                <a class="button" href="{{ path('app_ajout_abonnement') }}"> M'abonner </a>
+        {% endif %}
+        
+    </div>
+
+    {# Ajoute d'autres sections ou fonctionnalités ici #}
+
+    {% include 'includes/footer/footer.html.twig' %}
+{% endblock %}
