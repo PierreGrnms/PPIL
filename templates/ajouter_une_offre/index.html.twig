@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="{{ asset('css/ajouterOffre.css') }}">
 
     {% include 'includes/nav_bar/navBar.html.twig' %}
-<script language = "javascript" 
+<script
       src = "https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script>
 
@@ -233,7 +233,7 @@
 //===============================
 document.body.appendChild(form) ;
 
-/** 
+/**
  * Envois les données du formulaire dans une requete Ajax.
  * @param {String} dest
  */
@@ -244,7 +244,7 @@ function sendAjaxForm(dest){
         alert("Les conditions suivantes doivent être vérifiés : \n-Titre\n-Prix\n-Au moins une disponibilite")
     }
 
-    
+
     if (!err){
         lstDispo.forEach(element => {
             console.log (element) ;
@@ -282,20 +282,20 @@ function sendAjaxForm(dest){
             lstDispo: lstDispo,
             lstFichiers: lstFichiers
         };
-        
+
         // URL de destination de la requête AJAX
         var url = "/ajax";
-        
+
         // Envoi de la requête AJAX
         $.ajax({
-            type: "POST", 
-            url: url, 
-            contentType: "application/json", 
-            data: JSON.stringify(data), 
-            success: function(response) { 
+            type: "POST",
+            url: url,
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            success: function(response) {
                 console.log("Réponse du serveur :", response);
             },
-            error: function(xhr, status, error) { 
+            error: function(xhr, status, error) {
                 console.error("Erreur lors de la requête :", error);
             }
         });
@@ -303,17 +303,17 @@ function sendAjaxForm(dest){
 }
 /**
  * Fonction mettant a jour l'affichage des dispo sur la page
- * 
+ *
  */
 function updateDispo(){
     while (containerDispoLst.firstChild) {
         containerDispoLst.removeChild(containerDispoLst.firstChild);
     }
 
-    lstDispo.forEach(element => { 
+    lstDispo.forEach(element => {
         // pour chaque disponibilite faire :
 
-        // création d'un conteneur 
+        // création d'un conteneur
             const containerDispo = document.createElement('div');
             containerDispo.classList.add('containerDispo')
             //Création du label affichant les données de la dispo
@@ -334,7 +334,7 @@ function updateDispo(){
     });
 }
 
-/** 
+/**
  * Fonction permettant d'ajouter une disponibilite dans la liste des disponibilite en recuperant les donnes des input date timeH et timeF
  */
 function AjouterDispo(){
@@ -353,9 +353,9 @@ function AjouterDispo(){
             }
             else{
                 // Ajout de la dispo dans la liste des dispo
-                const dispo = [date.value, hDebut.value, hFin.value] ; 
+                const dispo = [date.value, hDebut.value, hFin.value] ;
                 lstDispo.push(dispo) ;
-                // Remise a zero des input 
+                // Remise a zero des input
                 date.value = "" ;
                 hFin.value = "" ;
                 hDebut.value = "" ;
@@ -363,7 +363,7 @@ function AjouterDispo(){
                 updateDispo() ;
             }
         }
-    
+
 }
 
 function updateImg(){
@@ -429,7 +429,7 @@ function updateImg(){
                 cell1.appendChild(imgElement);
                 imageContainer.appendChild(imageCont);
                 console;console.log('test');
-                
+
 
     });
 }

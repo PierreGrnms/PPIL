@@ -4,6 +4,9 @@ namespace App\Entity;
 
 use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Exception;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -50,6 +53,9 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?float $porte_monnaie = null;
 
+    #[ORM\OneToMany(mappedBy: 'id', targetEntity: Offre::class)]
+    private Collection $offres;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -65,6 +71,33 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         $this->email = $email;
 
         return $this;
+    }
+
+    /**
+     * @param Collection $offres
+     */
+
+
+    public function addOffres(Offre $offre): void
+    {
+        $this->offres->add($offre);
+        $offre->setIdUser($this);
+        /*if (!isset($this->offres)) {
+            $this->offres = new ArrayCollection();
+
+        }
+        if (!$this->offres->contains($offre)) {
+            $this->offres->add($offre);
+            $offre->setIdUser($this);
+        }*/
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getOffres(): Collection
+    {
+        return $this->offres;
     }
 
     /**

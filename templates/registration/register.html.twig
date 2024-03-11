@@ -10,55 +10,85 @@
 
 {{ form_start(registrationForm) }}
 
-{{ form_row(registrationForm.email) }}
-{% if registrationForm.email.vars.errors|length > 0 %}
-    <div class="error">{{ registrationForm.email.vars.errors|first.message }}</div>
-{% endif %}
+    {{ form_label(registrationForm.email) }}
+    {{ form_widget(registrationForm.email) }}
+    {% if form_errors(registrationForm.email) %}
+        <div class="alert alert-danger">
+            {{ form_errors(registrationForm.email) }}
+        </div>
+    {% endif %}
 
-{{ form_row(registrationForm.plainPassword, {label: 'Password'}) }}
-{% if registrationForm.plainPassword.vars.errors|length > 0 %}
-    <div class="error">{{ registrationForm.plainPassword.vars.errors|first.message }}</div>
-{% endif %}
+    {{ form_label(registrationForm.plainPassword) }}
+    {{ form_widget(registrationForm.plainPassword) }}
+    {% if form_errors(registrationForm.plainPassword) %}
+        <div class="alert alert-danger">
+            {{ form_errors(registrationForm.plainPassword) }}
+        </div>
+    {% endif %}
 
-{{ form_row(registrationForm.nom) }}
-{% if registrationForm.nom.vars.errors|length > 0 %}
-    <div class="error">{{ registrationForm.nom.vars.errors|first.message }}</div>
-{% endif %}
+    {{ form_label(registrationForm.nom) }}
+    {{ form_widget(registrationForm.nom) }}
+    {% if form_errors(registrationForm.nom) %}
+        <div class="alert alert-danger">
+            {{ form_errors(registrationForm.nom) }}
+        </div>
+    {% endif %}
 
-{{ form_row(registrationForm.prenom) }}
-{% if registrationForm.prenom.vars.errors|length > 0 %}
-    <div class="error">{{ registrationForm.prenom.vars.errors|first.message }}</div>
-{% endif %}
+    {{ form_label(registrationForm.prenom) }}
+    {{ form_widget(registrationForm.prenom) }}
+    {% if form_errors(registrationForm.prenom) %}
+        <div class="alert alert-danger">
+            {{ form_errors(registrationForm.prenom) }}
+        </div>
+    {% endif %}
 
-{{ form_row(registrationForm.numero_rue) }}
-{% if registrationForm.numero_rue.vars.errors|length > 0 %}
-    <div class="error">{{ registrationForm.numero_rue.vars.errors|first.message }}</div>
-{% endif %}
+    {{ form_label(registrationForm.numero_rue) }}
+    {{ form_widget(registrationForm.numero_rue) }}
+    {% if form_errors(registrationForm.numero_rue) %}
+        <div class="alert alert-danger">
+            {{ form_errors(registrationForm.numero_rue) }}
+        </div>
+    {% endif %}
 
-{{ form_row(registrationForm.nom_de_la_rue) }}
-{% if registrationForm.nom_de_la_rue.vars.errors|length > 0 %}
-    <div class="error">{{ registrationForm.nom_de_la_rue.vars.errors|first.message }}</div>
-{% endif %}
+    {{ form_label(registrationForm.nom_de_la_rue) }}
+    {{ form_widget(registrationForm.nom_de_la_rue) }}
+    {% if form_errors(registrationForm.nom_de_la_rue) %}
+        <div class="alert alert-danger">
+            {{ form_errors(registrationForm.nom_de_la_rue) }}
+        </div>
+    {% endif %}
 
-{{ form_row(registrationForm.numero_telephone) }}
-{% if registrationForm.numero_telephone.vars.errors|length > 0 %}
-    <div class="error">{{ registrationForm.numero_telephone.vars.errors|first.message }}</div>
-{% endif %}
+    {{ form_label(registrationForm.numero_telephone) }}
+    {{ form_widget(registrationForm.numero_telephone) }}
+    {% if form_errors(registrationForm.numero_telephone) %}
+        <div class="alert alert-danger">
+            {{ form_errors(registrationForm.numero_telephone) }}
+        </div>
+    {% endif %}
 
-{{ form_row(registrationForm.code_postal) }}
-{% if registrationForm.code_postal.vars.errors|length > 0 %}
-    <div class="error">{{ registrationForm.code_postal.vars.errors|first.message }}</div>
-{% endif %}
+    {{ form_label(registrationForm.code_postal) }}
+    {{ form_widget(registrationForm.code_postal) }}
+    {% if form_errors(registrationForm.code_postal) %}
+        <div class="alert alert-danger">
+            {{ form_errors(registrationForm.code_postal) }}
+        </div>
+    {% endif %}
 
-{{ form_row(registrationForm.porte_monnaie) }}
-{% if registrationForm.porte_monnaie.vars.errors|length > 0 %}
-    <div class="error">{{ registrationForm.porte_monnaie.vars.errors|first.message }}</div>
-{% endif %}
+    {{ form_label(registrationForm.porte_monnaie) }}
+    {{ form_widget(registrationForm.porte_monnaie) }}
+    {% if form_errors(registrationForm.porte_monnaie) %}
+        <div class="alert alert-danger">
+            {{ form_errors(registrationForm.porte_monnaie) }}
+        </div>
+    {% endif %}
 
-{{ form_row(registrationForm.agreeTerms) }}
-{% if registrationForm.agreeTerms.vars.errors|length > 0 %}
-    <div class="error">{{ registrationForm.agreeTerms.vars.errors|first.message }}</div>
-{% endif %}
+    {{ form_label(registrationForm.agreeTerms) }}
+    {{ form_widget(registrationForm.agreeTerms) }}
+    {% if form_errors(registrationForm.agreeTerms) %}
+        <div class="alert alert-danger">
+            {{ form_errors(registrationForm.agreeTerms) }}
+        </div>
+    {% endif %}
 
 <button type="submit" class="btn">Register</button>
 {{ form_end(registrationForm) }}

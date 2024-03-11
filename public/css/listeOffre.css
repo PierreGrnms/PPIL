@@ -56,11 +56,11 @@ body {
 
     border-radius:25px;
     border: solid 1px var(--gold-color);
-    width:180px;
-    height:270px;
+    width:100%;
+    height:200px;
     color:var(--gold-color);
     display:flex;
-    flex-direction: column;
+
     justify-content: space-around;
     align-items: center;
 
@@ -83,8 +83,7 @@ body {
     height:20%;
     font-size:1.3em;
     display:flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 }
 .offres h5 {

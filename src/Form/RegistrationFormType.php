@@ -88,6 +88,11 @@ class RegistrationFormType extends AbstractType
                     new NotBlank([
                         'message' => 'Please enter the postal code',
                     ]),
+                    new Length([
+                        'min' => 5,
+                        'minMessage' => 'Your postal code must be {{ limit }} characters',
+                        'max' => 5,
+                    ]),
                 ],
             ])
             ->add('numero_telephone', null, [

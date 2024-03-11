@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ListeOffreController!{% endblock %}
+
+
+{% block body %}
+    <head>
+        <link rel="stylesheet" href="{{ asset('css/listeOffre.css') }}">
+    </head>
+    {% include 'includes/nav_bar/navBar.html.twig' %}
+
+    <div class="main">
+        {% if offres is null %}
+            <div class="container-recette">
+                <div class="recette-description">
+                    <div class="left-recette">
+                        <img class="backup" src="" alt="">
+                    </div>
+                    <div class="right-recette">
+                        <h1>{{ offre.getTitreOffre }}</h1>
+                        <div class="box-description">
+                            <div class="contain">
+                                <h2>Description</h2>
+                                <p>{{ offre.getTexteOffre }}</p>
+                                <h2>Prix</h2>
+                                <label>{{ offre.getPrix }} florains</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="contenu">
+                <div class="offres">
+                    {% for offre in offres %}
+                        <a href="?id={{ offre.getId }}">
+                            <div class="textbox">
+                                <h5>{{ offre.getTitreOffre }}</h5>
+                                <h5>{{ offre.getPrix }} florains</h5>
+                                <h5>{{ offre.getIdUser.getCodepostal }}</h5>
+                            </div>
+                        </a>
+                        {#{% else %}
+                        <h1>
+                            Aucune offres
+                        </h1>#}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    {% include 'includes/footer/footer.html.twig' %}
+{% endblock %}

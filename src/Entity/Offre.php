@@ -6,6 +6,7 @@ use App\Repository\OffreRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Monolog\Handler\Curl\Util;
 use Symfony\UX\Turbo\Attribute\Broadcast;
 
 #[ORM\Entity(repositoryClass: OffreRepository::class)]
@@ -27,6 +28,8 @@ class Offre
     #[ORM\Column]
     private ?float $prix = null;
 
+    #[ORM\OneToMany(mappedBy: 'id', targetEntity: Utilisateur::class)]
+    private Collection $owner;
     #[ORM\OneToMany(mappedBy: 'id', targetEntity: Evaluation::class)]
     private Collection $evaluations;
 
@@ -41,6 +44,9 @@ class Offre
 
     #[ORM\OneToMany(mappedBy: 'id', targetEntity: Disponibilites::class)]
     private Collection $disponibilites;
+
+    #[ORM\ManyToOne(inversedBy: 'offres')]
+    private ?Utilisateur $id_user;
 
     public function __construct()
     {
@@ -240,5 +246,21 @@ class Offre
         }
 
         return $this;
+    }
+
+    /**
+     * @param Offre|null $id_user
+     */
+    public function setIdUser(Utilisateur $id_user): void
+    {
+        $this->id_user = $id_user;
+    }
+
+    /**
+     * @return Offre|null
+     */
+    public function getIdUser(): ?Utilisateur
+    {
+        return $this->id_user;
     }
 }

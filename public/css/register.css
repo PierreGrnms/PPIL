@@ -57,3 +57,8 @@ button:hover {
 .checkbox-label input {
     margin-right: 5px;
 }
+
+
+.alert .alert-danger ul li{
+    color:red;
+}

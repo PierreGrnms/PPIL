@@ -50,17 +50,17 @@
     color: #c45454;
 }
 .disconnect {
-    position: relative;
-    top:150%;
+    position: absolute;
+    top:100%;
     display:none;
     width:100%;
 
     background: #61836b;
-    font-size:20px;
-    padding:15px 0;
+    font-size:16px;
+    padding:15px 5px;
 
     text-align: center;
-    border-radius: 15px;
+    /*border-radius: 15px;*/
 }
 
 .user-container:hover .disconnect {

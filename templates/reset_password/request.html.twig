@@ -16,7 +16,14 @@
     <h1>Reset your password</h1>
 
         {{ form_start(requestForm) }}
-            {{ form_row(requestForm.email) }}
+
+            {{ form_label(requestForm.email) }}
+            {{ form_widget(requestForm.email) }}
+            {% if form_errors(requestForm.email) %}
+                <div class="alert alert-danger">
+                    {{ form_errors(requestForm.email) }}
+                </div>
+            {% endif %}
             <div>
                 <small>
                     Enter your email address, and we will send you a

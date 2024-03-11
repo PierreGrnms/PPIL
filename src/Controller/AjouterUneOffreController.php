@@ -22,8 +22,6 @@ class AjouterUneOffreController extends AbstractController
     #[Route('/ajouteruneoffre', name: 'app_ajouter_une_offre')]
     public function index(Request $request): Response
     {
-        $offre = new Offre();
-        echo('test') ;
 
         return $this->render('ajouter_une_offre/index.html.twig', [
             'controller_name' => 'AjouterUneOffreController',
@@ -32,6 +30,10 @@ class AjouterUneOffreController extends AbstractController
     #[Route('/ajax', name: 'app_ajax_get', methods: ['POST'])]
     public function ajaxreq(Request $request,EntityManagerInterface $entityManager): Response
     {
+
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
         // Récupérer les données envoyées via la requête AJAX
         $data = json_decode($request->getContent(), true);
 
@@ -62,11 +64,13 @@ class AjouterUneOffreController extends AbstractController
             $dispo->setDebut($dateD) ;
             $dispo->setFin($dateF) ;
             $offre->addDisponibilite($dispo) ;
+
+            $this->getUser()->addOffres($offre);
             $entityManager->persist($offre);
             $entityManager->persist($dispo);
             $entityManager->flush();
             $number_img = 0 ;
-            $public_directory = $this->getParameter('kernel.project_dir') . '/public' . '/' . $titre . '/';
+            /*$public_directory = $this->getParameter('kernel.project_dir') . '/public' . '/' . $titre . '/';
             // Chemin du fichier dans le répertoire public
             mkdir($public_directory) ;
             foreach ($lstFichiers as $key => $image_string) {
@@ -79,7 +83,7 @@ class AjouterUneOffreController extends AbstractController
                 $chemin_fichier = $public_directory . (string)$number_img . '.png';
                 file_put_contents($chemin_fichier, $imageData);
                 $number_img++ ;
-            }
+            }*/
 
         }
         
