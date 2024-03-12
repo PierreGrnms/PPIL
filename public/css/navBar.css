@@ -60,11 +60,12 @@
     padding:15px 5px;
 
     text-align: center;
-    /*border-radius: 15px;*/
+    border-radius: 15px;
 }
 
 .user-container:hover .disconnect {
-    display:block;
+    display: block;
+    position: static;
 }
 
 .nav-link:hover {
