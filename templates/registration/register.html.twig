@@ -42,6 +42,14 @@
         </div>
     {% endif %}
 
+    {{ form_label(registrationForm.numero_telephone) }}
+    {{ form_widget(registrationForm.numero_telephone) }}
+    {% if form_errors(registrationForm.numero_telephone) %}
+        <div class="alert alert-danger">
+            {{ form_errors(registrationForm.numero_telephone) }}
+        </div>
+    {% endif %}
+
     {{ form_label(registrationForm.numero_rue) }}
     {{ form_widget(registrationForm.numero_rue) }}
     {% if form_errors(registrationForm.numero_rue) %}
@@ -58,27 +66,11 @@
         </div>
     {% endif %}
 
-    {{ form_label(registrationForm.numero_telephone) }}
-    {{ form_widget(registrationForm.numero_telephone) }}
-    {% if form_errors(registrationForm.numero_telephone) %}
-        <div class="alert alert-danger">
-            {{ form_errors(registrationForm.numero_telephone) }}
-        </div>
-    {% endif %}
-
     {{ form_label(registrationForm.code_postal) }}
     {{ form_widget(registrationForm.code_postal) }}
     {% if form_errors(registrationForm.code_postal) %}
         <div class="alert alert-danger">
             {{ form_errors(registrationForm.code_postal) }}
-        </div>
-    {% endif %}
-
-    {{ form_label(registrationForm.porte_monnaie) }}
-    {{ form_widget(registrationForm.porte_monnaie) }}
-    {% if form_errors(registrationForm.porte_monnaie) %}
-        <div class="alert alert-danger">
-            {{ form_errors(registrationForm.porte_monnaie) }}
         </div>
     {% endif %}
 
