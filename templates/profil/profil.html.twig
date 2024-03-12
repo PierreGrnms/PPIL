@@ -50,11 +50,6 @@
                 <div class="error">{{ profilForm.code_postal.vars.errors|first.message }}</div>
             {% endif %}
 
-            {{ form_row(profilForm.porte_monnaie) }}
-            {% if profilForm.porte_monnaie.vars.errors|length > 0 %}
-                <div class="error">{{ profilForm.porte_monnaie.vars.errors|first.message }}</div>
-            {% endif %}
-
             <div class="button-container">
                 <button type="submit" class="btn">Changer mon Profil</button>
                 <button type="reset" class="btn">Réinitialiser mes modifications</button>

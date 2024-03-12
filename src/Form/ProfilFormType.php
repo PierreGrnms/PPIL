@@ -93,14 +93,6 @@ class ProfilFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('porte_monnaie', null, [
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter your wallet information',
-                    ]),
-                    // Add any additional constraints for the wallet field
-                ],
-            ])
         ;
     }
 
