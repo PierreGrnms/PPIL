@@ -15,9 +15,8 @@ class SupprimerAbonnementController extends AbstractController
     #[Route('/suppr_abonnement', name: 'app_suppr_abonnement')]
     public function index(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
-
         $user = $this->getUser();
-        if($user){
+        if(!$user){
             return $this->redirectToRoute('app_login');
         }
         $this->supprAbonnement($entityManager, $user);
