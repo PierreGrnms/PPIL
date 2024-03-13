@@ -9,16 +9,16 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Date;
 
 class AbonnementController extends AbstractController
 {
     #[Route('/abonnement', name: 'app_abonnement')]
     public function index(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
-
         $user = $this->getUser();
 
-        if($user){
+        if(!$user){
             return $this->redirectToRoute('app_login');
         }
         $abo = $this->findAbonnement($entityManager, $user);

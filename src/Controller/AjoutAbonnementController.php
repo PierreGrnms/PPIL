@@ -9,16 +9,16 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Date;
 
 class AjoutAbonnementController extends AbstractController
 {
     #[Route('/ajout_abonnement', name: 'app_ajout_abonnement')]
     public function index(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
-
         $user = $this->getUser();
 
-        if($user){
+        if(!$user){
             return $this->redirectToRoute('app_login');
         }
         $date = null;
@@ -49,11 +49,8 @@ class AjoutAbonnementController extends AbstractController
     {
         if($date == 0){
             $date = date('d-m-Y');
-            $date = date('d-m-Y', strtotime("+12 months $date"));
-        }else{
-            $date = date('d-m-Y', strtotime("+12 months $date"));
         }
-        return $date;
+        return date('d-m-Y', strtotime("+1 year $date"));
     }
 
     public function updateDateExpiration($entityManager, $user)
@@ -63,7 +60,7 @@ class AjoutAbonnementController extends AbstractController
         $query = $entityManager->createQuery(
             'UPDATE i.date_expiration
             FROM App\Entity\InscriptionAnnuelle i
-            JOIN App\Entity\Utilisateur u ON 
+            JOIN App\Entity\Utilisateur u ON (id_user)
             WHERE u.email = :user'
         )->setParameter('user', $user);
 
