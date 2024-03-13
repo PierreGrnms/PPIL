@@ -34,8 +34,6 @@ class ListeOffreController extends AbstractController
 
         }
         else {
-            print_r(count($entityManager->getRepository(Offre::class)->findAll()));
-
             return $this->render('liste_offre/index.html.twig', [
                 'controller_name' => 'ListeOffreController',
                 'offres' => $entityManager->getRepository(Offre::class)->findAll(),
