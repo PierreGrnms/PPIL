@@ -21,11 +21,18 @@
             {% if app.user %}
                 <li class="nav-item user-container">
                     <a class="nav-link connected" href="{{ path('app_profil') }}">
-                        Accéder à mon profil
+                        {{ app.user.getEmail() }}
                     </a>
-                    <a class="nav-link disconnect" href="{{ path('app_logout') }}">
-                        Se déconnecter
-                    </a>
+                    <ul class="user-fonctionality">
+                        <li>
+                            <a class="nav-link" href="{{ path('app_mes_offres') }}">Mes Offres</a>
+                        </li>
+                        <li>
+                             <a class="nav-link disconnect" href="{{ path('app_logout') }}">
+                                Se déconnecter
+                            </a>
+                        </li>
+                    </ul>
                 </li>
             {% else %}
                 <li class="nav-item">

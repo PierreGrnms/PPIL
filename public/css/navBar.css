@@ -49,7 +49,8 @@
 .connected {
     color: #c45454;
 }
-.disconnect {
+
+.user-fonctionality {
     position: absolute;
     top:100%;
     display:none;
@@ -57,17 +58,31 @@
 
     background: #61836b;
     font-size:16px;
+    
+    border-radius: 15px;
+
+    padding:15px;
+
+
+    flex-direction: column;
+    row-gap: 15px;
+}
+
+.user-fonctionality a {
+
+    width:100%;
+
     padding:15px 5px;
 
     text-align: center;
-    border-radius: 15px;
 }
 
-.user-container:hover .disconnect {
-    display: block;
-    position: static;
+.user-container:hover .user-fonctionality {
+    display: flex;
 }
 
 .nav-link:hover {
     color: #054c04;
 }
+
+
