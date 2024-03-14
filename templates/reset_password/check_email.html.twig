@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Password Reset Email Sent{% endblock %}
+{% block title %}ÉcoPrêt - Envoi du mail de confirmation{% endblock %}
 
 {% block body %}
     <head>
@@ -8,12 +8,11 @@
     </head>
     {% include 'includes/nav_bar/navBar.html.twig' %}
     <div class="container">
-        
         <p>
-            If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password.
-            This link will expire in {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+            S'il existe un compte correspondant à cette adresse email, un email vient d'être envoyé contenant un lien que vous pouvez utiliser pour réinitialiser votre mot de passe.
+            Ce lien expirera dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
         </p>
-        <p>If you don't receive an email please check your spam folder or <a href="{{ path('app_forgot_password_request') }}">try again</a>.</p>
+        <p>Si vous ne recevez pas d'email, veuillez vérifier votre dossier spam/indésirables ou<a href="{{ path('app_forgot_password_request') }}">try again</a>.</p>
     </div>
     {% include 'includes/footer/footer.html.twig' %}
 {% endblock %}

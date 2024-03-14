@@ -6,6 +6,7 @@ use App\Entity\Utilisateur;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Email;
@@ -19,77 +20,83 @@ class ProfilFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            /*->add('email', null, [
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter an email address',
-                    ]),
-                    new Email([
-                        'message' => 'The email "{{ value }}" is not a valid email address.',
-                    ]),
-                ],
-            ])*/
             ->add('plainPassword', PasswordType::class, [
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Le mot de passe est obligatoire.',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères.',
                         'max' => 4096,
                     ]),
                     new Regex([
                         'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/',
-                        'message' => 'Your password must contain at least one lowercase letter, one uppercase letter, and one digit.',
+                        'message' => 'Votre mot de passe doit contenir au moins une lettre minuscule, une lettre majuscule et un chiffre.',
                     ]),
                 ],
             ])
             ->add('nom', null, [
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter your last name',
+                        'message' => 'Le nom est obligatoire.',
+                    ]),
+                    new Regex([
+                        'pattern' => '/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.\'-]+$/u',
+                        'message' => 'Votre nom contient des caractères spéciaux non valides.'
                     ]),
                 ],
             ])
             ->add('prenom', null, [
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter your first name',
+                        'message' => 'Le prénom est obligatoire.',
+                    ]),
+                    new Regex([
+                        'pattern' => '/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.\'-]+$/u',
+                        'message' => 'Votre prénom contient des caractères spéciaux non valides.'
                     ]),
                 ],
             ])
             ->add('nom_de_la_rue', null, [
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter the street name',
+                        'message' => 'Le nom de la rue est obligatoire',
+                    ]),
+                    new Regex([
+                        'pattern' => '/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.\'-]+$/u',
+                        'message' => 'Le nom de la rue contient des caractères spéciaux non valides.'
                     ]),
                 ],
             ])
             ->add('numero_rue', null, [
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter the street number',
+                        'message' => 'Le numéro de rue est obligatoire.',
                     ]),
                 ],
             ])
             ->add('code_postal', null, [
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter the postal code',
+                        'message' => 'Le code postal est obligatoire.',
+                    ]),
+                    new Regex([
+                        'pattern' => '/^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$/',
+                        'message' => 'Le code postal doit se composer de 5 chiffres et doit être valide.',
                     ]),
                 ],
             ])
             ->add('numero_telephone', null, [
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter your phone number',
+                        'message' => 'Le numéro de téléphone est obligatoire.',
                     ]),
                     new Regex([
-                        'pattern' => '/^\+(?:[0-9] ?){6,14}[0-9]$/',
-                        'message' => 'Please enter a valid phone number with country code.',
+                        'pattern' => '/^\+(?:\d{1,4}\-?)?\(?\d{1,}\)?[\s\-]?\d{1,}[\s\-]?\d{1,}[\s\-]?\d{1,}$/',
+                        'message' => 'Votre numéro de téléphone n\'est pas valide. Il doit être sous le format international.',
                     ]),
                 ],
             ])
