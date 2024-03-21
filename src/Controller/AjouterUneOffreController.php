@@ -4,6 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Disponibilites;
 use App\Entity\Offre;
+use App\Entity\Photo;
+use App\Entity\Utilisateur;
+
 use App\Form\AjoutDispoType;
 use App\Form\AjouterUneOffreFormType;
 use DateTime;
@@ -22,7 +25,9 @@ class AjouterUneOffreController extends AbstractController
     #[Route('/ajouteruneoffre', name: 'app_ajouter_une_offre')]
     public function index(Request $request): Response
     {
-
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
         return $this->render('ajouter_une_offre/index.html.twig', [
             'controller_name' => 'AjouterUneOffreController',
         ]);
@@ -65,15 +70,32 @@ class AjouterUneOffreController extends AbstractController
             $dispo->setFin($dateF) ;
             $offre->addDisponibilite($dispo) ;
 
-            $this->getUser()->addOffres($offre);
-            $entityManager->persist($offre);
+            $user = $this->getUser();
+            $user_id = $user->getUserIdentifier();
+            $user = $this->getUser();
+            //$user->addOffres($offre);
+
+            $userRepository = $entityManager->getRepository(Utilisateur::class);
+            $userEntity = $userRepository->findOneByEmail($user_id);
+            $userEntity->addOffres($offre);
             $entityManager->persist($dispo);
-            $entityManager->flush();
+
             $number_img = 0 ;
-            /*$public_directory = $this->getParameter('kernel.project_dir') . '/public' . '/' . $titre . '/';
+            $chemin = '../public/offreImg/';
+            if( !file_exists($chemin)){
+                mkdir($chemin) ;
+            }
             // Chemin du fichier dans le répertoire public
+            $public_directory = $chemin . $titre . '/';
+            $num = 0 ;
+            while (file_exists($public_directory)) {
+                $num++ ;
+                $public_directory = $chemin . '/' . $titre . $num . '/';
+            }
             mkdir($public_directory) ;
+
             foreach ($lstFichiers as $key => $image_string) {
+                $chemin = '../public/offreImg/';
                 $image_string = str_replace('data:image/jpeg;base64,', '', $image_string);
                 $image_string = str_replace('data:image/jpg;base64,', '', $image_string);
                 $image_string = str_replace('data:image/png;base64,', '', $image_string);
@@ -83,8 +105,14 @@ class AjouterUneOffreController extends AbstractController
                 $chemin_fichier = $public_directory . (string)$number_img . '.png';
                 file_put_contents($chemin_fichier, $imageData);
                 $number_img++ ;
-            }*/
+                $photo = new Photo() ;
+                $photo->setNom($chemin_fichier) ;
+                $offre->addPhoto($photo) ;
+                $entityManager->persist($photo);
 
+            }
+            $entityManager->persist($offre);
+            $entityManager->flush();
         }
         
 

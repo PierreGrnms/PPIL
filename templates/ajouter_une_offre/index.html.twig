@@ -180,22 +180,31 @@
             fileInput.accept = 'image/*';
             fileInput.multiple = true;
             fileInput.style.display = 'none';
+            filesValide = true ;
             fileInput.addEventListener('change', function() {
                 const files = fileInput.files;
                 console.log(files.length) ;
                 if (files.length > 0) {
                     for (const file of files) {
-                        console.log('file') ;
-                        // Créer un objet FileReader
-                        const reader = new FileReader();
-                        // Définir ce qui se passe lorsque le fichier est chargé
-                        reader.onload = function(event) {
-                            lstFichiers.push(event.target.result) ;
-                            updateImg() ;
+                        const fileName = file.name.toLowerCase();
+                        if (! /\.(jpg|jpeg|png)$/.test(fileName)) {
+                            filesValide = false ;
                         }
-                        reader.readAsDataURL(file);
-
+                        if(filesValide){
+                            // Créer un objet FileReader
+                            const reader = new FileReader();
+                            // Définir ce qui se passe lorsque le fichier est chargé
+                            reader.onload = function(event) {
+                                lstFichiers.push(event.target.result) ;
+                                updateImg() ;
+                            }
+                            reader.readAsDataURL(file);
+                        }
                     }
+                }
+                if(!filesValide){
+                    alert("Les images doivent avoir comme extension jpg, jpeg ou png.") ;
+                    filesValide = true 
                 }
             });
             // Création de l'élément label
@@ -294,6 +303,8 @@ function sendAjaxForm(dest){
             data: JSON.stringify(data),
             success: function(response) {
                 console.log("Réponse du serveur :", response);
+                window.location.href = "{{ path('app_mes_offres') }}";
+
             },
             error: function(xhr, status, error) {
                 console.error("Erreur lors de la requête :", error);

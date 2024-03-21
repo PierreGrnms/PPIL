@@ -60,7 +60,7 @@ class ListeOffreController extends AbstractController
      
                 return $this->render('liste_offre/index.html.twig', [
                     'controller_name' => 'ListeOffreController',
-                    'offres' => $entityManager->getRepository(Offre::class)->findBy(["id_user" => $user->getId()])
+                    'offres' => $entityManager->getRepository(Offre::class)->findBy(["id_user" => $user->getid()])
                 ]);
             }
 
