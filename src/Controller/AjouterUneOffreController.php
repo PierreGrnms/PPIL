@@ -28,6 +28,9 @@ class AjouterUneOffreController extends AbstractController
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
         }
+        header("Cache-Control: no-cache, must-revalidate"); // Indique de ne pas mettre en cache et de toujours valider la ressource
+        header("Pragma: no-cache"); // En-tête pour une compatibilité maximale avec les navigateurs
+        header("Expires: 0"); // Indique une date d'expiration immédiate
         return $this->render('ajouter_une_offre/index.html.twig', [
             'controller_name' => 'AjouterUneOffreController',
         ]);
@@ -95,14 +98,27 @@ class AjouterUneOffreController extends AbstractController
             mkdir($public_directory) ;
 
             foreach ($lstFichiers as $key => $image_string) {
+                $extension = '.png' ;
+                if(strstr($image_string,'jpg')){
+                    $extension = '.jpg' ;
+                    $image_string = str_replace('data:image/jpg;base64,', '', $image_string);
+
+                }
+                if(strstr($image_string,'png')){
+                    $extension = '.png' ;
+                    $image_string = str_replace('data:image/png;base64,', '', $image_string);
+
+                }
+                if(strstr($image_string,'jpeg')){
+                    $extension = '.jpeg' ;
+                    $image_string = str_replace('data:image/jpeg;base64,', '', $image_string);
+
+                }
                 $chemin = '../public/offreImg/';
-                $image_string = str_replace('data:image/jpeg;base64,', '', $image_string);
-                $image_string = str_replace('data:image/jpg;base64,', '', $image_string);
-                $image_string = str_replace('data:image/png;base64,', '', $image_string);
 
                 $imageData = base64_decode($image_string);
 
-                $chemin_fichier = $public_directory . (string)$number_img . '.png';
+                $chemin_fichier = $public_directory . (string)$number_img . $extension;
                 file_put_contents($chemin_fichier, $imageData);
                 $number_img++ ;
                 $photo = new Photo() ;

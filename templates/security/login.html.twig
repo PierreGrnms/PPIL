@@ -8,7 +8,18 @@
 {% block body %}
 <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 
+
+    <header> 
+         <a href="{{ path('home') }}"> 
+            <img src="{{ asset('images/ecopret.png') }}" alt="homePage" style="width:100%;">
+         </a> 
+
+
+    </header>
 <form method="post">
+
+
+
 
     {% if app.user %}
         <div class="mb-3">
