@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ÉcoPrêt - Liste des offres{% endblock %}
+
+
+{% block body %}
+    <head>
+        <link rel="stylesheet" href="{{ asset('css/listeOffre.css') }}">
+    </head>
+    {% include 'includes/nav_bar/navBar.html.twig' %}
+
+    <div class="main">
+        {% if reservations is empty %}
+            <p>Aucune réservation trouvée.</p>
+        {% else %}
+            <ul>
+                {% for reservation in reservations %}
+                    <li>
+                        Réservation du {{ reservation.getReservDebut()|date('d/m/Y H:i') }} au {{ reservation.getReservFin()|date('d/m/Y H:i') }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    {% include 'includes/footer/footer.html.twig' %}
+{% endblock %}

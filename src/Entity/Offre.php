@@ -238,15 +238,16 @@ class Offre
 
     public function removeDisponibilite(Disponibilites $disponibilite): static
     {
-        if ($this->disponibilites->removeElement($disponibilite)) {
-            // set the owning side to null (unless already changed)
-            if ($disponibilite->getIdOffre() === $this) {
-                $disponibilite->setIdOffre(null);
-            }
+        
+        if ($disponibilite->getIdOffre() === $this) {
+            $disponibilite->setIdOffre(null);
         }
-
+        
         return $this;
     }
+
+
+    
 
     /**
      * @param Offre|null $id_user

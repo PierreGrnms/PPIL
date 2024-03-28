@@ -67,4 +67,16 @@ class Disponibilites
 
         return $this;
     }
+
+    public function find_dispo(DateTimeInterface $creneauDebut, DateTimeInterface $creneauFin): ?Disponibilites
+    {
+        $qb = $this->createQueryBuilder('d')
+            ->where('d.debut = :debut')
+            ->andWhere('d.fin = :fin')
+            ->setParameter('debut', $creneauDebut)
+            ->setParameter('fin', $creneauFin)
+            ->getQuery()
+            ->getOneOrNullResult();
+        return $qb;
+    }
 }

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ListeOffreController!{% endblock %}
+{% block title %}ÉcoPrêt - Liste des offres{% endblock %}
 
 
 {% block body %}
@@ -24,6 +24,7 @@
                                 <p>{{ offre.getTexteOffre }}</p>
                                 <h2>Prix</h2>
                                 <label>{{ offre.getPrix }} florains</label>
+                                <a href="{{ path('app_reserver_offre', {'id': offre.getId}) }}"><button>Reserver</button></a>
                             </div>
                         </div>
                     </div>

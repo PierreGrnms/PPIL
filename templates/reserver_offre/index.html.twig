@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ÉcoPrêt - Réservation{% endblock %}
+
+
+{% block body %}
+    <head>
+        <link rel="stylesheet" href="{{ asset('css/listeOffre.css') }}">
+    </head>
+    {% include 'includes/nav_bar/navBar.html.twig' %}
+
+    <div class="main">
+        <!-- Affichage de l'offre -->
+        <div class="container-recette">
+            <div class="recette-description">
+                <div class="left-recette">
+                    <img class="backup" src="{{ asset('images/placeholder.png') }}" alt="">
+                </div>
+                <div class="right-recette">
+                    <h1>{{ offre.getTitreOffre }}</h1>
+                    <div class="box-description">
+                        <div class="contain">
+                            <h2>Description</h2>
+                            <p>{{ offre.getTexteOffre }}</p>
+                            <h2>Prix</h2>
+                            <label>{{ offre.getPrix }} florains</label>
+                        </div>
+                    </div>
+                    <!-- Formulaire de réservation avec les crénaux disponibles -->
+                    <form action="{{ path('app_reserver_offre_action', {'id': offre.getId}) }}" method="post">
+                        <label for="creneau">Choisissez un créneau</label>
+                        <select class="form-control" id="creneau" name="creneau">
+                            {% for creneau in creneaux %}
+                                <option value="{{ creneau.getDebut|date('d/m/Y H:i') }} - {{ creneau.getFin|date('d/m/Y H:i') }}">{{ creneau.getDebut|date('d/m/Y H:i') }} - {{ creneau.getFin|date('d/m/Y H:i') }}</option>
+                            {% endfor %}
+                        </select>
+                        <button type="submit" class="btn btn-primary">Réserver</button>
+                    </form>
+                </div>
+            </div>
+    </div>
+    {% include 'includes/footer/footer.html.twig' %}
+{% endblock %}
