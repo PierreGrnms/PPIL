@@ -82,19 +82,24 @@ class ReserverOffreController extends AbstractController
 
                 // Ajoutez un message de confirmation
                 $this->addFlash('success', 'La réservation a été effectuée avec succès.');
+                // Redirigez l'utilisateur vers la page d'accueil
+                return $this->redirectToRoute('home');
             } else {
                 // Popup pas assez d'argent
-                $this->addFlash('error', 'Vous n\'avez pas assez d\'argent pour effectuer cette réservation.');
-                return $this->redirectToRoute('app_reserver_offre');
+                return $this->render('erreur/index.html.twig', [
+                    'controller_name' => 'ReserverOffreController',
+                    'message' => $message = 'Vous n\'avez pas assez d\'argent pour effectuer cette réservation.',
+                ]);
             }
         } else {
             // Popup erreur : offre ou disponibilité introuvable
-            $this->addFlash('error', 'L\'offre ou la disponibilité n\'a pas été trouvée.');
-            return $this->redirectToRoute('app_reserver_offre');
+            return $this->render('erreur/index.html.twig', [
+                'controller_name' => 'ReserverOffreController',
+                'message' => $message = 'L\'offre ou la disponibilité n\'a pas été trouvée.',
+            ]);
         }
 
-        // Redirigez l'utilisateur vers la page d'accueil
-        return $this->redirectToRoute('home');
+
     }
 
 }

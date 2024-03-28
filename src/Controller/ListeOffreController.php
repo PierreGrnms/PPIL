@@ -17,19 +17,14 @@ class ListeOffreController extends AbstractController
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
         $id = $request->query->get('id');
-       /* $offre = new Offre();
-        $offre->setTitreOffre("hey");
-        $offre->setPrix(floatval(50));
-        $offre->setTexteOffre("hey");
-        $this->getUser()->addOffres($offre);*/
-        //print_r($entityManager->getRepository(Offre::class)->find(1)->getIdUser()->getEmail());
 
-        //print_r($entityManager->getRepository(Disponibilites::class)->findOneBy(['id_offre' => 33]));
         if ($id) {
+            $dispos = $entityManager->getRepository(Disponibilites::class)->findBy(['id_offre' => $id]);
             return $this->render('liste_offre/index.html.twig', [
                 'controller_name' => 'ListeOffreController',
                 'offre' => $entityManager->getRepository(Offre::class)->find($id),
                 'offres' => null,
+                'dispos' => $dispos,
             ]);
 
         }

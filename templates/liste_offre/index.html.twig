@@ -24,7 +24,17 @@
                                 <p>{{ offre.getTexteOffre }}</p>
                                 <h2>Prix</h2>
                                 <label>{{ offre.getPrix }} florains</label>
-                                <a href="{{ path('app_reserver_offre', {'id': offre.getId}) }}"><button>Reserver</button></a>
+                                {% if offre.getIdUser.getId == app.user.id %}
+                                    <h3>Vous ne pouvez pas réserver votre propre offre</h3>
+                                {% else %}
+                                    {% if dispos|length > 0 %}
+                                        <a href="{{ path('app_reserver_offre', {'id': offre.getId}) }}"><button>Reserver</button></a>
+                                    {% else %}
+                                        <h1>
+                                            Aucune disponibilité pour cette offre
+                                        </h1>
+                                    {% endif %}
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -38,7 +48,7 @@
                             <div class="textbox">
                                 <h5>{{ offre.getTitreOffre }}</h5>
                                 <h5>{{ offre.getPrix }} florains</h5>
-                                <h5>{{ offre.getIdUser.getCodepostal }}</h5>
+                                
                             </div>
                         </a>
                     {% else %}
