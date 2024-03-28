@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ÉcoPrêt - Liste des offres{% endblock %}
+
+
+{% block body %}
+    <head>
+        <link rel="stylesheet" href="{{ asset('css/listeOffre.css') }}">
+    </head>
+    {% include 'includes/nav_bar/navBar.html.twig' %}
+
+    <div class="main">
+        <h1>{message}</h1>
+    </div>
+    {% include 'includes/footer/footer.html.twig' %}
+{% endblock %}
