@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Disponibilites;
 use App\Entity\Offre;
+use App\Entity\Reservation;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -48,6 +49,7 @@ class ListeOffreController extends AbstractController
                     'controller_name' => 'ListeOffreController',
                     'offre' => $entityManager->getRepository(Offre::class)->find($id),
                     'offres' => null,
+                    'mine' => true,
                 ]);
 
             }
@@ -62,26 +64,26 @@ class ListeOffreController extends AbstractController
         }
     }
 
-    /*#[Route('/offres/{offre}', name: 'offre_page')]
-    public function show(EntityManagerInterface $entityManager, string $offre): Response
+    #[Route('/offres/supprimer', name: 'supprimer_offre')]
+    public function delete(Request $request, EntityManagerInterface $entityManager): Response
     {
-        echo $offre;
-        //$offre = $entityManager->getRepository(Offre::class)->find($offre);
-        return $this->render('liste_offre/index.html.twig', [
-            'controller_name' => 'ListeOffreController',
-            'offre' => $offre,
-        ]);
+        // Récupérer l'id de l'offre à supprimer
+        $id = $request->query->get('id');
+        // Récupérer l'offre
+        $offre = $entityManager->getRepository(Offre::class)->find($id);
+        // supprimer les Disponibilites reliées à l'offre
+        $dispos = $entityManager->getRepository(Disponibilites::class)->findBy(['id_offre' => $id]);
+        foreach ($dispos as $dispo) {
+            $entityManager->remove($dispo);
+        }
+        //supprimer les reservations reliées à l'offre
+        $reservations = $entityManager->getRepository(Reservation::class)->findBy(['id_offre' => $id]);
+        foreach ($reservations as $reservation) {
+            $entityManager->remove($reservation);
+        }
+        // Supprimer l'offre
+        $entityManager->remove($offre);
+        $entityManager->flush();
+        return $this->redirectToRoute('app_mes_offres');
     }
-    #[Route('/offres/{offre_id}', name: 'offre_page', requirements: ['offre_id' => 'hello'])]
-    public function list(string $offre_id): Response
-    {
-        echo $offre_id;
-        echo "test";
-        $test = $this->generateUrl('app_liste_offre', [
-            'offre_id' => $offre_id,
-        ]);
-        return $this->render('liste_offre/index.html.twig', [
-            'controller_name' => 'ListeOffreController',
-        ]);
-    }*/
 }

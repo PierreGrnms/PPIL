@@ -13,9 +13,6 @@
         {% if offres is null %}
             <div class="container-recette">
                 <div class="recette-description">
-                    <div class="left-recette">
-                        <img class="backup" src="" alt="">
-                    </div>
                     <div class="right-recette">
                         <h1>{{ offre.getTitreOffre }}</h1>
                         <div class="box-description">
@@ -25,7 +22,9 @@
                                 <h2>Prix</h2>
                                 <label>{{ offre.getPrix }} florains</label>
                                 {% if offre.getIdUser.getId == app.user.id %}
-                                    <h3>Vous ne pouvez pas réserver votre propre offre</h3>
+                                <a href="{{ path('supprimer_offre', {'id': offre.getId}) }}">
+                                    <button onclick="return confirm('Êtes\-vous sûr de vouloir supprimer votre offre ?')">Supprimer l'offre</button>
+                                </a>
                                 {% else %}
                                     {% if dispos|length > 0 %}
                                         <a href="{{ path('app_reserver_offre', {'id': offre.getId}) }}"><button>Reserver</button></a>
@@ -48,7 +47,7 @@
                             <div class="textbox">
                                 <h5>{{ offre.getTitreOffre }}</h5>
                                 <h5>{{ offre.getPrix }} florains</h5>
-                                
+
                             </div>
                         </a>
                     {% else %}

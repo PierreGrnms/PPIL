@@ -34,6 +34,7 @@ class ReserverOffreController extends AbstractController
             ]);
         }
     }
+    
     #[Route('reserver_offre', name: 'app_reserver_offre_action')]
     public function reserverOffre(Request $request, EntityManagerInterface $entityManager): Response
     {
