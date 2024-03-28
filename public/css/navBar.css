@@ -1,88 +1,97 @@
-/* public/css/styles.css */
-
-/* Barre de Navigation */
-.navbar {
-    background-color: #2c2d2e;
-    padding: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 0 10px 0 rgba(0,0,0,0.75);
-    column-gap: 50%;
-}
-
-.navbar-brand a {
+header {
+    background-color: white;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    margin: 10px;
+    /* margin-left: 1%;
+    margin-right: 1%; */
+    border-bottom: 3px solid #057a03;
+     border-radius: 30px; 
+    font-size: large;
     text-decoration: none;
-    color: #054c04;
-    font-size: 3em;
-    font-weight: bold;
-    flex:1;
-}
-
-.navbar-menu {
+    /* justify-content: space-between; */
     display: flex;
-    flex:1;
-}
-
-.navbar-nav {
-    list-style: none;
-    display: flex;
-    flex:1;
-    justify-content: space-around;
-}
-
-.nav-item {
-    padding:10px 0;
-}
-
-.nav-link {
-    text-decoration: none;
-    color: #ffffff;
-    font-weight: bold;
-}
-.user-container {
-    position: relative;
-    display:flex;
     align-items: center;
-    flex-direction: column;
+    align-content: flex-end;
+    text-decoration: none;
+
 }
-.connected {
-    color: #c45454;
-}
-
-.user-fonctionality {
-    position: absolute;
-    top:100%;
-    display:none;
-    width:100%;
-
-    background: #61836b;
-    font-size:16px;
-    
-    border-radius: 15px;
-
-    padding:15px;
-
-
-    flex-direction: column;
-    row-gap: 15px;
-}
-
-.user-fonctionality a {
-
-    width:100%;
-
-    padding:15px 5px;
-
+.elemDroite{
+    max-width:100px;
+    max-height: 100px;
     text-align: center;
+    align-self: center;
+    margin-left: 2%;
+}
+.partLeft{
+     display: flex;
+     /* margin-left: auto;  */
+     margin-right: 40px;
+     align-items: center;
+     text-decoration: none;
+
+}
+.text{
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+
+}
+.elemDroite:hover{
+    transform: scale(1.1);
+    border:2px solid #057a03; ;
+    text-decoration: none;
+
+}
+.elemMid {
+margin: auto;
+}
+.elemPub{
+    max-width:100px;
+    max-height: 100px;
+    text-align: center;
+    background-color: #057a03;
+    border: 2px solid #045e02;
+    border-radius: 10px; 
+
+}
+.elemPub:hover{
+    transform: scale(1.1);
+
 }
 
-.user-container:hover .user-fonctionality {
-    display: flex;
+a:hover{
+    text-decoration: none;
 }
 
-.nav-link:hover {
-    color: #054c04;
+.menu-deroulant {
+    position: relative;
+    display: inline-block;
 }
 
+.sous {
+    display: none;
+    position: absolute;
+    background-color: #057a03;
+    border: 2px solid #045e02;
+    color: black;
+    border-radius: 10px; 
+    z-index: 1;
+}
 
+.sous li {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.menu-deroulant:hover .sous {
+    display: block;
+}
+.sous li a {
+    color: black;
+    font-weight: bold;
+}
+.sous li:hover{
+    background-color: #3a8b39;
+}

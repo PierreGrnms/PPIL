@@ -1,11 +1,50 @@
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #202021;
-    margin: 0;
-    padding: 0;
+    margin: 50;
+    padding: 50;
+    background-color: #EEEEEE;
+
 }
 
 .container {
     color: white;
 }
+.carou{
+    max-width: 500px;
+    text-align: center;
+    align-self: center;
+}
+h1 {
+    color: #057a03;
+    font-size: 500%;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 
+}
+article {
+    background-color: white;
+    margin: 2%;
+    border: 1px solid #057a03;
+    border-radius: 10px; 
+    padding: 2%;
+
+}
+article p {
+    color: black;
+    line-height: 1.6; /* Hauteur de ligne du texte */
+    margin-bottom: 5px; /* Espacement inférieur du texte */
+    font-family: Arial, Sans-Serif;
+    font-weight: 500;
+    font-size: 2rem;
+    line-height: 1.6;
+}
+.florain{
+    text-align: center;
+    align-items: center;
+    align-content: center;
+}
+h2 {
+    color: #057a03;
+    font-weight: 800;
+    margin-left: 2%;
+}

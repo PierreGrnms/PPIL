@@ -3,45 +3,83 @@
     <link rel="stylesheet" href="{{ asset('css/navBar.css') }}">
 </head>
 
-<nav class="navbar">
-    <div class="navbar-brand">
-        <a href="{{ path('home') }}">ÉcoPrêt</a>
-    </div>
-    <div class="navbar-menu">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_liste_offre') }}">Liste des offres</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_ajouter_une_offre') }}">Ajouter une offre</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_abonnement') }}">Abonnements</a>
-            </li>
-            {% if app.user %}
-                <li class="nav-item user-container">
-                    <a class="nav-link connected" href="{{ path('app_profil') }}">
-                        {{ app.user.getEmail() }}
+<header >
+<div> 
+         <a href="{{ path('home') }}"> 
+            <img src="{{ asset('images/ecopret.png') }}" alt="homePage" style="width:25%;">
+         </a>     
+</div>
+        <div class="elemMid"> 
+
+        </div>
+        <div class= "partLeft">
+                    <a  href="{{ path('app_liste_offre') }}">
+
+            <div class="elemDroite">
+                        <img  src="{{ asset('images/plus.png') }}" alt="LstOffre" style="width:50%;">
+                        <span class="text" >Publier une offre </span>
+                           
+            </div>
+            </a> 
+                    <a  href="{{ path('app_liste_offre') }}">
+
+                <div class="elemDroite">
+                    <img  src="{{ asset('images/offres.png') }}" alt="LstOffre" style="width:50%;">
+                    <p class="text" >Liste des offres </p>
+                </div>  
                     </a>
-                    <ul class="user-fonctionality">
-                        <li>
-                            <a class="nav-link" href="{{ path('app_mes_offres') }}">Mes offres</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="{{ path('app_liste_reservations') }}">Mes réservations</a>
-                        <li>
-                             <a class="nav-link disconnect" href="{{ path('app_logout') }}">
-                                Déconnexion
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+
+                        <a href="{{ path('app_ajouter_une_offre') }}">
+
+                <div class="elemDroite">
+
+                        <img  src="{{ asset('images/messages.png') }}" alt="addOffer" style="width:50%;">
+                        <p class="text" >Messages</p>  
+                       
+                </div> 
+             </a>
+ 
+
+
+                                    
+            {% if app.user %}
+
+                <ul>
+                    <li class="menu-deroulant">
+                        <a  href="{{ path('app_profil') }}">
+                        <div class="elemDroite">
+
+                            <img src="{{ asset('images/user.png') }}" alt="LstOffre" style="width:50%;">
+                            <p class="text" >Mon profil </p>
+                        </div>  
+                        </a>
+                        <ul class="sous">
+                            <li>
+                                <a  href="{{ path('app_mes_offres') }}">Mes offres</a>
+                            </li>
+                            <li>
+                                <a  href="{{ path('app_logout') }}">
+                                    Déconnexion
+                                </a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="{{ path('app_liste_reservations') }}">Mes réservations</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+               
             {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
-                </li>
-            {% endif %}
-            {# Ajoute d'autres liens de navigation ici #}
-        </ul>
-    </div>
-</nav>
+                <a  href="{{ path('app_login') }}">
+                    <div class="elemDroite">
+
+                        <img src="{{ asset('images/user.png') }}" alt="LstOffre" style="width:50%;">
+                        <p class="text" >Connexion </p>
+                    </div>  
+                </a>
+            {% endif %} 
+        </div>
+
+
+    </div> 
+</header>
