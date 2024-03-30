@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfilIndexController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+<link rel="stylesheet" href="{{ asset('css/indexProfil.css') }}"> 
+     {% include 'includes/nav_bar/navBar.html.twig' %} 
+
+
+<div class="profil-info">
+
+    <img class="profil-item"  src="{{ asset('images/profil_default.png') }}" alt="messages" style="width:10%;">
+ <span class="profil-item"> {{ app.user.nom }}  {{ app.user.prenom }} </span> 
+<div class="florinsContainer">
+        <p class="nbFlorins"> {{user.getPorteMonnaie }} </p>
+        <img src="{{ asset('images/florain.png') }}" alt="florain" style="width:25%;">
+</div>
+ </div>
+<table>
+<tr>
+    <td>
+    <a  href="{{ path('app_profil') }}">
+        <div class="card">
+            <img  src="{{ asset('images/user.png') }}" alt="messages" style="width:50%;">
+            <p> Mes informations </p>
+        </div>
+    </a>
+    </td>
+    <td>
+        <a  href="{{ path('app_mes_offres') }}">
+            <div class="card">
+                <img  src="{{ asset('images/offres.png') }}" alt="messages" style="width:50%;">
+
+                <p> Mes Offres </p>
+            </div>
+        </a>
+    </td>
+</tr>
+
+<tr>
+    <td>
+        <a class="nav-link" href="{{ path('app_liste_reservations') }}">
+            <div class="card">
+                <img  src="{{ asset('images/reservation.png') }}" alt="messages" style="width:50%;">
+
+                <p> Mes Reservations </p>
+            </div>
+        </a>
+    </td>
+
+    <td>
+        <div class="card">
+            <img  src="{{ asset('images/messages.png') }}" alt="messages" style="width:50%;">
+            <p> Mes Messages </p>
+        </div>
+    </td>
+</tr>
+</table>
+{% endblock %}
