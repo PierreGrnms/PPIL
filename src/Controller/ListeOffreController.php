@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Disponibilites;
 use App\Entity\Offre;
+use App\Entity\Photo;
 use App\Entity\Reservation;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,11 +22,14 @@ class ListeOffreController extends AbstractController
 
         if ($id) {
             $dispos = $entityManager->getRepository(Disponibilites::class)->findBy(['id_offre' => $id]);
+            $photos = $entityManager->getRepository(Photo::class)->findBy(['id_offre' => $id]);
+
             return $this->render('liste_offre/index.html.twig', [
                 'controller_name' => 'ListeOffreController',
                 'offre' => $entityManager->getRepository(Offre::class)->find($id),
                 'offres' => null,
                 'dispos' => $dispos,
+                'photos' => $photos,
             ]);
 
         }
@@ -41,7 +45,7 @@ class ListeOffreController extends AbstractController
     public function show(Request $request, EntityManagerInterface $entityManager): Response
     {
         $id = $request->query->get('id');
-     
+        $photos = $entityManager->getRepository(Photo::class)->findBy(['id_offre' => $id]);
         $user = $this->getUser();
         if ($user) {
             if ($id) {
@@ -50,6 +54,7 @@ class ListeOffreController extends AbstractController
                     'offre' => $entityManager->getRepository(Offre::class)->find($id),
                     'offres' => null,
                     'mine' => true,
+                    'photos' => $photos,
                 ]);
 
             }

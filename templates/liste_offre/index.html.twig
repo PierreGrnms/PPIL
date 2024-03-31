@@ -9,18 +9,30 @@
     </head>
     {% include 'includes/nav_bar/navBar.html.twig' %}
 
-    <div class="main">
         {% if offres is null %}
-            <div class="container-recette">
-                <div class="recette-description">
-                    <div class="right-recette">
+            <div class="container-offre">
+                    <div class = "container-offre-titre" >
                         <h1>{{ offre.getTitreOffre }}</h1>
-                        <div class="box-description">
-                            <div class="contain">
+                            <div class="florinsContainer2">
+                                <p class="nbFlorins"> Prix : {{ offre.getPrix }} </p>
+                                <img src="{{ asset('images/florain.png') }}" alt="florain" style="width:40%;">
+                            </div>
+                    </div>
+                        <h2> Photos  </h2>
+                        <div class="container-photo">
+                            {% for photo in photos %}
+                                <img src="{{ asset('offreImg/' ~ photo.nom) }}" alt="photo" style="width:40%;">
+                             {% else %}
+                            <h1 class="err-offre">
+                                Il n'y a pas de photos pour cette offre
+                            </h1>
+                            {% endfor %}
+
+
+                        </div>
                                 <h2>Description</h2>
                                 <p>{{ offre.getTexteOffre }}</p>
-                                <h2>Prix</h2>
-                                <label>{{ offre.getPrix }} florains</label>
+                                <h2> Reservations </h2>
                                 {% if offre.getIdUser.getId == app.user.id %}
                                 <a href="{{ path('supprimer_offre', {'id': offre.getId}) }}">
                                     <button onclick="return confirm('Êtes\-vous sûr de vouloir supprimer votre offre ?')">Supprimer l'offre</button>
@@ -34,10 +46,7 @@
                                         </h1>
                                     {% endif %}
                                 {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        
             </div>
         {% else %}
             <div class="contenu">
@@ -46,18 +55,19 @@
                         <a href="?id={{ offre.getId }}">
                             <div class="textbox">
                                 <h5>{{ offre.getTitreOffre }}</h5>
-                                <h5>{{ offre.getPrix }} florains</h5>
-
+                                <div class="florinsContainer">
+                                <h5>{{ offre.getPrix }} </h5>
+                                <img src="{{ asset('images/florain.png') }}" alt="florain" style="width:10%;">
+                                </div>
                             </div>
                         </a>
                     {% else %}
-                        <h1>
+                        <h1 class="err-offre">
                             Aucune offres
                         </h1>
                     {% endfor %}
                 </div>
             </div>
         {% endif %}
-    </div>
     {% include 'includes/footer/footer.html.twig' %}
 {% endblock %}
