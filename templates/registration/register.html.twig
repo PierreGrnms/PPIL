@@ -11,78 +11,99 @@
 {{ form_start(registrationForm) }}
 
     {{ form_label(registrationForm.email) }}
-    {{ form_widget(registrationForm.email) }}
     {% if form_errors(registrationForm.email) %}
-        <div class="alert alert-danger" style="color: red;">
+        <div class="alert alert-danger">
             {{ form_errors(registrationForm.email) }}
         </div>
     {% endif %}
+    {{ form_widget(registrationForm.email) }}
 
-    {{ form_label(registrationForm.plainPassword) }}
+    {#{{ form_label(registrationForm.plainPassword) }}
     {{ form_widget(registrationForm.plainPassword) }}
     {% if form_errors(registrationForm.plainPassword) %}
-        <div class="alert alert-danger" style="color: red;">
+        <div class="alert alert-danger">
             {{ form_errors(registrationForm.plainPassword) }}
         </div>
-    {% endif %}
+    {% endif %}#}
+
+    {% for passwordField in registrationForm.plainPassword %}
+        <div class="form-field">
+            {{ form_label(passwordField, null, { 'attr': {'class': 'form-label'} }) }}
+            <div class="alert alert-danger">
+                {{ form_errors(passwordField)}}
+            </div>
+            {{ form_widget(passwordField, { 'attr': {'class': 'form-input'} }) }}
+        </div>
+    {% endfor %}
 
     {{ form_label(registrationForm.nom) }}
-    {{ form_widget(registrationForm.nom) }}
     {% if form_errors(registrationForm.nom) %}
-        <div class="alert alert-danger" style="color: red;">
+        <div class="alert alert-danger">
             {{ form_errors(registrationForm.nom) }}
         </div>
     {% endif %}
+    {{ form_widget(registrationForm.nom) }}
 
     {{ form_label(registrationForm.prenom) }}
-    {{ form_widget(registrationForm.prenom) }}
     {% if form_errors(registrationForm.prenom) %}
-        <div class="alert alert-danger" style="color: red;">
+        <div class="alert alert-danger">
             {{ form_errors(registrationForm.prenom) }}
         </div>
     {% endif %}
+    {{ form_widget(registrationForm.prenom) }}
 
     {{ form_label(registrationForm.numero_telephone) }}
-    {{ form_widget(registrationForm.numero_telephone) }}
     {% if form_errors(registrationForm.numero_telephone) %}
-        <div class="alert alert-danger" style="color: red;">
+        <div class="alert alert-danger">
             {{ form_errors(registrationForm.numero_telephone) }}
         </div>
     {% endif %}
+    {{ form_widget(registrationForm.numero_telephone) }}
+
 
     {{ form_label(registrationForm.numero_rue) }}
-    {{ form_widget(registrationForm.numero_rue) }}
     {% if form_errors(registrationForm.numero_rue) %}
-        <div class="alert alert-danger" style="color: red;">
+        <div class="alert alert-danger">
             {{ form_errors(registrationForm.numero_rue) }}
         </div>
     {% endif %}
+    {{ form_widget(registrationForm.numero_rue) }}
+
 
     {{ form_label(registrationForm.nom_de_la_rue) }}
-    {{ form_widget(registrationForm.nom_de_la_rue) }}
     {% if form_errors(registrationForm.nom_de_la_rue) %}
-        <div class="alert alert-danger" style="color: red;">
+        <div class="alert alert-danger">
             {{ form_errors(registrationForm.nom_de_la_rue) }}
         </div>
     {% endif %}
+    {{ form_widget(registrationForm.nom_de_la_rue) }}
 
     {{ form_label(registrationForm.code_postal) }}
-    {{ form_widget(registrationForm.code_postal) }}
     {% if form_errors(registrationForm.code_postal) %}
-        <div class="alert alert-danger" style="color: red;">
+        <div class="alert alert-danger">
             {{ form_errors(registrationForm.code_postal) }}
         </div>
     {% endif %}
+    {{ form_widget(registrationForm.code_postal) }}
+
+    {{ form_label(registrationForm.ville) }}
+    {% if form_errors(registrationForm.ville) %}
+        <div class="alert alert-danger">
+            {{ form_errors(registrationForm.ville) }}
+        </div>
+    {% endif %}
+    {{ form_widget(registrationForm.ville) }}
+
 
     {{ form_label(registrationForm.agreeTerms) }}
-    {{ form_widget(registrationForm.agreeTerms) }}
     {% if form_errors(registrationForm.agreeTerms) %}
-        <div class="alert alert-danger" style="color: red;">
+        <div class="alert alert-danger" >
             {{ form_errors(registrationForm.agreeTerms) }}
         </div>
     {% endif %}
+    {{ form_widget(registrationForm.agreeTerms) }}
 
 <button type="submit" class="btn">Register</button>
 {{ form_end(registrationForm) }}
-
+<script src="{{ asset('js/registration.js') }}"></script>
 {% endblock %}

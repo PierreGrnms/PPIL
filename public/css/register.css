@@ -58,6 +58,52 @@ button:hover {
     margin-right: 5px;
 }
 
-.alert .alert-danger ul li{
+.alert-danger ul li{
     color: red;
+}
+
+
+
+
+
+
+select {
+    position: relative;
+    width: 200px; /* Largeur du select */
+    font-size: 16px; /* Taille de la police */
+    appearance: none; /* Supprime les styles par défaut */
+    -webkit-appearance: none; /* Pour les navigateurs WebKit */
+    -moz-appearance: none; /* Pour les navigateurs basés sur Gecko */
+    border: none; /* Supprime la bordure */
+    background-color: #ffffff; /* Couleur de fond */
+    padding: 10px; /* Espacement interne */
+    cursor: pointer;
+}
+
+/* Style des options */
+select option {
+    font-size: 16px; /* Taille de la police */
+    padding: 10px; /* Espacement interne */
+}
+
+/* Style de l'indicateur de flèche */
+select::after {
+    content: '\25BC'; /* Code de la flèche vers le bas */
+    position: absolute;
+    top: 50%;
+    right: 10px; /* Espacement à droite */
+    transform: translateY(-50%);
+}
+
+select:focus {
+    outline: none; /* Supprime l'effet de focus */
+}
+
+select:hover {
+    background-color: #f0f0f0; /* Couleur de fond au survol */
+}
+
+select option:checked {
+    background-color: #007bff; /* Couleur de fond de l'option sélectionnée */
+    color: #ffffff; /* Couleur du texte de l'option sélectionnée */
 }

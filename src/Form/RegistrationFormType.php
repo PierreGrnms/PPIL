@@ -3,21 +3,28 @@
 namespace App\Form;
 
 use App\Entity\Utilisateur;
+use Doctrine\DBAL\Types\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Regex;
 
+
+
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+
         $builder
             ->add('email', null, [
                 'constraints' => [
@@ -95,7 +102,7 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('code_postal', null, [
+            ->add('code_postal', IntegerType::class, [
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Le code postal est obligatoire.',
@@ -105,6 +112,11 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Le code postal doit se composer de 5 chiffres et doit être valide.',
                     ]),
                 ],
+            ])
+            ->add('ville', ChoiceType::class, [
+                'choices' => null,
+                'label' => 'Villes',
+                'placeholder' => 'Choississez une option.',
             ])
             ->add('numero_telephone', null, [
                 'constraints' => [
@@ -118,6 +130,7 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
         ;
+        $builder->get('ville')->resetViewTransformers();
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -126,4 +139,7 @@ class RegistrationFormType extends AbstractType
             'data_class' => Utilisateur::class,
         ]);
     }
+
+
 }
+

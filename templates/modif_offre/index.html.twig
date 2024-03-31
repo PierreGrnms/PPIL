@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ÉcoPrêt - Liste des offres{% endblock %}
+
+
+{% block body %}
+    <head>
+        <link rel="stylesheet" href="{{ asset('css/listeOffre.css') }}">
+    </head>
+    {% include 'includes/nav_bar/navBar.html.twig' %}
+
+    <div class="main">
+        {% if offre %}
+            <div class="container-offre">
+                <div class="offre-description">
+                    <div class="right-offre">
+                        <h1>{{ offre.getTitreOffre }}</h1>
+                        <div class="box-description">
+                            <div class="contain">
+                                <h2>Description</h2>
+                                <p>{{ offre.getTexteOffre }}</p>
+                                <h2>Prix</h2>
+                                <label>{{ offre.getPrix }} florains</label>
+                                {% if offre.getIdUser.getId == app.user.id %}
+                                    <a href="{{ path('supprimer_offre', {'id': offre.getId}) }}">
+                                        <button onclick="return confirm('Êtes\-vous sûr de vouloir supprimer votre offre ?')">Supprimer l'offre</button>
+                                    </a>
+                                {% else %}
+                                    {% if dispos|length > 0 %}
+                                        <a href="{{ path('app_reserver_offre', {'id': offre.getId}) }}"><button>Reserver</button></a>
+                                    {% else %}
+                                        <h1>
+                                            Aucune disponibilité pour cette offre
+                                        </h1>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <h1>
+                Offre introuvable.
+            </h1>
+        {% endif %}
+    </div>
+    {% include 'includes/footer/footer.html.twig' %}
+{% endblock %}

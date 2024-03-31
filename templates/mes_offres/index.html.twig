@@ -13,8 +13,7 @@
         <div class="contenu">
             <div class="offres">
                 {% for offre in offres %}
-                    <a href={{ path('app_offre') }}?id={{ offre.getId }}>
-                    {#<a href="offre?id={{ offre.getId }}">#}
+                    <a href={{ path('app_modif_offre') }}?id={{ offre.getId }}>
                         <div class="textbox">
                             <h5>{{ offre.getTitreOffre }}</h5>
                             <h5>{{ offre.getPrix }} florains</h5>

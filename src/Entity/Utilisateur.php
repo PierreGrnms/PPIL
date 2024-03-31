@@ -48,6 +48,9 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $code_postal = null;
 
     #[ORM\Column(length: 255)]
+    private ?string $ville = null;
+
+    #[ORM\Column(length: 255)]
     private ?string $numero_telephone = null;
 
     #[ORM\Column]
@@ -177,6 +180,19 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+
+
+    public function setVille(string $ville): void
+    {
+        $this->ville = $ville;
+    }
     public function getNomDeLaRue(): ?string
     {
         return $this->nom_de_la_rue;

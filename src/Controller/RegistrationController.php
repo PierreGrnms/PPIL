@@ -28,7 +28,7 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-
+            $user->setVille($form->get("ville")->getData());
             $user->setPorteMonnaie(500);
 
             $entityManager->persist($user);
@@ -40,6 +40,28 @@ class RegistrationController extends AbstractController
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form,
+        ]);
+    }
+
+    #[Route('/villes', name: 'app_cities')]
+    public function villes(Request $request): Response
+    {
+        $form = $this->createForm(PostalCodeFormType::class);
+        $form->handleRequest($request);
+
+        $cities = [];
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $postalCode = $data['code_postal'];
+
+            // Appel à GeoNamesService pour obtenir les villes françaises correspondant au code postal
+            $cities = $geoNamesService->getCitiesByPostalCode($postalCode);
+        }
+
+        return $this->render('villes.html.twig', [
+            'form' => $form->createView(),
+            'cities' => $cities,
         ]);
     }
 }
