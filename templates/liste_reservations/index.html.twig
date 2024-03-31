@@ -10,16 +10,34 @@
     {% include 'includes/nav_bar/navBar.html.twig' %}
 
     <div class="main">
-        {% if reservations is empty %}
+        {% if reservationsDetails is empty %}
             <p>Aucune réservation trouvée.</p>
         {% else %}
-            <ul>
-                {% for reservation in reservations %}
-                    <li>
-                        Réservation du {{ reservation.getReservDebut()|date('d/m/Y H:i') }} au {{ reservation.getReservFin()|date('d/m/Y H:i') }}
-                    </li>
-                {% endfor %}
-            </ul>
+            <div class="container-recette">
+                <ul>
+                    {% for reservationDetails in reservationsDetails %}
+                        <li>
+                            <div class="recette-description">
+                                <div class="right-recette">
+                                    <h1>{{ reservationDetails.offre.getTitreOffre }}</h1>
+                                    <div class="box-description">
+                                        <div class="contain">
+                                            <h2>Description</h2>
+                                            <p>{{ reservationDetails.offre.getTexteOffre}}</p>
+                                            <h2>Prix</h2>
+                                            <p>{{reservationDetails.offre.getPrix}}</p>
+                                            Réservation du {{ reservationDetails.reservation.getReservDebut()|date('d/m/Y H:i') }} au {{ reservationDetails.reservation.getReservFin()|date('d/m/Y H:i') }}
+                                            <a href="{{ path('app_annuler_reservation', {'id': reservationDetails.reservation.getId}) }}">
+                                                <button onclick="return confirm('Êtes-vous sûr de vouloir annuler votre réservation ?')">Annuler la réservation</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
         {% endif %}
     </div>
     {% include 'includes/footer/footer.html.twig' %}

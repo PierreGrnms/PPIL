@@ -82,15 +82,16 @@ class AjouterUneOffreController extends AbstractController
             $userEntity = $userRepository->findOneByEmail($user_id);
             $userEntity->addOffres($offre);
             $entityManager->persist($dispo);
-
+        }
             $number_img = 0 ;
-            $chemin = '../public/offreImg/';
+            $chemin = '../public/offreImg';
             if( !file_exists($chemin)){
                 mkdir($chemin) ;
             }
             // Chemin du fichier dans le répertoire public
-            $public_directory = $chemin . $titre . '/';
             $num = 0 ;
+            $public_directory = $chemin . '/' . $titre . $num . '/';
+
             while (file_exists($public_directory)) {
                 $num++ ;
                 $public_directory = $chemin . '/' . $titre . $num . '/';
@@ -120,16 +121,20 @@ class AjouterUneOffreController extends AbstractController
 
                 $chemin_fichier = $public_directory . (string)$number_img . $extension;
                 file_put_contents($chemin_fichier, $imageData);
-                $number_img++ ;
                 $photo = new Photo() ;
-                $photo->setNom($chemin_fichier) ;
+                $chemin_photo =  $titre . $num . '/' . (string)$number_img . $extension;
+                $photo->setNom($chemin_photo) ;
                 $offre->addPhoto($photo) ;
                 $entityManager->persist($photo);
+                $entityManager->persist($offre);
+                $number_img++ ;
 
             }
+
+            
             $entityManager->persist($offre);
             $entityManager->flush();
-        }
+        
         
 
         
