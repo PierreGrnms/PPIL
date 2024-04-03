@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}ÉcoPrêt - Mon profil{% endblock %}
+{% block title %}ÉcoPrêt - Mes informations{% endblock %}
 
 {% block body %}
     <head>
@@ -51,7 +51,7 @@
             {% endif %}
 
             <div class="button-container">
-                <button type="submit" class="btn">Changer les informations</button>
+                <button type="submit" class="btn">Changer mes informations</button>
                 <button type="reset" class="btn">Réinitialiser mes modifications</button>
                 <a class="nav-link delete" href="{{ path('supprimer_compte', {'id': user.id}) }}">
                     <button type="button" class="btn">Supprimer mon compte</button>

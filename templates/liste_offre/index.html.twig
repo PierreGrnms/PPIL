@@ -29,11 +29,10 @@
                             </h1>
                             {% endfor %}
 
-
                         </div>
                                 <h2>Description</h2>
                                 <p>{{ offre.getTexteOffre }}</p>
-                                <h2> Reservations </h2>
+                                <h2> Réservations </h2>
                                 {% if offre.getIdUser.getId == app.user.id %}
                                 <a href="{{ path('supprimer_offre', {'id': offre.getId}) }}">
                                     <button onclick="return confirm('Êtes\-vous sûr de vouloir supprimer votre offre ?')">Supprimer l'offre</button>
@@ -42,9 +41,7 @@
                                     {% if dispos|length > 0 %}
                                         <a href="{{ path('app_reserver_offre', {'id': offre.getId}) }}"><button>Reserver</button></a>
                                     {% else %}
-                                        <h1>
-                                            Aucune disponibilité pour cette offre
-                                        </h1>
+                                        <h1>Aucune disponibilité pour cette offre</h1>
                                     {% endif %}
                                 {% endif %}
                                 <h2> évaluations </h2>
@@ -59,8 +56,6 @@
                                     Il n'y a pas de d'évaluation pour cette offre
                                 </h1>
                                 {% endfor %}
-
-                        
             </div>
             <script src="{{ asset('js/formEval.js') }}"></script>
 
