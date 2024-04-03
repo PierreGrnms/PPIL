@@ -36,14 +36,17 @@ class ConversationController extends AbstractController
                 ->andWhere('m.id_utilisateur = :user')
                 ->setParameter('user', $this->getUser())
                 ->setParameter('nothing', "");
+
+
             $receiver = array_map(function($r) {
                 return $r->getIdDestinataire();
             }, $queryBuilder->getQuery()->getResult());
+
             $queryBuilder->select('a')
                 ->from(Message::class, 'a')
-                ->where('m.text != :nothing')
-                ->andWhere('m.id_destinataire = :user')
-                ->groupBy('m.id_destinataire')
+                ->where('a.text != :nothing')
+                ->andWhere('a.id_destinataire = :user')
+                ->groupBy('a.id_destinataire')
                 ->setParameter('user', $this->getUser())
                 ->setParameter('nothing', "");;
 
@@ -60,10 +63,9 @@ class ConversationController extends AbstractController
                 ->setParameter('nothing', "");*/
 
             $destinataires = array_merge($receiver, $sender);
-
             return $this->render('conversation/index.html.twig', [
                 'controller_name' => 'ConversationController',
-                'destinataires' => $destinataires,
+                'destinataires' => array_unique($destinataires, SORT_REGULAR),
                 'currentDest' => $session->get('currentDest'),
             ]);
         }
@@ -73,7 +75,7 @@ class ConversationController extends AbstractController
     /**
      * @Route("/send-message", methods={"POST"})
      */
-    /*#[Route('/send-message', methods: 'POST')]*/
+    #[Route('/send-message', methods: 'POST')]
     public function addMessage(EntityManagerInterface $entityManager, Request $request, SessionInterface $session, HubInterface $hub): Response
     {
 
@@ -91,7 +93,7 @@ class ConversationController extends AbstractController
         $entityManager->persist($message);
         $entityManager->flush();
 
-        $update = new Update("https://Nearmessage.com/message", json_encode(["dest"=>$dest->getId()]));
+        $update = new Update("message2", json_encode(["sourceId"=>$this->getUser()->getId(),"destId"=>$dest->getId()]));
         $hub->publish($update);
 
         return $this->json(['dest'=> $dest->getPrenom(),'message' => $data['message']]);
@@ -100,7 +102,7 @@ class ConversationController extends AbstractController
     /**
      * @Route("/conversation-change-event", name="app_change_event", methods={"POST"})
      */
-    /*#[Route('/conversation-change-event', name: 'app_change_event', methods: 'POST')]*/
+    #[Route('/conversation-change-event', name: 'app_change_event', methods: 'POST')]
     public function handleConvChange(EntityManagerInterface $entityManager, Request $request, SessionInterface $session): JsonResponse
     {
         $data = json_decode($request->getContent(),true);

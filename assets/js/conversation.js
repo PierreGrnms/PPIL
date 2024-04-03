@@ -1,6 +1,5 @@
 
 function init(id) {
-    console.log("test")
     if (id) {
         updateDestinataire(document.querySelector("#\\3"+id.toString()));
     }
@@ -21,6 +20,7 @@ function updateDestinataire(e) {
             return r.json()
         }).then(data => {
             document.querySelector(".messages").innerHTML = "";
+            console.log(data)
             updateMessage(data);
             for (let child of e.parentNode.children) {
                 child.classList.remove('activated')
@@ -50,8 +50,8 @@ function throw_message() {
         message.classList.add("messageR");
 
         text.innerHTML = content;
-        message.append(text);
-        container.append(message);
+        message.appendChild(text);
+        container.appendChild(message);
 
         updateScroll()
 
@@ -72,6 +72,8 @@ function throw_message() {
 function updateMessage(data) {
     let user = data['user'];
     let container = document.querySelector(".messages");
+    console.log('HEEEEEEEEEEEEEEEEEEEEEEEE')
+
     data['messages'].forEach(message => {
         if (message.text !== "") {
             let messagebox = document.createElement("div");
@@ -84,8 +86,8 @@ function updateMessage(data) {
             }
 
             text.innerHTML = message.text;
-            messagebox.append(text);
-            container.append(messagebox);
+            messagebox.appendChild(text);
+            container.appendChild(messagebox);
         }
 
     })
@@ -93,10 +95,42 @@ function updateMessage(data) {
 
 }
 
-function majMessage(data) {
-    console.log("received")
-    console.log(data)
-    //updateMessage(data) // besoin de userid, messages[]
+function majMessage(data1) {
+
+    if (document.querySelector("#\\3"+data1.sourceId.toString())) {
+
+        e=document.querySelector("#\\3"+data1.sourceId.toString());
+        fetch('/conversation-change-event', {method: 'POST',body: JSON.stringify(
+                {"destinataire": parseInt(e.id)}
+            )}).then(r => {
+            return r.json()
+        }).then(data => {
+            document.querySelector(".messages").innerHTML = "";
+            console.log(data)
+            updateMessage(data);
+            for (let child of e.parentNode.children) {
+                child.classList.remove('activated')
+            }
+            e.classList.add('activated')
+            document.querySelector('#destinataire-courant').innerText = e.children[1].innerText;
+            document.querySelector('#messager').disabled = false;
+        }).catch(e => {
+            console.log('error' + e);
+        })
+    } else {
+        fetch('/conversation-change-event', {method: 'POST',body: JSON.stringify(
+                {"destinataire": parseInt(data1.sourceId)}
+            )}).then(r => {
+            return r.json()
+        }).then(data => {
+            document.querySelector(".messages").innerHTML = "";
+            console.log(data)
+            updateMessage(data);
+            document.querySelector('#messager').disabled = false;
+        }).catch(e => {
+            console.log('error' + e);
+        })
+    }
 }
 
 document.querySelector(".enter").addEventListener("keyup", event => {

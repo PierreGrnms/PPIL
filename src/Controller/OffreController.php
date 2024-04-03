@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Disponibilites;
+use App\Entity\Evaluation;
 use App\Entity\Message;
 use App\Entity\Offre;
 use App\Entity\Photo;
@@ -27,6 +28,7 @@ class OffreController extends AbstractController
                 'offre' => $entityManager->getRepository(Offre::class)->find($id),
                 'dispos' => $entityManager->getRepository(Disponibilites::class)->findBy(['id_offre' => $id]),
                 'photos' => $entityManager->getRepository(Photo::class)->findBy(['id_offre' => $id]),
+                'evaluations' => $entityManager->getRepository(Evaluation::class)->findBy(['id_offre' => $id]),
             ]);
         }
         else {
@@ -108,7 +110,6 @@ class OffreController extends AbstractController
     #[Route('/offres/supprimer', name: 'supprimer_offre')]
     public function delete(Request $request, EntityManagerInterface $entityManager): Response
     {
-
         $id = $request->query->get('id');
         $offre = $entityManager->getRepository(Offre::class)->find($id);
         // supprimer les Disponibilites reliées à l'offre
@@ -125,5 +126,29 @@ class OffreController extends AbstractController
         $entityManager->remove($offre);
         $entityManager->flush();
         return $this->redirectToRoute('app_mes_offres');
+    }
+
+    #[Route('/offres/evaluation', name: 'evaluation_offre')]
+    public function evaluer(Request $request,EntityManagerInterface $entityManager): Response
+    {
+        // Récupérer les données POST envoyées dans la requête
+        $data = json_decode($request->getContent(), true);
+        // Traiter les données
+        $titre = $data['titre'];
+        $description = $data['description'];
+        $note = $data['note'];
+        $offreId = $data['id'];
+        $offre = $entityManager->getRepository(Offre::class)->find($offreId) ;
+        $eval = new Evaluation()     ;
+        $eval->setTitre($titre) ;
+        $eval->setNote($note) ;
+        $eval->setIdOffre($offre) ;
+        if($description != ""){
+            $eval->setCommentaire($description) ;
+        }
+        $entityManager->persist($eval);
+        $entityManager->flush();
+        return new Response(' Bonjour Données reçues avec succès !' . $note . $description . $titre );
+
     }
 }

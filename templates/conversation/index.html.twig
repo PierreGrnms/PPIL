@@ -43,7 +43,6 @@
         {% else %}
             init({{ currentDest }})
         {% endif %}#}
-        init({{ currentDest }})
 
         function whenAvailable(name, callback) {
             window.setTimeout(function() {
@@ -54,14 +53,15 @@
                 }
             }, 10);
         }
-        /*whenAvailable("init", (init) => {
+        whenAvailable("init", (init) => {
+
             init({{ currentDest }})
-        });*/
-        eventSource = new EventSource("{{ mercure('https://Nearmessage.com/message')|escape('js') }}");
+        });
+        eventSource = new EventSource("{{ mercure('message2')|escape('js') }}");
         eventSource.onmessage = event => {
             let data = JSON.parse(event.data)
             let me = {{ app.user ? app.user.getId : null }};
-            if (me === data['dest']) {
+            if (me === data['destId']) {
                 majMessage(data);
             }
         }

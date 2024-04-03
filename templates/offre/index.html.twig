@@ -42,6 +42,23 @@
                             Aucune disponibilité pour cette offre
                         </h3>
                     {% endif %}
+                    <h2> Évaluations </h2>
+                    <div class="list-eval">
+                        {% for eval in evaluations %}
+                            <div>
+                                <p> Titre : {{ eval.getTitre }} <p>
+                                <p> Note : {{ eval.getNote }} </p>
+                                <p> Description : {{ eval.getCommentaire }} </p>
+                            </div>
+                        {% else %}
+                            <h3 class="err-offre">
+                                Il n'y a pas de d'évaluation pour cette offre
+                            </h3>
+                        {% endfor %}
+                    </div>
+                    <a onclick="popUp()" >
+                        Ajouter une évaluation
+                    </a>
                 </div>
 
             </div>
@@ -58,5 +75,7 @@
             </h1>
         {% endif %}
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ asset('js/formEval.js') }}"></script>
     {% include 'includes/footer/footer.html.twig' %}
 {% endblock %}

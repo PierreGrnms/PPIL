@@ -116,7 +116,7 @@ a {text-decoration: none}
     text-align: center;
     padding: 10px;
     background-color: #b7eca1;
-    min-width: 5%;
+    min-width: 1%;
     max-width: 75%;
     word-wrap: break-word;
 }
