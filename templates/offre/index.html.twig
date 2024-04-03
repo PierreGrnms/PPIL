@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ÉcoPrêt - Liste des offres{% endblock %}
+
+
+{% block body %}
+    <head>
+        <link rel="stylesheet" href="{{ asset('css/listeOffre.css') }}">
+    </head>
+    {% include 'includes/nav_bar/navBar.html.twig' %}
+
+    <div class="main">
+        {% if offre %}
+            <div class="container-offre">
+                <div class="container-photo">
+                    <h2>Photos</h2>
+                    <div class="photos-cont">
+                        {% for photo in photos %}
+                            <img src="{{ asset('offreImg/' ~ photo.nom) }}" alt="photo">
+                        {% else %}
+                            <h3 class="err-offre">
+                                Il n'y a pas de photos pour cette offre
+                            </h3>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="container-offre-titre" >
+                    <h1>{{ offre.getTitreOffre }}</h1>
+                    <div class="florinsContainer2">
+                        <p class="nbFlorins"> Prix : {{ offre.getPrix }} </p>
+                        <img src="{{ asset('images/florain.png') }}" alt="florain" style="width:40%;">
+                    </div>
+                    <h2>Description</h2>
+                    <p>{{ offre.getTexteOffre }}</p>
+                    <h2> Reservations </h2>
+                    {% if dispos|length > 0 %}
+                        <a href="{{ path('app_reserver_offre', {'id': offre.getId}) }}">
+                            Reserver
+                        </a>
+                    {% else %}
+                        <h3>
+                            Aucune disponibilité pour cette offre
+                        </h3>
+                    {% endif %}
+                </div>
+
+            </div>
+            <div class="userbox">
+                <img src="{{ asset('images/user.png') }}" alt="user">
+                <h3 id="destinataire-courant">{{ offre.getIdUser.getPrenom }}</h3>
+                <a href="{{ path('contacter', {'id': offre.getId}) }}">
+                    Contacter
+                </a>
+            </div>
+        {% else %}
+            <h1>
+                Offre introuvable.
+            </h1>
+        {% endif %}
+    </div>
+    {% include 'includes/footer/footer.html.twig' %}
+{% endblock %}
