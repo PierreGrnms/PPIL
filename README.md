@@ -16,17 +16,17 @@ Guides d'installations :
       ```DATABASE_URL="sqlite:///%kernel.project_dir%/var/data.db"``` pour sqlite
 
   - Commandes à la racine du projet :
-    composer install
-    symfony console doctrine:database:create
-    rm -rf migrations/*
-    symfony console doctrine:schema:drop --force
-    symfony console make:migration
-    symfony console doctrine:migrations:migrate
+    ```composer install```
+    ```symfony console doctrine:database:create```
+    ```rm -rf migrations/*```
+    ```symfony console doctrine:schema:drop --force```
+    ```symfony console make:migration```
+    ```symfony console doctrine:migrations:migrate```
 
   - Pour vérifier que ça marche :
-    symfony check:requirements
+    ```symfony check:requirements```
   - Pour sqlite :
-     sqlite3 var/data.db
-    .tables devrait afficher les tables de la BDD
+     ```sqlite3 var/data.db```
+    ```.tables``` devrait afficher les tables de la BDD
   - Lancer le server :
-    symfony server:start
+    ```symfony server:start```
