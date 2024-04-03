@@ -35,10 +35,10 @@ class AjouterUneOffreFormType extends AbstractType
             'label' => 'Il s\'agit d\'une offre de :',
         ])
             ->add('titre_offre',TextType::class, [
-                'attr' => ['placeholder' => 'Le Titre de votre offre'],
+                'attr' => ['placeholder' => 'L\'intitulé de votre offre'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Votre titre ne dois pas etre vide',
+                        'message' => 'Votre titre ne doit pas être vide !',
                     ]),
                 ], ])
 
@@ -54,13 +54,16 @@ class AjouterUneOffreFormType extends AbstractType
                 ],
                 // Autres options de champ
             ])
+
+
             ->add('fichiers', FileType::class, [
-                'label' => "ajouter des images",
+                'label' => "Ajouter des images",
+
                 'multiple' => true,
                 'constraints' => [
                     new File([
                         'mimeTypes' => ['image/jpeg', 'image/png', 'image/gif'],
-                        'mimeTypesMessage' => 'Veuillez télécharger une image valide (JPEG, PNG, GIF).',
+                        'mimeTypesMessage' => 'Veuillez ajouter une image au format valide (JPEG, PNG, GIF).',
                     ]),
                 ],
             ])

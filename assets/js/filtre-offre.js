@@ -3,7 +3,7 @@ const minPrixInput = document.getElementById('min');
 const maxPrixInput = document.getElementById('max');
 const codePostalInput = document.getElementById('code');
 const villeInput = document.getElementById('ville');
-console.log("ok")
+
 function fetchFilteredData() {
     const nom = nomInput.value;
     const minPrix = minPrixInput.value;
@@ -68,10 +68,14 @@ maxPrixInput.addEventListener('input', fetchFilteredData);
 codePostalInput.addEventListener('input', fetchFilteredData);
 villeInput.addEventListener('input', fetchFilteredData);
 document.querySelector('.filtres').addEventListener('click', a => {
-    let e = document.querySelector('.filtres');
-    console.log(parseInt(e.style.left.slice(0, -1)));
-    if (parseInt(e.style.left.slice(0, -1)) > 10) e.style.left = 0+'%'
-    else e.style.left = 33+'%'
+    console.log(a.offsetX + " " + a.offsetY);
+    if (a.offsetY >= 350 && a.offsetY <= 420 && a.offsetX <= 0 && a.offsetX >= -40) { // Assuming ::before width is 20px
+        let e = document.querySelector('.filtres');
+        if (parseInt(e.style.left.slice(0, -1)) > 10) e.style.left = 0+'%'
+        else e.style.left = 33+'%'
+    }
+
+
 });
 
 

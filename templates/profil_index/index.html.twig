@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProfilIndexController!{% endblock %}
+{% block title %}ÉcoPrêt - Mon profil{% endblock %}
 
 {% block body %}
 <style>
@@ -9,7 +9,6 @@
 </style>
 <link rel="stylesheet" href="{{ asset('css/indexProfil.css') }}"> 
      {% include 'includes/nav_bar/navBar.html.twig' %} 
-
 
 <div class="profil-info">
 
@@ -35,7 +34,7 @@
             <div class="card">
                 <img  src="{{ asset('images/offres.png') }}" alt="messages" style="width:50%;">
 
-                <p> Mes Offres </p>
+                <p> Mes offres </p>
             </div>
         </a>
     </td>
@@ -47,7 +46,7 @@
             <div class="card">
                 <img  src="{{ asset('images/reservation.png') }}" alt="messages" style="width:50%;">
 
-                <p> Mes Reservations </p>
+                <p> Mes réservations </p>
             </div>
         </a>
     </td>

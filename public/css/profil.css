@@ -16,7 +16,7 @@ h1 {
     text-align: center;
 }
 
-form {
+.container-form form {
     display:flex;
     flex-direction: column;
     justify-content: space-around;
@@ -31,7 +31,33 @@ form {
     font-family: Arial, Helvetica, sans-serif;
     gap: 20px;
     width:50%;
+}
+.sommeil-r {
     margin-bottom: 50px;
+align-items: center;
+text-align: center;
+}
+.sommeil-r .btn {
+    background-color: rgb(156, 29, 3);
+    border: #c30404 solid 3px;
+    color: white;
+
+}
+.sommeil-r{
+margin-bottom: 50px;
+align-items: center;
+text-align: center;
+}
+.sommeil-v .btn {
+    background-color: rgb(2, 87, 0);
+    border: #057a03 solid 3px;
+    color: white;
+
+}
+.sommeil-v{
+margin-bottom: 50px;
+align-items: center;
+text-align: center;
 }
 form div {
     width:50%;

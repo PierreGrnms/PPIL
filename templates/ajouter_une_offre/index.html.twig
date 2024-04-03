@@ -9,6 +9,11 @@
     {% include 'includes/nav_bar/navBar.html.twig' %}
 <script
       src = "https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+
+ {% if user.isEnSommeil %}
+ <h1> Votre compte est en sommeil, vous ne pouvez pas ajouter d'offre. <h1>
+ {% else %}
 <script>
 
 {# Permet d'éviter les problèmes de chargement du formulaire #}
@@ -20,8 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
 initForm()
 });
 
-
-
 function initForm(){
     // Sélectionnez tous les liens de la page
     const links = document.querySelectorAll('a');
@@ -32,7 +35,6 @@ function initForm(){
         link.addEventListener('click', function(event) {
             // Obtenir l'URL vers laquelle le lien pointe
             const href = this.getAttribute('href');
-
 
             // Vérifier si le lien pointe vers la même page
             if (href === '/ajouteruneoffre') {
@@ -47,28 +49,25 @@ function initForm(){
         let lstDispo=new Array();
         // Mise en place de la liste des fichiers
         let lstFichiers=new Array();
-         
 
-
-
-    // ======= Creation du formulaire =======
+    // ======= Création du formulaire =======
         var form = document.createElement("div");
         form.id = "formOffre"
 
         // === Ajout du titre du formulaire ===
             const titreForm = document.createElement('h2');
-            titreForm.textContent = "Ajouter une Offre" ;
+            titreForm.textContent = "Ajouter une offre" ;
             titreForm.style.textAlign = 'center' ;
             form.appendChild(titreForm) ;
 
-        //  === Creation d'un bouton radio button ===
+        //  === Création d'un bouton radio button ===
             const option1 = document.createElement('input');
             option1.type = 'radio';
             option1.id = 'Radio1';
             option1.value = 'pret';
             option1.name = 'radio_type';
             const label1 = document.createElement('label');
-            label1.textContent = 'Offre de pret';
+            label1.textContent = 'Prêt';
             label1.htmlFor = 'Radio1';
             const option2 = document.createElement('input');
             option2.type = 'radio';
@@ -76,7 +75,7 @@ function initForm(){
             option2.value = 'service';
             option2.name = 'radio_type';
             const label2 = document.createElement('label');
-            label2.textContent = 'Offre de service';
+            label2.textContent = 'Service';
             label2.htmlFor = 'Radio2';
             const container1 = document.createElement('div');
             const container2 = document.createElement('div');
@@ -89,21 +88,21 @@ function initForm(){
         // === Gestion du titre de l'offre ===
 
             const containerTitre = document.createElement('div');
-            // Creation d'un input pour le titre
+            // Création d'un input pour le titre
             const titreField = document.createElement('input');
             titreField.type = 'text';
             titreField.id = 'titre';
             titreField.name = 'titre';
             titreField.classList.add('inputForm')
             const labelTitre = document.createElement('label');
-            labelTitre.textContent = 'Ajouter un titre a votre offre :';
+            labelTitre.textContent = 'Intitulé de votre offre :';
             labelTitre.htmlFor = 'titre';
             containerTitre.appendChild(labelTitre);
             containerTitre.appendChild(titreField);
             form.appendChild(containerTitre);
 
         // === Gestion de la description de l'offre ===
-            // Creation d'un input pour la description
+            // Création d'un input pour la description
             const containerDesc = document.createElement('div');
             const descField = document.createElement('textarea');
             descField.classList.add('inputForm') ;
@@ -111,7 +110,7 @@ function initForm(){
             descField.name = 'desc';
             descField.style.height= '180px'
             const labelDesc = document.createElement('label');
-            labelDesc.textContent = 'Ajouter une description a votre offre :';
+            labelDesc.textContent = 'Description de votre offre :';
             labelDesc.htmlFor = 'desc';
             containerDesc.appendChild(labelDesc);
             containerDesc.appendChild(descField);
@@ -119,7 +118,7 @@ function initForm(){
             form.appendChild(containerDesc);
 
         // === Gestion du prix de l'offre ===
-            // Creation d'un input pour le prix
+            // Création d'un input pour le prix
             const containerPrix = document.createElement('div');
 
             const prixField = document.createElement('input');
@@ -128,20 +127,20 @@ function initForm(){
             prixField.name = 'prix';
             prixField.classList.add('inputForm') ;
             const labelPrix = document.createElement('label');
-            labelPrix.textContent = 'Ajouter un prix en florain pour votre offre :';
+            labelPrix.textContent = 'Coût (en florins) de votre offre :';
             labelPrix.htmlFor = 'prix';
             containerPrix.appendChild(labelPrix);
             containerPrix.appendChild(prixField);
 
             form.appendChild(containerPrix);
 
-        // ============= Gestion des disponibilitees =============
+        // ============= Gestion des disponibilitées =============
         const containerDispoForm = document.createElement('div');
         containerDispoForm.id = "containerDispoForm"
 
         // === Gestion titre dispo ===
             const titreDispoForm = document.createElement('h3');
-            titreDispoForm.textContent = "Ajouter une Disponibilite" ;
+            titreDispoForm.textContent = "Ajouter une disponibilité" ;
             titreDispoForm.style.textAlign = 'center'
             containerDispoForm.appendChild(titreDispoForm ) ;
         // === Gestion de la date ===
@@ -152,7 +151,7 @@ function initForm(){
             dateField.id = 'date';
             dateField.name = 'date';
             const labelDate = document.createElement('label');
-            labelDate.textContent = 'Ajouter une date :  ';
+            labelDate.textContent = 'Date :  ';
             labelDate.htmlFor = 'date';
             containerDateDispo.appendChild(labelDate);
             containerDateDispo.appendChild(dateField);
@@ -165,7 +164,7 @@ function initForm(){
             hdField.id = 'timeH';
             hdField.name = 'timeH';
             const labelHd = document.createElement('label');
-            labelHd.textContent = 'Ajouter une heure de depart : ';
+            labelHd.textContent = 'Heure de début : ';
             labelHd.htmlFor = 'timeH';
             containerHdebutDispo.appendChild(labelHd);
             containerHdebutDispo.appendChild(hdField);
@@ -178,7 +177,7 @@ function initForm(){
             hfField.id = 'timeF';
             hfField.name = 'timeF';
             const labelHf = document.createElement('label');
-            labelHf.textContent = 'Ajouter une heure de fin : ';
+            labelHf.textContent = 'Heure de fin : ';
             labelHf.htmlFor = 'timeF';
             containerHfinDispo.appendChild(labelHf);
             containerHfinDispo.appendChild(hfField);
@@ -191,7 +190,7 @@ function initForm(){
 
         // === Ajout du bouton ===
             const button = document.createElement('button');
-            button.textContent = 'Ajouter la disponibilte';
+            button.textContent = 'Ajouter la disponibilté';
             button.id = 'add_dispo';
             // Ajout d'une classe au bouton (facultatif)
             button.classList.add('btn');
@@ -202,7 +201,7 @@ function initForm(){
 
         // === GESTION DU BOUTON D'IMPORT (IMG) ===
             const titreImg = document.createElement('h3') ;
-            titreImg.textContent = "Ajouter des images a votre offre :"
+            titreImg.textContent = "Ajouter des images à votre offre :"
             form.appendChild(titreImg) ;
             // Création de l'élément input de type fichier
             const fileInput = document.createElement('input');
@@ -335,7 +334,7 @@ function sendAjaxForm(dest){
             data: JSON.stringify(data),
             success: function(response) {
                 console.log("Réponse du serveur :", response);
-                window.location.href = "{{ path('app_mes_offres') }}";
+                window.location.href = "{{ path('app_liste_offre') }}";
 
             },
             error: function(xhr, status, error) {
@@ -388,11 +387,11 @@ function AjouterDispo(){
         const hFin = document.getElementById('timeF')
     // Vérification que les champs sont bien remplis
         if (date.value == '' || hFin.value == '' || hDebut.value == '' || hFin.value == '') {
-            alert("Veuillez corectement remplir la date l'heure de debut et l'heure de fin") ;
+            alert("Veuillez corectement remplir la date, l'heure de début et l'heure de fin") ;
         }else{
             if (new Date ('1/1/1999 ' + hDebut.value) > new Date ('1/1/1999 ' + hFin.value)){
-                // Si l'heure de fin est inférieur a l'heure de debut
-                alert("L'heure de fin est supérieur a l'heure de début.")
+                // Si l'heure de fin est inférieure a l'heure de début
+                alert("L'heure de début est supérieure à l'heure de fin.")
             }
             else{
                 // Ajout de la dispo dans la liste des dispo
@@ -402,7 +401,7 @@ function AjouterDispo(){
                 date.value = "" ;
                 hFin.value = "" ;
                 hDebut.value = "" ;
-                // Mise a jour de l'ffichage des dispo
+                // Mise a jour de l'affichage des dispo
                 updateDispo() ;
             }
         }
@@ -470,14 +469,11 @@ function updateImg(){
                 cell2.appendChild(lab_del);
                 cell1.appendChild(imgElement);
                 imageContainer.appendChild(imageCont);
-                console;console.log('test');
-
-
     });
 }
 }
 
-
 </script
+{% endif %}
 
 {% endblock %}

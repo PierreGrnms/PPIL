@@ -35,4 +35,26 @@ class ProfilController extends AbstractController
         }
         return $this->redirectToRoute('app_login');
     }
+    #[Route('/modifierDonnees', name: 'modifierDonnees')]
+
+    public function modifierDonnees(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        // Récupérer la valeur booléenne envoyée par le formulaire
+        $nouvelleValeur = filter_var($request->request->get('nouvelle_valeur'), FILTER_VALIDATE_BOOLEAN);
+        $user = $this->getUser();
+        $user_id = $user->getUserIdentifier();
+        $user = $this->getUser();
+        //$user->addOffres($offre);
+
+        $userRepository = $entityManager->getRepository(Utilisateur::class);
+        $userEntity = $userRepository->findOneByEmail($user_id);
+        $userEntity->setEnSommeil($nouvelleValeur) ;
+
+        $entityManager->persist($userEntity) ;
+        $entityManager->flush();        
+
+
+        // Rediriger l'utilisateur vers une autre page
+        return $this->redirectToRoute('app_profil');
+    }
 }

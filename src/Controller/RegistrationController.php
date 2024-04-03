@@ -30,7 +30,7 @@ class RegistrationController extends AbstractController
             );
             $user->setVille($form->get("ville")->getData());
             $user->setPorteMonnaie(500);
-
+            $user->setEnSommeil(false) ;
             $entityManager->persist($user);
             $entityManager->flush();
 
