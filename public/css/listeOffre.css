@@ -14,6 +14,7 @@ body {
 }
 
 .main {
+    padding: 10px;
     width:100%;
     height:92%;
     flex:1;
@@ -92,14 +93,6 @@ body {
     text-align: center;
 }
 
-
-
-
-
-.right-recette h1:hover {
-    transform:scale(1.1);
-    color:#027b28
-}
 .container-offre{
     border: solid 3px #027b28;
     border-radius: 30px;
@@ -108,7 +101,6 @@ body {
     margin: 5%;
     padding-left: 2%;
     padding-right: 2%;
-
 }
 
 .florinsContainer{
