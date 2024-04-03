@@ -25,7 +25,8 @@ class AjouterUneOffreController extends AbstractController
     #[Route('/ajouteruneoffre', name: 'app_ajouter_une_offre')]
     public function index(Request $request): Response
     {
-        if (!$this->getUser()) {
+        $user = $this->getUser();
+        if (!$user) {
             return $this->redirectToRoute('app_login');
         }
         header("Cache-Control: no-cache, must-revalidate"); // Indique de ne pas mettre en cache et de toujours valider la ressource
@@ -33,15 +34,19 @@ class AjouterUneOffreController extends AbstractController
         header("Expires: 0"); // Indique une date d'expiration immédiate
         return $this->render('ajouter_une_offre/index.html.twig', [
             'controller_name' => 'AjouterUneOffreController',
+            'user' => $user,
         ]);
     } 
     #[Route('/ajax', name: 'app_ajax_get', methods: ['POST'])]
     public function ajaxreq(Request $request,EntityManagerInterface $entityManager): Response
-    {
+    {        
+        $user = $this->getUser();
 
-        if (!$this->getUser()) {
+
+        if (!$user) {
             return $this->redirectToRoute('app_login');
         }
+
         // Récupérer les données envoyées via la requête AJAX
         $data = json_decode($request->getContent(), true);
 

@@ -7,6 +7,7 @@
     <head>
         <link rel="stylesheet" href="{{ asset('css/listeOffre.css') }}">
     </head>
+    <script src = "https://code.jquery.com/jquery-2.2.4.min.js"></script>
     {% include 'includes/nav_bar/navBar.html.twig' %}
 
         {% if offres is null %}
@@ -28,30 +29,42 @@
                             </h1>
                             {% endfor %}
 
-
                         </div>
                                 <h2>Description</h2>
                                 <p>{{ offre.getTexteOffre }}</p>
-                                <h2> Reservations </h2>
+                                <h2> Réservations </h2>
                                 {% if offre.getIdUser.getId == app.user.id %}
                                 <a href="{{ path('supprimer_offre', {'id': offre.getId}) }}">
                                     <button onclick="return confirm('Êtes\-vous sûr de vouloir supprimer votre offre ?')">Supprimer l'offre</button>
                                 </a>
                                 {% else %}
                                     {% if dispos|length > 0 %}
-                                        <a href="{{ path('app_reserver_offre', {'id': offre.getId}) }}"><button>Reserver</button></a>
+                                        <a href="{{ path('app_reserver_offre', {'id': offre.getId}) }}"><button>Réserver</button></a>
                                     {% else %}
-                                        <h1>
-                                            Aucune disponibilité pour cette offre
-                                        </h1>
+                                        <h1>Aucune disponibilité pour cette offre</h1>
                                     {% endif %}
                                 {% endif %}
-                        
+                                <h2> évaluations </h2>
+                                {% for eval in evaluations %}
+                                    <div> 
+                                    <p> Titre : {{ eval.getTitre }} <p>
+                                    <p> Note : {{ eval.getNote }} </p>
+                                    <p> Description : {{ eval.getCommentaire }} </p>
+                                    </div
+                                {% else %}
+                                <h1 class="err-offre">
+                                    Il n'y a pas de d'évaluation pour cette offre
+                                </h1>
+                                {% endfor %}
             </div>
+            <script src="{{ asset('js/formEval.js') }}"></script>
+
         {% else %}
             <div class="contenu">
                 <div class="offres">
                     {% for offre in offres %}
+                    {% if offre.getIdUser.isEnSommeil %}
+                    {% else %}
                         <a href="?id={{ offre.getId }}">
                             <div class="textbox">
                                 <h5>{{ offre.getTitreOffre }}</h5>
@@ -61,6 +74,7 @@
                                 </div>
                             </div>
                         </a>
+                    {% endif %}
                     {% else %}
                         <h1 class="err-offre">
                             Aucune offres
@@ -69,5 +83,5 @@
                 </div>
             </div>
         {% endif %}
-    {% include 'includes/footer/footer.html.twig' %}
+    {# {% include 'includes/footer/footer.html.twig' %} #}
 {% endblock %}

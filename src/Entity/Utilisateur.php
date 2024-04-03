@@ -56,6 +56,9 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'id', targetEntity: Offre::class)]
     private Collection $offres;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $enSommeil = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -233,6 +236,18 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPorteMonnaie(float $porte_monnaie): static
     {
         $this->porte_monnaie = $porte_monnaie;
+
+        return $this;
+    }
+
+    public function isEnSommeil(): ?bool
+    {
+        return $this->enSommeil;
+    }
+
+    public function setEnSommeil(?bool $enSommeil): static
+    {
+        $this->enSommeil = $enSommeil;
 
         return $this;
     }

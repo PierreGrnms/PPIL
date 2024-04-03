@@ -8,11 +8,11 @@
     </head>
     {% include 'includes/nav_bar/navBar.html.twig' %}
     <div class="container">
-        <h1>Reset your password</h1>
+        <h1>Réinitialiser votre mot de passe</h1>
 
         {{ form_start(resetForm) }}
             {{ form_row(resetForm.plainPassword) }}
-            <button class="btn btn-primary">Réinitialiser le mot de passe</button>
+            <button class="btn btn-primary">Réinitialiser</button>
         {{ form_end(resetForm) }}
     </div>
     {% include 'includes/footer/footer.html.twig' %}

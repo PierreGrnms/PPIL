@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Utilisateur;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,6 +21,7 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email', null, [
+                'label' => 'Adresse mail',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'L\'adresse mail est obligatoire.',
@@ -30,6 +32,7 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('agreeTerms', CheckboxType::class, [
+                'label' => 'Conditions Générales d\'Utilisation',
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
@@ -38,24 +41,38 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('plainPassword', RepeatedType::class, [
-                'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password'],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Le mot de passe est obligatoire.',
-                    ]),
-                    new Length([
-                        'min' => 6,
-                        'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères.',
-                        'max' => 4096,
-                    ]),
-                    new Regex([
-                        'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/',
-                        'message' => 'Votre mot de passe doit contenir au moins une lettre minuscule, une lettre majuscule et un chiffre.',
-                    ]),
+                'type' => PasswordType::class,
+                'label' => 'Mot de passe',
+                'options' => [
+                    'attr' => [
+                        'autocomplete' => 'new-password',
+                    ],
                 ],
+                'first_options' => [
+                    'constraints' => [
+                        new NotBlank([
+                            'message' => 'Le mot de passe est obligatoire.',
+                        ]),
+                        new Length([
+                            'min' => 6,
+                            'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères.',
+                            'max' => 4096,
+                        ]),
+                        new Regex([
+                            'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/',
+                            'message' => 'Votre mot de passe doit contenir au moins une lettre minuscule, une lettre majuscule et un chiffre.',
+                        ]),
+                    ],
+                    'label' => ' ',
+                ],
+                'second_options' => [
+                    'label' => 'Répéter le mot de passe',
+                ],
+                'invalid_message' => 'Les mots de passe doivent être identiques.',
+                'mapped' => false,
             ])
             ->add('nom', null, [
+                'label' => 'Nom',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Le nom est obligatoire.',
@@ -67,6 +84,7 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('prenom', null, [
+                'label' => 'Prénom',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Le prénom est obligatoire.',
@@ -78,6 +96,7 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('nom_de_la_rue', null, [
+                'label' => 'Nom de la rue',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Le nom de la rue est obligatoire',
@@ -89,6 +108,7 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('numero_rue', null, [
+                'label' => 'Numéro de rue',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Le numéro de rue est obligatoire.',
@@ -96,6 +116,7 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('code_postal', null, [
+                'label' => 'Code postal',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Le code postal est obligatoire.',
@@ -107,6 +128,7 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('numero_telephone', null, [
+                'label' => 'Numéro de téléphone',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Le numéro de téléphone est obligatoire.',

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Disponibilites;
+use App\Entity\Evaluation;
 use App\Entity\Offre;
 use App\Entity\Photo;
 use App\Entity\Reservation;
@@ -12,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Length;
 
 class ListeOffreController extends AbstractController
 {
@@ -23,6 +25,7 @@ class ListeOffreController extends AbstractController
         if ($id) {
             $dispos = $entityManager->getRepository(Disponibilites::class)->findBy(['id_offre' => $id]);
             $photos = $entityManager->getRepository(Photo::class)->findBy(['id_offre' => $id]);
+            $evaluations = $entityManager->getRepository(Evaluation::class)->findBy(['id_offre' => $id]);
 
             return $this->render('liste_offre/index.html.twig', [
                 'controller_name' => 'ListeOffreController',
@@ -30,6 +33,7 @@ class ListeOffreController extends AbstractController
                 'offres' => null,
                 'dispos' => $dispos,
                 'photos' => $photos,
+                'evaluations' => $evaluations
             ]);
 
         }
@@ -46,6 +50,8 @@ class ListeOffreController extends AbstractController
     {
         $id = $request->query->get('id');
         $photos = $entityManager->getRepository(Photo::class)->findBy(['id_offre' => $id]);
+        $evaluations = $entityManager->getRepository(Evaluation::class)->findBy(['id_offre' => $id]);
+
         $user = $this->getUser();
         if ($user) {
             if ($id) {
@@ -55,6 +61,8 @@ class ListeOffreController extends AbstractController
                     'offres' => null,
                     'mine' => true,
                     'photos' => $photos,
+                    'evaluations' => $evaluations
+
                 ]);
 
             }
@@ -90,5 +98,29 @@ class ListeOffreController extends AbstractController
         $entityManager->remove($offre);
         $entityManager->flush();
         return $this->redirectToRoute('app_mes_offres');
+    }
+    
+    #[Route('/offres/evaluation', name: 'evaluation_offre')]
+    public function evaluer(Request $request,EntityManagerInterface $entityManager): Response
+    {
+        // Récupérer les données POST envoyées dans la requête
+        $data = json_decode($request->getContent(), true);
+        // Traiter les données
+        $titre = $data['titre'];
+        $description = $data['description'];
+        $note = $data['note']; 
+        $offreId = $data['id']; 
+        $offre = $entityManager->getRepository(Offre::class)->find($offreId) ;
+        $eval = new Evaluation()     ;
+        $eval->setTitre($titre) ;
+        $eval->setNote($note) ;
+        $eval->setIdOffre($offre) ;
+        if($description != ""){
+            $eval->setCommentaire($description) ;
+        } 
+        $entityManager->persist($eval);
+        $entityManager->flush();
+        return new Response(' Bonjour Données reçues avec succès !' . $note . $description . $titre );
+
     }
 }
