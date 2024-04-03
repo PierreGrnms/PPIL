@@ -21,9 +21,8 @@ class AbonnementController extends AbstractController
         if(!$user){
             return $this->redirectToRoute('app_login');
         }
-        $abonnement = $entityManager->getRepository(InscriptionAnnuelle::class)->find($user);
+        $abonnement = $this->findAbonnemnet($entityManager);
         return $this->render('abonnement/index.html.twig', [
-            'user' => $user,
             'abonnement' => $abonnement
         ]);
     }
@@ -67,7 +66,7 @@ class AbonnementController extends AbstractController
     public function findAbonnemnet($entityManager)
     {
         $user = $this->getUser();
-        return $entityManager->getRepository(InscriptionAnnuelle::class)->find($user->getId());
+        return $entityManager->getRepository(InscriptionAnnuelle::class)->find($user);
     }
 
 }
