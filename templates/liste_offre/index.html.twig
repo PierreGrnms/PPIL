@@ -7,6 +7,7 @@
     <head>
         <link rel="stylesheet" href="{{ asset('css/listeOffre.css') }}">
     </head>
+    <script src = "https://code.jquery.com/jquery-2.2.4.min.js"></script>
     {% include 'includes/nav_bar/navBar.html.twig' %}
 
         {% if offres is null %}
@@ -46,8 +47,23 @@
                                         </h1>
                                     {% endif %}
                                 {% endif %}
+                                <h2> évaluations </h2>
+                                {% for eval in evaluations %}
+                                    <div> 
+                                    <p> Titre : {{ eval.getTitre }} <p>
+                                    <p> Note : {{ eval.getNote }} </p>
+                                    <p> Description : {{ eval.getCommentaire }} </p>
+                                    </div
+                                {% else %}
+                                <h1 class="err-offre">
+                                    Il n'y a pas de d'évaluation pour cette offre
+                                </h1>
+                                {% endfor %}
+
                         
             </div>
+            <script src="{{ asset('js/formEval.js') }}"></script>
+
         {% else %}
             <div class="contenu">
                 <div class="offres">
@@ -69,5 +85,5 @@
                 </div>
             </div>
         {% endif %}
-    {% include 'includes/footer/footer.html.twig' %}
+    {# {% include 'includes/footer/footer.html.twig' %} #}
 {% endblock %}
