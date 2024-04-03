@@ -8,7 +8,7 @@ async function updateVille(postalCode) {
         This service is also available in JSON format : api.geonames.org/findNearbyPostalCodesJSON?postalcode=8775&country=CH&radius=10&username=demo*/
 
     try {
-        const response = await fetch(`http://api.geonames.org/postalCodeLookupJSON?postalcode=${postalCode}&country=FR&username=pierregrnms`);
+        const response = await fetch(`https://api.geonames.org/postalCodeLookupJSON?postalcode=${postalCode}&country=FR&username=pierregrnms`);
         const data = await response.json();
         return data.postalcodes.map(item => item.placeName);
     } catch (error) {
