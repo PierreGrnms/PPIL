@@ -63,6 +63,8 @@
             <div class="contenu">
                 <div class="offres">
                     {% for offre in offres %}
+                    {% if offre.getIdUser.isEnSommeil %}
+                    {% else %}
                         <a href="?id={{ offre.getId }}">
                             <div class="textbox">
                                 <h5>{{ offre.getTitreOffre }}</h5>
@@ -72,6 +74,7 @@
                                 </div>
                             </div>
                         </a>
+                    {% endif %}
                     {% else %}
                         <h1 class="err-offre">
                             Aucune offres

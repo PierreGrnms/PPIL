@@ -9,6 +9,11 @@
     {% include 'includes/nav_bar/navBar.html.twig' %}
 <script
       src = "https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+
+ {% if user.isEnSommeil %}
+ <h1> Votre compte est en sommeil, vous ne pouvez pas ajouter d'offre. <h1>
+ {% else %}
 <script>
 
 {# Permet d'éviter les problèmes de chargement du formulaire #}
@@ -469,5 +474,6 @@ function updateImg(){
 }
 
 </script
+{% endif %}
 
 {% endblock %}
