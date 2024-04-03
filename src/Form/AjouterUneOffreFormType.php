@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -25,7 +26,6 @@ class AjouterUneOffreFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-
         ->add('choiceField', ChoiceType::class, [
             'choices' => [
                 'Offre de Pret' => 'pret',
@@ -54,11 +54,8 @@ class AjouterUneOffreFormType extends AbstractType
                 ],
                 // Autres options de champ
             ])
-
-
             ->add('fichiers', FileType::class, [
                 'label' => "ajouter des images",
-
                 'multiple' => true,
                 'constraints' => [
                     new File([
@@ -74,6 +71,12 @@ class AjouterUneOffreFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => null,
+            'validation_groups' => function(FormInterface $form) {
+                if ($form->get('fichiers')->getData() == []) {
+                    return false;
+                }
+                return 'Default';
+            }
         ]);
     }
 }

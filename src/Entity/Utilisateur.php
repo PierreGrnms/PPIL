@@ -59,6 +59,9 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'id', targetEntity: Offre::class)]
     private Collection $offres;
 
+    #[ORM\OneToMany(mappedBy: 'id', targetEntity: Message::class)]
+    private Collection $messages;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -101,6 +104,14 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function getOffres(): Collection
     {
         return $this->offres;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getMessages(): Collection
+    {
+        return $this->messages;
     }
 
     /**

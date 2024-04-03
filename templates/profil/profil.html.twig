@@ -16,39 +16,43 @@
             <label for="">Adresse mail : {{ user.email }}</label>
 
             {{ form_row(profilForm.plainPassword, {label: 'Mot de passe'}) }}
-            {% if profilForm.plainPassword.vars.errors|length > 0 %}
+            {#{% if profilForm.plainPassword.vars.errors|length > 0 %}
                 <div class="error">{{ profilForm.plainPassword.vars.errors|first.message }}</div>
-            {% endif %}
+            {% endif %}#}
 
             {{ form_row(profilForm.nom, {label: 'Nom'}) }}
-            {% if profilForm.nom.vars.errors|length > 0 %}
+            {#{% if profilForm.nom.vars.errors|length > 0 %}
                 <div class="error">{{ profilForm.nom.vars.errors|first.message }}</div>
-            {% endif %}
+            {% endif %}#}
 
             {{ form_row(profilForm.prenom, {label: 'Prénom'}) }}
-            {% if profilForm.prenom.vars.errors|length > 0 %}
+            {#{% if profilForm.prenom.vars.errors|length > 0 %}
                 <div class="error">{{ profilForm.prenom.vars.errors|first.message }}</div>
-            {% endif %}
-
+            {% endif %} #}
             {{ form_row(profilForm.numero_telephone, {label: 'N° de téléphone'}) }}
-            {% if profilForm.numero_telephone.vars.errors|length > 0 %}
+            {#{% if profilForm.numero_telephone.vars.errors|length > 0 %}
                 <div class="error">{{ profilForm.numero_telephone.vars.errors|first.message }}</div>
-            {% endif %}
+            {% endif %}#}
 
             {{ form_row(profilForm.numero_rue, {label: 'N° de rue'}) }}
-            {% if profilForm.numero_rue.vars.errors|length > 0 %}
+            {#{% if profilForm.numero_rue.vars.errors|length > 0 %}
                 <div class="error">{{ profilForm.numero_rue.vars.errors|first.message }}</div>
-            {% endif %}
+            {% endif %}#}
 
             {{ form_row(profilForm.nom_de_la_rue, {label: 'Nom de la rue'}) }}
-            {% if profilForm.nom_de_la_rue.vars.errors|length > 0 %}
+            {#{% if profilForm.nom_de_la_rue.vars.errors|length > 0 %}
                 <div class="error">{{ profilForm.nom_de_la_rue.vars.errors|first.message }}</div>
-            {% endif %}
+            {% endif %}#}
 
             {{ form_row(profilForm.code_postal, {label: 'Code postal'}) }}
-            {% if profilForm.code_postal.vars.errors|length > 0 %}
+            {#{% if profilForm.code_postal.vars.errors|length > 0 %}
                 <div class="error">{{ profilForm.code_postal.vars.errors|first.message }}</div>
-            {% endif %}
+            {% endif %}#}
+
+            {{ form_row(profilForm.ville) }}
+            {#{% if profilForm.ville.vars.errors|length > 0 %}
+                <div class="error">{{ profilForm.ville.vars.errors|first.message }}</div>
+            {% endif %}#}
 
             <div class="button-container">
                 <button type="submit" class="btn">Changer les informations</button>
@@ -60,6 +64,6 @@
 
         {{ form_end(profilForm) }}
     </div>
-
+    <script src="{{ asset('js/profil.js') }}"></script>
     {% include 'includes/footer/footer.html.twig' %}
 {% endblock %}

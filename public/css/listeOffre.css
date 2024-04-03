@@ -9,24 +9,25 @@ body {
     padding: 0;
     color:black;
 
-    max-height: 100%;
-    height:100vh;
+    max-height: 100vh;
+    height:100%;
 }
 
-.main {
-    width:100%;
-    height:92%;
+.main, form {
+
     flex:1;
     display:flex;
-    justify-content: space-between;
+    justify-content: center;
 }
+
+
 
 .contenu {
      /* background-color: rgb(255, 255, 255);  */
     flex: 5;
     display: flex;
     overflow-y: scroll;
-
+    height:700px;
     /*scrollbar-color: hidden;*/
     font-weight: bold;
     font-size: 20px;
@@ -42,10 +43,9 @@ body {
     box-sizing: border-box;
 
     padding:50px;
-    display: inline-flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: space-around;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     gap: 30px;
 }
@@ -55,12 +55,10 @@ body {
     padding:10px;
 
     border-radius:25px;
-    /* border: solid 1px var(--gold-color); */
     border: solid 1px  #027b28;
     background-color: white;
-    width:100%;
+    width:80%;
     height:200px;
-    /* color:var(--gold-color); */
     color: #027b28;
     display:flex;
 
@@ -74,57 +72,72 @@ body {
     transform: scale(1.05);
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
-
-.offres a img {
-    width:100%;
-    max-height:80%;
-    border-radius: 15px;
+.offres a:hover .info > h2 {
+    color: #025f7b;
 }
 
-.offres .textbox {
-    width:100%;
-    font-size:1.3em;
+.offres a .userbox {
+    height: 100%;
+    flex:1;
     display:flex;
-    justify-content: space-around;
+    justify-content: center;
+    flex-direction: column;
     align-items: center;
+
 }
-.offres h5 {
+.offres a .userbox img {width:45%;}
+
+.offres a .right-info {
+    height: 100%;
+    flex:4;
+    display:flex;
+    flex-direction: column;
+}
+
+.florinsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.florinsContainer img {width:7%;}
+
+.offres a .info {
+    padding: 10px 0;
+    /*width:100%;*/
+    font-size:1.2em;
+    display:flex;
+    flex-direction: column;
+    row-gap: 25px;
+
+    flex: 4;
+}
+.offres a .place {
+    flex: 1;
+    display:flex;
+    justify-content: center;
+}
+.offres h5, h2,h3, h4 {
     text-align: center;
 }
-
-
-
-
-
 .right-recette h1:hover {
     transform:scale(1.1);
     color:#027b28
 }
-.container-offre{
+.container-offre {
+    display: flex;
+    width:70%;
+    column-gap: 50px;
     border: solid 3px #027b28;
     border-radius: 30px;
     font-size: 20px;
     background-color: white;
-    margin: 5%;
-    padding-left: 2%;
-    padding-right: 2%;
-
-}
-
-.florinsContainer{
-    display: flex;
-    width: max-content;
-    border-radius: 30px;
-    text-align: center;
-    align-items: center;
-    justify-content: center ;
-    margin: 2% 5% ;
+    padding:50px;
 }
 
 
 .err-offre{
     color: red;
-    font-size: 300%;
     text-align: center;
 }
 .florinsContainer2{
@@ -135,7 +148,19 @@ body {
     align-items: center;
     justify-content: center ;
     margin: 2% 5% ;
-    width:auto;}
+    width:auto;
+}
+.florinsContainer3{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    max-width: 300px;
+    text-align: center;
+    align-items: center;
+    justify-content: center ;
+    margin: 2% 5% ;
+    width:auto;
+}
 .nbFlorins{
     color: #458966;
     font-weight: 600;
@@ -147,7 +172,7 @@ body {
 .container-offre h2 {
     color: #024d19;
     align-items: center;
-    border-bottom: solid 1px #027b28;
+    border-bottom: solid 2px #027b28;
 }
 .container-offre p {
     margin-left: 2%;
@@ -155,10 +180,263 @@ body {
 
 }
 .container-offre-titre {
+    flex:1;
     display: flex;
+    justify-content: center;
+    row-gap: 30px;
+    /*justify-content: space-around;*/
     align-items: center;
-    justify-content: space-around;
+    flex-direction: column;
 }
-.container-photo{
-    border: solid 1px #027b28;
+.container-photo {
+    flex:1;
+
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 10px;
+}
+
+.photos-cont {
+
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    overflow-y: auto;
+    height: 80%;
+    border: solid 2px #027b28;
+    border-radius: 15px;
+}
+.userbox {
+    display:flex;
+    /* justify-content: space-evenly;*/
+    align-items: center;
+    flex-direction: column;
+    font-size:2em;
+
+    border: solid 2px #027b28;
+    border-radius: 15px;
+    flex:1;
+    height:100%;
+}
+.userbox h3 {
+    font-size:0.6em;
+}
+.userbox img {
+    width:30%;
+}
+.userbox a {
+    border:none;
+    text-decoration: none;
+    text-align: center;
+    background-color: #054c04;
+    color: #fff;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    width: 50%;
+    margin-bottom: 15px;
+}
+
+.container-offre-titre p {
+    text-align: center;
+    font-size:1.2em;
+}
+.container-photo img {
+    width: 100%;
+
+}
+
+.container-offre-titre a {
+    border:none;
+    text-decoration: none;
+    text-align: center;
+    background-color: #054c04;
+    color: #fff;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    width: 50%;
+    margin-bottom: 15px;
+}
+
+textarea {
+    height: 200px;
+    width: 450px;
+    max-height: 200px;
+    max-width: 450px;
+}
+
+
+
+input {
+    width: 100%;
+    padding: 10px;
+
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #027b28;
+    color: #fff;
+    cursor: pointer;
+    padding: 10px;
+    border: none;
+    font-size:15px;
+    display: block;
+    border-radius: 3px;
+
+}
+
+
+
+.filtres::before {
+    content:"";
+    background:url("../images/arrow.png") no-repeat center;
+    background-size: 70%;
+    left:-40px;
+    top:50%;
+    display: inline-block;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 20px 20px, rgba(0, 0, 0, 0.12) 0px -12px 30px;
+    border-radius: 15px  0 0 15px;
+    width:40px;
+    height:70px;
+    position:absolute;
+    cursor: pointer;
+}
+
+
+.filtres {
+    transition: left 1s ease;
+    flex:2;
+    box-sizing: border-box;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 20px 20px, rgba(0, 0, 0, 0.12) 0px -12px 30px;
+    border-radius: 5vh;
+    padding:20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    row-gap: 30px;
+    position:relative;
+    right:0;
+   /* height:100%;*/
+}
+.filtres > label {
+    font-size:30px;
+}
+.filtres .container-filtres {
+    display:flex;
+    flex-direction: column;
+    row-gap:20px;
+}
+.container-filtres .c {
+    padding:10px;
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    row-gap:20px;
+
+}
+
+.filtres input {
+    height:40px;
+    width:100%;
+    border-radius: 5px;
+    outline:none;
+    padding:5px 7px;
+    font-size: 22px;
+    font-weight: bold;
+    border:solid 1px #67c587;
+}
+.special input {
+    font-size:20px;
+}
+
+.special ul {
+    overflow: auto;
+    display:flex;
+    flex-direction: column;
+    gap:3px;
+    max-height:200px;
+}
+.special ul li {
+    font-weight: bold;
+    font-size:20px;
+    padding:5px 0;
+    text-align: center;
+    color: #67c587;
+    cursor:pointer;
+}
+.special ul li:hover {
+    background: grey;
+}
+
+.filtres label {
+    font-size:23px;
+    font-weight: bold;
+    text-align: center;
+    color:#027b28;
+}
+.filtres .prix-box {
+    display:flex;
+    justify-content: space-between;
+}
+.prix-box input {
+    height:40px;
+    width:40%;
+}
+.filtres {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.wrapper {
+    background-color: #fff;
+    color: #444;
+    max-width:100%;
+    display: flex;
+}
+
+.box {
+    background-color: #444;
+    color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 150%;
+
+    /* Use box-sizing so that element's outerwidth will match width property */
+    box-sizing: border-box;
+
+    /* Allow box to grow and shrink, and ensure they are all equally sized */
+    flex: 1 1 auto;
+}
+
+.handler {
+    width: 20px;
+    padding: 0;
+    cursor: ew-resize;
+    flex: 0 0 auto;
+}
+
+.handler::before {
+    content: '';
+    display: block;
+    width: 4px;
+    height: 100%;
+    background: red;
+    margin: 0 auto;
 }

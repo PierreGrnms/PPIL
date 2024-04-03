@@ -5,9 +5,12 @@ namespace App\Form;
 use App\Entity\Utilisateur;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -89,6 +92,11 @@ class ProfilFormType extends AbstractType
                     ]),
                 ],
             ])
+            ->add('ville', ChoiceType::class, [
+                'choices' => null,
+                'label' => 'Villes',
+                'placeholder' => $options['data']->getVille(),
+            ])
             ->add('numero_telephone', null, [
                 'constraints' => [
                     new NotBlank([
@@ -100,7 +108,14 @@ class ProfilFormType extends AbstractType
                     ]),
                 ],
             ])
-        ;
+        ;$builder->get('ville')->resetViewTransformers();
+
+        /*$builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($options): void {
+            $form = $event->getForm();
+            $user = $options['data'];
+            dd($user->getVille());
+            $form->get("ville")->setData($user->getVille());
+        });*/
     }
 
     public function configureOptions(OptionsResolver $resolver): void

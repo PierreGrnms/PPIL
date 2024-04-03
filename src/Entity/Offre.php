@@ -264,4 +264,6 @@ class Offre
     {
         return $this->id_user;
     }
+
+
 }

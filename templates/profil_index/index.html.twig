@@ -53,10 +53,12 @@
     </td>
 
     <td>
-        <div class="card">
-            <img  src="{{ asset('images/messages.png') }}" alt="messages" style="width:50%;">
-            <p> Mes Messages </p>
-        </div>
+        <a class="nav-link" href="{{ path('app_conversation') }}">
+            <div class="card">
+                <img  src="{{ asset('images/messages.png') }}" alt="messages" style="width:50%;">
+                <p> Mes Messages </p>
+            </div>
+        </a>
     </td>
 </tr>
 </table>

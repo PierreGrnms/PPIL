@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ÉcoPrêt - Messages{% endblock %}
+
+{% block body %}
+    <head>
+        <link rel="stylesheet" href="{{ asset('css/conversation.css') }}">
+    </head>
+    {% include 'includes/nav_bar/navBar.html.twig' %}
+
+    <div class="main">
+        <div class="contenu">
+            <div class="conversations">
+                {% for d in destinataires %}
+                    <div id={{ d.getId() }} class="conv" onclick="updateDestinataire(this)">
+                        <img src="{{ asset('images/user.png') }}" alt="user">
+                        <h3>{{ d.getPrenom() }}</h3>
+                    </div>
+
+                {% else %}
+                    <h3>Auncune conversations</h3>
+                {% endfor %}
+            </div>
+            <div class="container-chat">
+                <div class="chat">
+                    <div class="messages"></div>
+                    <input id="messager" type="text" value="" placeholder="Écrivez votre message" class="enter" disabled>
+                </div>
+            </div>
+            <div class="userbox">
+                <img src="{{ asset('images/user.png') }}" alt="user">
+                <h3 id="destinataire-courant"></h3>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ asset('js/conversation.js') }}">
+    </script>
+    <script>
+
+        {#{% if currentDest is null %}
+            init({{ currentDest }})
+        {% else %}
+            init({{ currentDest }})
+        {% endif %}#}
+        init({{ currentDest }})
+
+        function whenAvailable(name, callback) {
+            window.setTimeout(function() {
+                if (window[name]) {
+                    callback(window[name]);
+                } else {
+                    whenAvailable(name, callback);
+                }
+            }, 10);
+        }
+        /*whenAvailable("init", (init) => {
+            init({{ currentDest }})
+        });*/
+        eventSource = new EventSource("{{ mercure('https://Nearmessage.com/message')|escape('js') }}");
+        eventSource.onmessage = event => {
+            let data = JSON.parse(event.data)
+            let me = {{ app.user ? app.user.getId : null }};
+            if (me === data['dest']) {
+                majMessage(data);
+            }
+        }
+    </script>
+    {% include 'includes/footer/footer.html.twig' %}
+{% endblock %}

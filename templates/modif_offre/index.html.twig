@@ -10,35 +10,61 @@
     {% include 'includes/nav_bar/navBar.html.twig' %}
 
     <div class="main">
-        {% if offre %}
+        {% if offre and app.user and offre.getIdUser.getId == app.user.id %}
+            {{ form_start(form) }}
+
             <div class="container-offre">
-                <div class="offre-description">
-                    <div class="right-offre">
-                        <h1>{{ offre.getTitreOffre }}</h1>
-                        <div class="box-description">
-                            <div class="contain">
-                                <h2>Description</h2>
-                                <p>{{ offre.getTexteOffre }}</p>
-                                <h2>Prix</h2>
-                                <label>{{ offre.getPrix }} florains</label>
-                                {% if offre.getIdUser.getId == app.user.id %}
-                                    <a href="{{ path('supprimer_offre', {'id': offre.getId}) }}">
-                                        <button onclick="return confirm('Êtes\-vous sûr de vouloir supprimer votre offre ?')">Supprimer l'offre</button>
-                                    </a>
-                                {% else %}
-                                    {% if dispos|length > 0 %}
-                                        <a href="{{ path('app_reserver_offre', {'id': offre.getId}) }}"><button>Reserver</button></a>
-                                    {% else %}
-                                        <h1>
-                                            Aucune disponibilité pour cette offre
-                                        </h1>
-                                    {% endif %}
-                                {% endif %}
-                            </div>
-                        </div>
+                <div class="container-photo">
+                    <h2> Photos  </h2>
+                    <div class="photos-cont">
+                        {% for photo in photos %}
+                            <img src="{{ asset('offreImg/' ~ photo.nom) }}" alt="photo">
+                        {% else %}
+                            <h3 class="err-offre">
+                                Il n'y a pas de photos pour cette offre
+                            </h3>
+                        {% endfor %}
                     </div>
                 </div>
+                <div class="container-offre-titre" >
+                    <h2>Titre</h2>
+                    {% if form_errors(form.titre_offre) %}
+                        <div class="alert alert-danger">
+                            {{ form_errors(form.titre_offre) }}
+                        </div>
+                    {% endif %}
+                    {{ form_widget(form.titre_offre, {'value' : offre.getTitreOffre }) }}
+
+
+                    <div class="florinsContainer3">
+
+                        <h2>Prix</h2>
+                        <div class="line" style="display:flex;align-items: center">
+                            {{ form_widget(form.prix, {'value' : offre.getPrix }) }}
+                            <img src="{{ asset('images/florain.png') }}" alt="florain" style="width:15%;">
+                        </div>
+                    </div>
+                    <h2>Description</h2>
+                    {#<p>{{ offre.getTexteOffre }}</p>#}
+
+                    {#{{ form_label(form.texte_offre) }}#}
+                    {% if form_errors(form.texte_offre) %}
+                        <div class="alert alert-danger">
+                            {{ form_errors(form.texte_offre) }}
+                        </div>
+                    {% endif %}
+                    {{ form_widget(form.texte_offre, {'value' : offre.getTexteOffre }) }}
+
+
+
+                    <a href="{{ path('supprimer_offre', {'id': offre.getId}) }}">
+                        Supprimer l'offre
+                    </a>
+                    <button type="submit" class="btn">Modifier l'offre</button>
+                </div>
             </div>
+            {{ form_row(form._token) }}
+            {{ form_end(form, {'render_rest': false}) }}
         {% else %}
             <h1>
                 Offre introuvable.

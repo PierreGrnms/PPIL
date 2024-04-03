@@ -22,6 +22,7 @@ class ProfilController extends AbstractController
             $form = $this->createForm(ProfilFormType::class, $user);
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
+                $user->setVille($form->get("ville")->getData());
                 $entityManager->persist($user);
                 $entityManager->flush();
                 return $this->redirectToRoute('app_profil');
@@ -29,9 +30,9 @@ class ProfilController extends AbstractController
 
             return $this->render('profil/profil.html.twig', [
                 'user' => $user,
-                'profilForm' => $form->createView(),
+                'profilForm' => $form,
             ]);
         }
-        return $this->redirectToRoute('home');
+        return $this->redirectToRoute('app_login');
     }
 }

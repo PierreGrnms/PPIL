@@ -19,16 +19,18 @@ class Message
 
     #[ORM\ManyToOne(inversedBy: 'messages')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Utilisateur $id_utilisateur = null;
+    private ?Utilisateur $id_utilisateur;
+
+    #[ORM\ManyToOne()]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Utilisateur $id_destinataire;
 
     #[ORM\Column(length: 255)]
     private ?string $text = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private ?\DateTimeInterface $date_mess = null;
 
-    #[ORM\ManyToOne(inversedBy: 'messages')]
-    private ?Conversation $id_conv = null;
 
     public function getId(): ?int
     {
@@ -46,6 +48,22 @@ class Message
         $this->id_utilisateur = $id_utilisateur;
 
         return $this;
+    }
+
+    /**
+     * @return Utilisateur|null
+     */
+    public function getIdDestinataire(): ?Utilisateur
+    {
+        return $this->id_destinataire;
+    }
+
+    /**
+     * @param Utilisateur|null $id_destinataire
+     */
+    public function setIdDestinataire(?Utilisateur $id_destinataire): void
+    {
+        $this->id_destinataire = $id_destinataire;
     }
 
     public function getText(): ?string
