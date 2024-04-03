@@ -21,13 +21,8 @@ class InscriptionAnnuelle
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date_expiration = null;
 
-    #[ORM\OneToMany(mappedBy: 'inscriptionAnnuelle', targetEntity: Utilisateur::class)]
-    private Collection $id_user;
-
-    public function __construct()
-    {
-        $this->id_user = new ArrayCollection();
-    }
+    #[ORM\OneToOne(inversedBy: 'inscriptionAnnuelle', cascade: ['persist', 'remove'])]
+    private ?Utilisateur $id_user = null;
 
     public function getId(): ?int
     {
@@ -52,33 +47,15 @@ class InscriptionAnnuelle
 
         return $this;
     }
-
-    /**
-     * @return Collection<int, Utilisateur>
-     */
-    public function getIdUser(): Collection
+    
+    public function getIdUser(): ?Utilisateur
     {
         return $this->id_user;
     }
 
-    public function addIdUser(Utilisateur $idUser): static
+    public function setIdUser(?Utilisateur $id_user): static
     {
-        if (!$this->id_user->contains($idUser)) {
-            $this->id_user->add($idUser);
-            $idUser->setInscriptionAnnuelle($this);
-        }
-
-        return $this;
-    }
-
-    public function removeIdUser(Utilisateur $idUser): static
-    {
-        if ($this->id_user->removeElement($idUser)) {
-            // set the owning side to null (unless already changed)
-            if ($idUser->getInscriptionAnnuelle() === $this) {
-                $idUser->setInscriptionAnnuelle(null);
-            }
-        }
+        $this->id_user = $id_user;
 
         return $this;
     }

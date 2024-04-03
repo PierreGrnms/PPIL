@@ -9,23 +9,20 @@
         <link rel="stylesheet" href="{{ asset('css/abo.css') }}">
     </head>
     {% include 'includes/nav_bar/navBar.html.twig' %}
-
     <div class="container mt-4">
         {% if app.user %}
-            {% if date %}
+            {% if abonnement %}
                 <div>
-                    <h2>Vous avez un abonnement qui expirera le {{date}}</h2>
+                    <h2>Vous avez un abonnement qui expirera le {{abonnement.getDateExpiration()|date('Y-m-d')}}</h2>
                     <div class="spliter">
-                        <a class="button" href="{{ path('home') }}"> Prolonger mon abonnement </a>
-                        <a class="button" href="{{ path('app_suppr_abonnement') }}" onclick="return confirm('Êtes\-vous sûr de vouloir supprimer votre abonnement ?')">Annuler mon abonnement</a>
+                        <a class="button" href="{{ path('app_update_abonnement', {'abonnement' : 'abonnement'}) }}"> Prolonger mon abonnement </a>
+                        <a class="button" href="{{ path('app_remove_abonnement', {'abonnement' : abonnement}) }}" onclick="return confirm('Êtes\-vous sûr de vouloir supprimer votre abonnement ?')">Annuler mon abonnement</a>
                     </div>
                 </div>
             {% else %}
-                <div>
-                    
+                <div> 
                     <h2>Vous n'avez pas encore d'abonnement</h2>
-
-                    <a class="button" href="{{ path('app_ajout_abonnement') }}"> M'abonner </a>
+                    <a class="button" href="{{ path('app_new_abonnement') }}"> M'abonner </a>
                 </div>
 
             {% endif %}
