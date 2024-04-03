@@ -1,7 +1,7 @@
 
 async function updateVille(postalCode) {
     try {
-        const response = await fetch(`http:s//api.geonames.org/postalCodeLookupJSON?postalcode=${postalCode}&country=FR&username=pierregrnms`);
+        const response = await fetch(`api.geonames.org/postalCodeLookupJSON?postalcode=${postalCode}&country=FR&username=pierregrnms`);
         const data = await response.json();
         return data.postalcodes.map(item => item.placeName);
     } catch (error) {
