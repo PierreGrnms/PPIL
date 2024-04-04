@@ -147,7 +147,7 @@ class RegistrationFormType extends AbstractType
                     ]),
                     new Regex([
                         'pattern' => '/^\+(?:\d{1,4}\-?)?\(?\d{1,}\)?[\s\-]?\d{1,}[\s\-]?\d{1,}[\s\-]?\d{1,}$/',
-                        'message' => 'Votre numéro de téléphone n\'est pas valide. Il doit être sous le format international.',
+                        'message' => 'Votre numéro de téléphone n\'est pas valide. Il doit être sous le format international. (+33 France)',
                     ]),
                 ],
             ])

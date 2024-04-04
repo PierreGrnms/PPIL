@@ -65,9 +65,11 @@
             <div class="userbox">
                 <img src="{{ asset('images/user.png') }}" alt="user">
                 <h3 id="destinataire-courant">{{ offre.getIdUser.getPrenom }}</h3>
-                <a href="{{ path('contacter', {'id': offre.getId}) }}">
-                    Contacter
-                </a>
+                {% if offre.getIdUser != app.user %}
+                    <a href="{{ path('contacter', {'id': offre.getId}) }}">
+                        Contacter
+                    </a>
+                {% endif %}
             </div>
         {% else %}
             <h1>

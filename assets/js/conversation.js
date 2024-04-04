@@ -13,25 +13,23 @@ function updateScroll(){
 
 function updateDestinataire(e) {
 
-    if (!e.classList.contains("activated")) {
-        fetch('/conversation-change-event', {method: 'POST',body: JSON.stringify(
-                {"destinataire": parseInt(e.id)}
-            )}).then(r => {
-            return r.json()
-        }).then(data => {
-            document.querySelector(".messages").innerHTML = "";
-            console.log(data)
-            updateMessage(data);
-            for (let child of e.parentNode.children) {
-                child.classList.remove('activated')
-            }
-            e.classList.add('activated')
-            document.querySelector('#destinataire-courant').innerText = e.children[1].innerText;
-            document.querySelector('#messager').disabled = false;
-        }).catch(e => {
-            console.log('error' + e);
-        })
-    }
+    fetch('/conversation-change-event', {method: 'POST',body: JSON.stringify(
+            {"destinataire": parseInt(e.id)} // DOIT ETRE LE DEST
+        )}).then(r => {
+        return r.json()
+    }).then(data => {
+        document.querySelector(".messages").innerHTML = "";
+        updateMessage(data);
+        for (let child of e.parentNode.children) {
+            child.classList.remove('activated')
+        }
+        e.classList.add('activated')
+        document.querySelector('#destinataire-courant').innerText = e.children[1].innerText;
+        document.querySelector('#messager').disabled = false;
+    }).catch(e => {
+        console.log('error' + e);
+    })
+
 
 
 }
@@ -55,14 +53,11 @@ function throw_message() {
 
         updateScroll()
 
-
         fetch('/send-message', {
             method: 'POST',
             body: JSON.stringify(
                 {'message' : content}
             )
-        }).then(r => {
-
         }).catch(e => {
             console.log('error' + e);
         })
@@ -72,7 +67,6 @@ function throw_message() {
 function updateMessage(data) {
     let user = data['user'];
     let container = document.querySelector(".messages");
-    console.log('HEEEEEEEEEEEEEEEEEEEEEEEE')
 
     data['messages'].forEach(message => {
         if (message.text !== "") {
@@ -98,35 +92,13 @@ function updateMessage(data) {
 function majMessage(data1) {
 
     if (document.querySelector("#\\3"+data1.sourceId.toString())) {
-
-        e=document.querySelector("#\\3"+data1.sourceId.toString());
-        fetch('/conversation-change-event', {method: 'POST',body: JSON.stringify(
-                {"destinataire": parseInt(e.id)}
-            )}).then(r => {
-            return r.json()
-        }).then(data => {
-            document.querySelector(".messages").innerHTML = "";
-            console.log(data)
-            updateMessage(data);
-            for (let child of e.parentNode.children) {
-                child.classList.remove('activated')
-            }
-            e.classList.add('activated')
-            document.querySelector('#destinataire-courant').innerText = e.children[1].innerText;
-            document.querySelector('#messager').disabled = false;
-        }).catch(e => {
-            console.log('error' + e);
-        })
+        let e=document.querySelector("#\\3"+data1.sourceId.toString());
+        updateDestinataire(e);
     } else {
-        fetch('/conversation-change-event', {method: 'POST',body: JSON.stringify(
-                {"destinataire": parseInt(data1.sourceId)}
+        fetch('/createSession', {method: 'POST', body: JSON.stringify(
+                {"dest": parseInt(data1.sourceId)}
             )}).then(r => {
-            return r.json()
-        }).then(data => {
-            document.querySelector(".messages").innerHTML = "";
-            console.log(data)
-            updateMessage(data);
-            document.querySelector('#messager').disabled = false;
+            location.href = 'conversation'
         }).catch(e => {
             console.log('error' + e);
         })
@@ -135,7 +107,6 @@ function majMessage(data1) {
 
 document.querySelector(".enter").addEventListener("keyup", event => {
     if (event.key === "Enter") {
-        // event.preventDefault(); avoid refreshing
         throw_message()
     }
 });

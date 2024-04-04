@@ -170,10 +170,8 @@
             fileInput.style.display = 'none';
             fileInput.addEventListener('change', function() {
                 const files = fileInput.files;
-                console.log(files.length) ;
                 if (files.length > 0) {
                     for (const file of files) {
-                        console.log('file') ;
                         // Créer un objet FileReader
                         const reader = new FileReader();
                         // Définir ce qui se passe lorsque le fichier est chargé
@@ -250,18 +248,12 @@ function sendAjaxForm(dest){
                 // Récupérer la valeur du bouton radio sélectionné
                  type = radioButton.value;
                 // Faire quelque chose avec la valeur sélectionnée
-                console.log("La valeur sélectionnée est : " + type);
             }
         });
         let titre  = titreField.value ;
         let description = desc.value ;
         let prix = prixField.value ;
 
-        console.log("titre : "+ titre) ;
-        console.log("Description : "+ description) ;
-        console.log("Prix : "+ prix) ;
-        console.log("type : "+ type) ;
-        // Création de la requete Ajax
         // Créer un objet XMLHttpRequest
         var data = {
             titre: titre,
@@ -355,11 +347,9 @@ function AjouterDispo(){
 }
 
 function updateImg(){
-    console.log('UpdateImg')
     // Recupération du conteneur des images
     const imageContainer = document.getElementById('imageContainer');
     while (imageContainer.firstChild) {
-        console.log('reset')
         imageContainer.removeChild(imageContainer.firstChild);
     }
     lstFichiers.forEach(element => {
@@ -405,7 +395,6 @@ function updateImg(){
                         if (index !== -1) {
                             // Supprimer l'élément à l'index trouvé
                             lstFichiers.splice(index, 1);
-                            console.log('del eleme')
                         }
                         imageContainer.removeChild(imageCont);
                         updateImg()
@@ -416,8 +405,7 @@ function updateImg(){
                 cell2.appendChild(lab_del);
                 cell1.appendChild(imgElement);
                 imageContainer.appendChild(imageCont);
-                console;console.log('test');
-                
+
 
     });
 }

@@ -87,10 +87,20 @@ class OffreController extends AbstractController
             if ($this->getUser()) {
                 $session->set('currentDest', $offre->getIdUser()->getId());
 
-                if (is_null($entityManager->getRepository(Message::class)->findOneBy(['id_utilisateur'=>$this->getUser(),'id_destinataire'=>$offre->getIdUser()]))) {
+                if (is_null($entityManager->getRepository(Message::class)->findOneBy(['id_utilisateur'=>$this->getUser(),'id_destinataire'=>$offre->getIdUser()])) and
+                    is_null($entityManager->getRepository(Message::class)->findOneBy(['id_utilisateur'=>$offre->getIdUser(),'id_destinataire'=>$this->getUser()]))) {
                     $message = new Message();
                     $message->setIdUtilisateur($this->getUser());
                     $message->setIdDestinataire($offre->getIdUser());
+                    $message->setText("");
+                    $currentDateTime = new \DateTimeImmutable();
+                    $message->setDateMess($currentDateTime);
+                    $entityManager->persist($message);
+                    $entityManager->flush();
+
+                    $message = new Message();
+                    $message->setIdUtilisateur($offre->getIdUser());
+                    $message->setIdDestinataire($this->getUser());
                     $message->setText("");
                     $currentDateTime = new \DateTimeImmutable();
                     $message->setDateMess($currentDateTime);

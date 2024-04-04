@@ -100,7 +100,6 @@ function createForm() {
     etoile1.style.width = '5%'
     etoile1.addEventListener('mouseenter', function() {
         // Code à exécuter lorsque l'image est survolée
-        console.log('L\'image est survolée');
         afficherEtoile(1)
 
     });
@@ -108,14 +107,12 @@ function createForm() {
     // Ajoutez un écouteur d'événement pour quitter le survol
     etoile1.addEventListener('mouseleave', function() {
         // Code à exécuter lorsque le curseur quitte l'image
-        console.log('Le curseur a quitté l\'image');
         afficherEtoile(noteInput.value)
 
     });
 
     etoile1.onclick = function() {
         // Code à exécuter lorsque le curseur quitte l'image
-        console.log('Note = 1');
         if(noteInput.value == 1){
             noteInput.value = 0
             afficherEtoile(0)
@@ -134,7 +131,6 @@ function createForm() {
 
     etoile2.addEventListener('mouseenter', function() {
         // Code à exécuter lorsque l'image est survolée
-        console.log('L\'image est survolée');
         afficherEtoile(2)
 
     });
@@ -142,7 +138,6 @@ function createForm() {
     // Ajoutez un écouteur d'événement pour quitter le survol
     etoile2.addEventListener('mouseleave', function() {
         // Code à exécuter lorsque le curseur quitte l'image
-        console.log('Le curseur a quitté l\'image');
         afficherEtoile(noteInput.value)
 
 
@@ -169,7 +164,6 @@ function createForm() {
 
     etoile3.addEventListener('mouseenter', function() {
         // Code à exécuter lorsque l'image est survolée
-        console.log('L\'image est survolée');
         afficherEtoile(3)
 
     });
@@ -177,7 +171,6 @@ function createForm() {
     // Ajoutez un écouteur d'événement pour quitter le survol
     etoile3.addEventListener('mouseleave', function() {
         // Code à exécuter lorsque le curseur quitte l'image
-        console.log('Le curseur a quitté l\'image');
         afficherEtoile(noteInput.value)
 
 
@@ -203,7 +196,6 @@ function createForm() {
 
     etoile4.addEventListener('mouseenter', function() {
         // Code à exécuter lorsque l'image est survolée
-        console.log('L\'image est survolée');
         afficherEtoile(4)
 
     });
@@ -211,7 +203,6 @@ function createForm() {
     // Ajoutez un écouteur d'événement pour quitter le survol
     etoile4.addEventListener('mouseleave', function() {
         // Code à exécuter lorsque le curseur quitte l'image
-        console.log('Le curseur a quitté l\'image');
         afficherEtoile(noteInput.value)
 
 
@@ -245,7 +236,6 @@ function createForm() {
 
     etoile5.addEventListener('mouseenter', function() {
         // Code à exécuter lorsque l'image est survolée
-        console.log('L\'image est survolée');
         afficherEtoile(5)
 
     });
@@ -253,7 +243,6 @@ function createForm() {
     // Ajoutez un écouteur d'événement pour quitter le survol
     etoile5.addEventListener('mouseleave', function() {
         // Code à exécuter lorsque le curseur quitte l'image
-        console.log('Le curseur a quitté l\'image');
         afficherEtoile(noteInput.value)
 
 

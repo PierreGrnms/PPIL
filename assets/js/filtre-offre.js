@@ -18,7 +18,6 @@ function fetchFilteredData() {
             return response.json();
         })
         .then(data => {
-            console.log(data);
             rerender(data['offres']);
         })
         .catch(error => {
@@ -31,8 +30,6 @@ function rerender(offres) {
     let html="";
 
     offres.forEach(function(offre) {
-        console.log(offre);
-
         html += `
             <a href="/offre?id=${offre[0]}">
                 <div class="userbox">
@@ -68,7 +65,6 @@ maxPrixInput.addEventListener('input', fetchFilteredData);
 codePostalInput.addEventListener('input', fetchFilteredData);
 villeInput.addEventListener('input', fetchFilteredData);
 document.querySelector('.filtres').addEventListener('click', a => {
-    console.log(a.offsetX + " " + a.offsetY);
     if (a.offsetY >= 350 && a.offsetY <= 420 && a.offsetX <= 0 && a.offsetX >= -40) { // Assuming ::before width is 20px
         let e = document.querySelector('.filtres');
         if (parseInt(e.style.left.slice(0, -1)) > 10) e.style.left = 0+'%'

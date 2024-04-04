@@ -30,7 +30,6 @@ function initForm(){
     const links = document.querySelectorAll('a');
     // Parcourir tous les liens
     links.forEach(link => {
-        console.log(link.getAttribute('href'))
         // Ajouter un écouteur d'événements "click" à chaque lien
         link.addEventListener('click', function(event) {
             // Obtenir l'URL vers laquelle le lien pointe
@@ -214,7 +213,6 @@ function initForm(){
             filesValide = true ;
             fileInput.addEventListener('change', function() {
                 const files = fileInput.files;
-                console.log(files.length) ;
                 if (files.length > 0) {
                     for (const file of files) {
                         const fileName = file.name.toLowerCase();
@@ -302,17 +300,12 @@ function sendAjaxForm(dest){
                 // Récupérer la valeur du bouton radio sélectionné
                  type = radioButton.value;
                 // Faire quelque chose avec la valeur sélectionnée
-                console.log("La valeur sélectionnée est : " + type);
             }
         });
         let titre  = titreField.value ;
         let description = desc.value ;
         let prix = prixField.value ;
 
-        console.log("titre : "+ titre) ;
-        console.log("Description : "+ description) ;
-        console.log("Prix : "+ prix) ;
-        console.log("type : "+ type) ;
         // Création de la requete Ajax
         // Créer un objet XMLHttpRequest
         var data = {
@@ -333,7 +326,6 @@ function sendAjaxForm(dest){
             contentType: "application/json",
             data: JSON.stringify(data),
             success: function(response) {
-                console.log("Réponse du serveur :", response);
                 window.location.href = "{{ path('app_liste_offre') }}";
 
             },
@@ -409,11 +401,9 @@ function AjouterDispo(){
 }
 
 function updateImg(){
-    console.log('UpdateImg')
     // Recupération du conteneur des images
     const imageContainer = document.getElementById('imageContainer');
     while (imageContainer.firstChild) {
-        console.log('reset')
         imageContainer.removeChild(imageContainer.firstChild);
     }
     lstFichiers.forEach(element => {

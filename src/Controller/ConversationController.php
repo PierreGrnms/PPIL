@@ -29,43 +29,18 @@ class ConversationController extends AbstractController
             return $this->redirectToRoute('app_conversation');
         }
         if ($this->getUser()) {
+
             $queryBuilder = $entityManager->createQueryBuilder();
             $queryBuilder->select('m')
                 ->from(Message::class, 'm')
-                ->where('m.text = :nothing')
-                ->andWhere('m.id_utilisateur = :user')
+                ->where('m.text = :nothing AND m.id_utilisateur = :user')
                 ->setParameter('user', $this->getUser())
                 ->setParameter('nothing', "");
-
-
-            $receiver = array_map(function($r) {
-                return $r->getIdDestinataire();
-            }, $queryBuilder->getQuery()->getResult());
-
-            $queryBuilder->select('a')
-                ->from(Message::class, 'a')
-                ->where('a.text != :nothing')
-                ->andWhere('a.id_destinataire = :user')
-                ->groupBy('a.id_destinataire')
-                ->setParameter('user', $this->getUser())
-                ->setParameter('nothing', "");;
-
-            $sender = array_map(function($r) {
-                return $r->getIdUtilisateur();
-            }, $queryBuilder->getQuery()->getResult());
-           /* $queryBuilder
-                ->select('m')
-                ->from(Message::class, 'm')
-                ->where('m.text = :nothing')
-                ->andWhere('(m.id_utilisateur = :user OR m.id_destinataire = :user)')
-                ->orderBy('m.date_mess', 'ASC')
-                ->setParameter('user', $this->getUser())
-                ->setParameter('nothing', "");*/
-
-            $destinataires = array_merge($receiver, $sender);
             return $this->render('conversation/index.html.twig', [
                 'controller_name' => 'ConversationController',
-                'destinataires' => array_unique($destinataires, SORT_REGULAR),
+                'destinataires' => array_map(function($r) {
+                    return $r->getIdDestinataire();
+                }, $queryBuilder->getQuery()->getResult()),
                 'currentDest' => $session->get('currentDest'),
             ]);
         }
@@ -76,10 +51,8 @@ class ConversationController extends AbstractController
      * @Route("/send-message", methods={"POST"})
      */
     #[Route('/send-message', methods: 'POST')]
-    public function addMessage(EntityManagerInterface $entityManager, Request $request, SessionInterface $session, HubInterface $hub): Response
+    public function addMessage(EntityManagerInterface $entityManager, Request $request, SessionInterface $session, HubInterface $hub) : Response
     {
-
-        /*return new Response('published');*/
         $data = json_decode($request->getContent(),true);
         $dest = $entityManager->getRepository(Utilisateur::class)->findOneBy(['id' => $session->get('currentDest')]);
 
@@ -96,8 +69,7 @@ class ConversationController extends AbstractController
         $update = new Update("message2", json_encode(["sourceId"=>$this->getUser()->getId(),"destId"=>$dest->getId()]));
         $hub->publish($update);
 
-        return $this->json(['dest'=> $dest->getPrenom(),'message' => $data['message']]);
-
+        return $this->json([]);
     }
     /**
      * @Route("/conversation-change-event", name="app_change_event", methods={"POST"})
@@ -110,16 +82,7 @@ class ConversationController extends AbstractController
         $dest = $entityManager->getRepository(Utilisateur::class)->findOneBy(['id' => $data["destinataire"]]);
         $session->set('currentDest', $dest->getId());
         $queryBuilder = $entityManager->createQueryBuilder();
-        /*$queryBuilder
-            ->select('identity(m.id_utilisateur)','identity(m.id_destinataire)','m.text', 'm.date_mess') //
-            ->from(Message::class, 'm')
-            ->where('m.id_utilisateur = :user')
-            ->andWhere('m.id_destinataire = :dest')
-            ->orWhere('m.id_utilisateur = :dest')
-            ->orWhere('m.id_destinataire = :user')
-            ->orderBy('m.date_mess', 'ASC')
-            ->setParameter('user', $this->getUser())
-            ->setParameter('dest', $dest);*/
+
         $queryBuilder
             ->select('identity(m.id_utilisateur)', 'identity(m.id_destinataire)', 'm.text', 'm.date_mess')
             ->from(Message::class, 'm')
@@ -140,5 +103,16 @@ class ConversationController extends AbstractController
 
 
         return $this->json(['user'=> $this->getUser()->getId(),'messages' => $messages]);
+    }
+
+
+    #[Route('/createSession', methods: 'POST')]
+    public function hehe(EntityManagerInterface $entityManager, Request $request, SessionInterface $session, HubInterface $hub) : Response
+    {
+
+        $data = json_decode($request->getContent(),true);
+        $session->set("currentDest", $data['dest']);
+
+        return $this->json([]);
     }
 }
